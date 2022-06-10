@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npx tsc",
+    "start": "node outDir/app.js",
+    "dev": "concurrently \"npx tsc --watch\" \"nodemon -q outDir/app.js\""
   },
   "author": "",
   "license": "ISC",
