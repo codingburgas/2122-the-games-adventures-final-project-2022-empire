@@ -4,8 +4,10 @@ WORKDIR /app
 
 COPY package*.json ./
 
-RUN npm install
-
 COPY . .
 
-CMD [ "nodemon", "app.js"]
+WORKDIR /app/server
+
+RUN npm install
+
+CMD [ "npm", "run dev"]
