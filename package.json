@@ -1,0 +1,24 @@
+{
+  "name": "2122-the-games-adventures-final-proejct-2022-empire",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codingburgas/2122-the-games-adventures-final-proejct-2022-empire.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/codingburgas/2122-the-games-adventures-final-proejct-2022-empire/issues"
+  },
+  "homepage": "https://github.com/codingburgas/2122-the-games-adventures-final-proejct-2022-empire#readme",
+  "devDependencies": {
+    "concurrently": "^7.2.1",
+    "nodemon": "^2.0.16",
+    "typescript": "^4.7.3"
+  }
+}

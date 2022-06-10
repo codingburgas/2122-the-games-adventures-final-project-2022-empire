@@ -349,4 +349,15 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 
+# Jetbrains ides
 .idea/
+
+# Vscode
+.vscode/
+
+# Node modules :D
+node_modules/
+
+
+# Typescript transpile
+outDir/
