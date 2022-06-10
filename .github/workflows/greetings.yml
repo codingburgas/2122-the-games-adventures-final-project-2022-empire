@@ -1,0 +1,20 @@
+name: Greetings
+
+on: [pull_request, issues]
+
+jobs:
+  greeting:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/first-interaction@v1
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        issue-message: |
+          # Welcome ${{github.actor}} :tada: 
+          Congrats to your first issue!
+          ![](https://user-images.githubusercontent.com/63718744/172160062-cfd1acf4-436c-4318-be7f-3079d4d68f2f.gif)
+        
+        pr-message: |
+          # Welcome ${{github.actor}} :tada: 
+          Congrats to your first PR! You can check Discussions 
+          ![](https://user-images.githubusercontent.com/63718744/172159972-5305bb69-555f-4dab-ac07-b615f7f15a30.gif)
