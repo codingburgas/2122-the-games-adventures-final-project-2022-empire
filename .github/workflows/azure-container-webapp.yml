@@ -25,5 +25,5 @@ jobs:
       uses: azure/webapps-deploy@v2.2.3
       with:
         app-name: 'brewingtime'
-        configuration-file: 'server/docker-compose.yml'
+        configuration-file: 'docker-compose.yml'
      
