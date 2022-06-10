@@ -22,7 +22,7 @@ jobs:
         creds: ${{ secrets.AZURE_CREDENTIALS }}
 
     - name: Update Azure config
-      uses: azure/webapps-deploy@v2
+      uses: azure/webapps-deploy@latest
       with:
         app-name: 'brewingtime'
         configuration-file: ./server/docker-compose.yml
