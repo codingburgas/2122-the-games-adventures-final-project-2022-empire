@@ -6,10 +6,10 @@ const app: Express = express()
 const port = process.env.PORT || 4000;
 
 const connection: Connection = mysql.createConnection({
-    host: 'mysqldb',
-    user: 'root',
-    password: 'idk',
-    port: 3306,
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    port: Number(process.env.DB_PORT),
 })
 
 connection.connect((err) => {
@@ -18,11 +18,11 @@ connection.connect((err) => {
         console.log(err);
         return;
     }
-    console.log("Pog");
+    console.log("Connected to the database!");
 })
 
 app.get('/', (req: Request, res: Response) =>  {
-    res.send('Qsha!');
+    res.send('Qsha');
 });
 
 app.listen(port, () => {

@@ -7,12 +7,12 @@ services:
       - dbdata:/var/lib/mysql
     restart: unless-stopped
     environment:
-      MYSQL_ROOT_PASSWORD: idk
+      MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: idk
     ports:
       - 3306
 
-  app:
+  server:
     depends_on:
       - mysqldb
     build:
@@ -24,9 +24,13 @@ services:
         source: .
         target: /app/
     ports:
-      - 4000:4000
+      - ${SERVER_PORT}:${SERVER_PORT}
     environment:
-      - PORT=4000
+      - PORT=${SERVER_PORT}
+      - DB_HOST=mysqldb
+      - DB_PASSWORD=${DB_ROOT_PASSWORD}
+      - DB_USER=root
+      - DB_PORT=3306
 
 volumes:
   dbdata:

@@ -358,6 +358,7 @@ MigrationBackup/
 # Node modules :D
 node_modules/
 
-
-# Typescript transpile
+# Typescript transpiler files
 outDir/
+
+.env
