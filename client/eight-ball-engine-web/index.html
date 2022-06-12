@@ -49,7 +49,11 @@
                 canvas: (function() {
                     var canvas = document.getElementById('canvas');
                     return canvas;
-                })()
+                })(),
+                onRuntimeInitialized() {
+                    Module.Init();
+                    setInterval(Module.Tick, 1/60*1000);
+                }
             };
         </script>
         <script src="dist/engine.js"></script>
