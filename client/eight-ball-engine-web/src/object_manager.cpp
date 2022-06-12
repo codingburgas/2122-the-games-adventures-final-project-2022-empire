@@ -1,7 +1,7 @@
 
 #include "./object_manager.hpp"
 
-uint64_t ObjectManager::s_currentId = 0;
+unsigned int ObjectManager::s_currentId = 0;
 ObjectManager* ObjectManager::s_instance = nullptr;
 
 bool ObjectManager::CheckBaseName(std::weak_ptr<Object> object, const char* name)
@@ -28,12 +28,13 @@ void ObjectManager::DestroyAllObjects()
     m_objectTable.clear();
 }
 
-void ObjectManager::DestroyObjectFromID(uint64_t id)
+void ObjectManager::DestroyObjectFromID(unsigned int id)
 {
     m_objectTable.erase(id);
+    s_currentId = 0;
 }
 
-std::weak_ptr<Object> ObjectManager::GetObjectFromID(uint64_t id)
+std::weak_ptr<Object> ObjectManager::GetObjectFromID(unsigned int id)
 {
     if (m_objectTable.find(id) != m_objectTable.end())
         return m_objectTable[id];

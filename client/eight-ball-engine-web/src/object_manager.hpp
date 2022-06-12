@@ -11,29 +11,29 @@
 class Object
 {
 private:
-    uint64_t id;
+    unsigned int id;
     
 public:
-    Object(uint64_t id) : id(id) {};
+    Object(unsigned int id) : id(id) {};
     virtual ~Object()
     {
-        printf("Destroyed Object with id %lld\n", id);
+        printf("Destroyed Object with id %u\n", id);
     }
 
     virtual const char* ObjectBaseName() { return nullptr; }
-    inline uint64_t GetID() { return id; }
+    inline unsigned int GetID() const { return id; }
 };
 
 #define DEFINE_OBJECT(TYPE) \
-    TYPE(uint64_t id) : Object(id) {}; \
+    TYPE(unsigned int id) : Object(id) {}; \
     const char* ObjectBaseName() override { return #TYPE; };
 
 class ObjectManager
 {
 private:
-    std::map<uint64_t, std::shared_ptr<Object>> m_objectTable;
+    std::map<unsigned int, std::shared_ptr<Object>> m_objectTable;
 
-    static uint64_t s_currentId;
+    static unsigned int s_currentId;
     static ObjectManager* s_instance;
 
     ObjectManager() : m_objectTable() {};
@@ -61,6 +61,6 @@ public:
     }
 
     void DestroyAllObjects();
-    void DestroyObjectFromID(uint64_t id);
-    std::weak_ptr<Object> GetObjectFromID(uint64_t id);
+    void DestroyObjectFromID(unsigned int id);
+    std::weak_ptr<Object> GetObjectFromID(unsigned int id);
 };
