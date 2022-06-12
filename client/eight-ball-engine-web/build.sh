@@ -1,0 +1,1 @@
+emcc hello_world.cpp ./lib/libraylib.a -Iinclude/ -Llib -sASYNCIFY -sEXPORTED_FUNCTIONS=_init,_deinit,_run_loop -sEXPORTED_RUNTIME_METHODS=ccall,cwrap -s USE_GLFW=3 -DPLATFORM_WEB -DGRAPHICS_API_OPENGL_ES2
