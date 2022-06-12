@@ -1,8 +1,14 @@
 import express, { Express, Request, Response} from "express";
+import usersRouter from "./routes/users";
+import registerRouter from "./routes/register"
 
 const app: Express = express()
 
 app.use(express.json());
+app.use(express.urlencoded());
+
+app.use("/api/users", usersRouter);
+app.use("/api/register", registerRouter);
 
 const port = process.env.PORT || 4000;
 
