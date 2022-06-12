@@ -5,12 +5,14 @@ services:
     image: mysql
     volumes:
       - dbdata:/var/lib/mysql
+      - ./database/db.sql:/script/db.sql
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${DB_ROOT_PASSWORD}
       MYSQL_DATABASE: idk
     ports:
       - 3306
+    command: "--init-file /script/db.sql"
 
   server:
     depends_on:
