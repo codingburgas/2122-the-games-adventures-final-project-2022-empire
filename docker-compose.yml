@@ -33,6 +33,7 @@ services:
       - DB_PASSWORD=${DB_ROOT_PASSWORD}
       - DB_USER=root
       - DB_PORT=3306
+      - DB_NAME=${DB}
 
 volumes:
   dbdata:
