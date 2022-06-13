@@ -27,4 +27,6 @@ public:
     void AddComponent(std::weak_ptr<Component> component);
     std::weak_ptr<Component> GetComponent(std::string componentName);
     void RemoveComponent(std::string componentName);
+
+    std::string Name {};
 };

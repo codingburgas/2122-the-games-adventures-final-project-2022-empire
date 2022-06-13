@@ -1,5 +1,22 @@
 #include "./ecs_manager.hpp"
 
+static std::vector<std::weak_ptr<Entity>> Entities {};
+
+std::weak_ptr<Entity> ECS::CreateEntity()
+{
+    auto ent = ObjectManager::GetInstance()->CreateObject<Entity>();
+    Entities.push_back(ent);
+    return ent;
+}
+
+std::weak_ptr<Entity> ECS::GetEntityFromID(unsigned int id)
+{
+    auto wPtr = ObjectManager::GetInstance()->GetObjectFromID(id);
+    if (wPtr.expired()) return std::weak_ptr<Entity>();
+
+    return std::static_pointer_cast<Entity>(wPtr.lock());
+}
+
 void ECS::Create()
 {
     auto entsCopy = Entities;
@@ -69,4 +86,15 @@ void ECS::Destroy()
     }
     
     Entities.clear();
+}
+
+std::weak_ptr<Entity> ECS::GetEntityFromName(std::string name)
+{
+    for (auto ent : Entities)
+    {
+        if (ent.lock()->Name == name)
+            return ent;
+    }
+
+    return std::weak_ptr<Entity>(); /* null */
 }

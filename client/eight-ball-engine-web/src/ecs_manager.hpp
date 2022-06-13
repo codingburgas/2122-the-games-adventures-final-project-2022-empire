@@ -3,17 +3,12 @@
 #include "./entity.hpp"
 #include "./object_manager.hpp"
 #include <vector>
+#include <string>
+#include <memory>
 
 namespace ECS
 {
-    std::vector<std::weak_ptr<Entity>> Entities {};
-
-    std::weak_ptr<Entity> CreateEntity()
-    {
-        auto ent = ObjectManager::GetInstance()->CreateObject<Entity>();
-        Entities.push_back(ent);
-        return ent;
-    }
+    std::weak_ptr<Entity> CreateEntity();
 
     template <typename CT>
     std::weak_ptr<CT> CreateComponent()
@@ -21,6 +16,9 @@ namespace ECS
         static_assert(std::is_base_of<Component, CT>::value, "CT must inherit from Component");
         return ObjectManager::GetInstance()->CreateObject<CT>();
     }
+
+    std::weak_ptr<Entity> GetEntityFromID(unsigned int id);
+    std::weak_ptr<Entity> GetEntityFromName(std::string);
 
     void Create();
     void Update();
