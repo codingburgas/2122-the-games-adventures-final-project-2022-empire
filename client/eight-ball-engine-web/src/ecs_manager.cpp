@@ -29,15 +29,15 @@ void ECS::Create()
         }
         
         auto components = (*it).lock()->GetComponents();
-        for (auto comp : components)
+        for (auto compIt = components.begin(); compIt != components.end(); compIt++)
         {
-            if (comp.second.expired())
+            if ((*compIt).expired())
             {
-                (*it).lock()->RemoveComponent(comp.first);
+                (*it).lock()->RemoveComponent(components.begin() - compIt);
                 continue;
             }
             
-            comp.second.lock()->OnCreate();
+            (*compIt).lock()->OnCreate();
         }
     }
 }
@@ -54,17 +54,17 @@ void ECS::Update()
         }
         
         auto components = (*it).lock()->GetComponents();
-        for (auto comp : components)
+        for (auto compIt = components.begin(); compIt != components.end(); compIt++)
         {
-            if (comp.second.expired())
+            if ((*compIt).expired())
             {
-                (*it).lock()->RemoveComponent(comp.first);
+                (*it).lock()->RemoveComponent(components.begin() - compIt);
                 continue;
             }
 
-            if (!comp.second.lock()->Active) continue;
+            if (!(*compIt).lock()->Active) continue;
             
-            comp.second.lock()->OnUpdate();
+            (*compIt).lock()->OnUpdate();
         }
     }
 }
@@ -76,12 +76,11 @@ void ECS::Destroy()
         if ((*it).expired()) continue;
         
         auto components = (*it).lock()->GetComponents();
-        for (auto comp : components)
+        for (auto compIt = components.begin(); compIt != components.end(); compIt++)
         {
-            if (comp.second.expired()) continue;
-            if (!comp.second.lock()->Active) continue;
+            if ((*compIt).expired()) continue;
             
-            comp.second.lock()->OnDestroy();
+            (*compIt).lock()->OnDestroy();
         }
     }
     

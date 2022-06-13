@@ -25,13 +25,13 @@ ObjectManager* ObjectManager::GetInstance()
 
 void ObjectManager::DestroyAllObjects()
 {
+    s_currentId = 0;
     m_objectTable.clear();
 }
 
 void ObjectManager::DestroyObjectFromID(unsigned int id)
 {
     m_objectTable.erase(id);
-    s_currentId = 0;
 }
 
 std::weak_ptr<Object> ObjectManager::GetObjectFromID(unsigned int id)
