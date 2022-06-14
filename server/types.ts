@@ -2,6 +2,13 @@ import { FieldPacket, QueryError, RowDataPacket } from "mysql2";
 
 export type RegisterData = {username: string, password: string};
 
-export type ErrorData = QueryError | null;
+export class RegisterReturnData {
+    public id: number;
+    public username: string;
 
-export type RegisterReturnData = [RowDataPacket[][], FieldPacket[]];
+    constructor(_id: number, _username: string) {
+        this.id = _id;
+        this.username = _username;
+    }
+};
+

@@ -1,16 +1,22 @@
 import BaseModel from "./base/Base";
-import { RegisterData, RegisterReturnData } from "../types";
+import {RegisterData, RegisterReturnData} from "../types";
+import {FieldPacket, ResultSetHeader} from "mysql2";
 
 class Users extends BaseModel {
     constructor() {
         super();
     }
 
-    registerUser(data: RegisterData) : Promise<RegisterReturnData> {
-        let resultQuery: boolean;
+    registerUser(data: RegisterData) {
         return this.connection.promise().execute(
-            'CALL Users_registerUser(?, ?)',
-            [data.username, data.password]);
+            'INSERT INTO Users(Username, Password) VALUES(?, ?)',
+            [data.username, data.password])
+            .then((results: [ResultSetHeader, FieldPacket[]]) => {
+                return new RegisterReturnData(results[0].insertId, data.username);
+            })
+            .catch((_) => {
+                return null;
+            })
     }
 }
 
