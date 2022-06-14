@@ -42,8 +42,8 @@ create procedure Users_registerUser(IN UsernameNew varchar(64), IN PasswordNew v
 BEGIN
 
     IF NOT EXISTS(SELECT Username FROM Users WHERE Username = UsernameNew)
-    THEN INSERT INTO Users(Username, Password) VALUES(UsernameNew, PasswordNew);
-    SELECT 1;
+        THEN INSERT INTO Users(Username, Password) VALUES(UsernameNew, PasswordNew);
+        SELECT 1;
     ELSE
         SELECT 0;
 

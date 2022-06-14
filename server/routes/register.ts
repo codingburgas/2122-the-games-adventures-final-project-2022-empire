@@ -1,7 +1,7 @@
 import express, {Router, Request, Response} from "express";
 import {isRegisterDataValid} from "../validations";
 import User from "../models/Users";
-import {RegisterData} from "../types";
+import { RegisterData, RegisterReturnData } from "../types";
 
 const registerRouter: Router = express.Router();
 
@@ -21,7 +21,11 @@ registerRouter.post("/", (req: Request, res: Response) => {
     };
 
     if(isRegisterDataValid(data)) {
-        res.send(User.registerUser({username: data.username, password: data.password}));
+        User.registerUser({username: data.username, password: data.password}).then(([results]) => {
+            res.send(results[0][0]['0'] !== undefined ?
+                JSON.stringify({response: 'Failure'}) :
+                JSON.stringify({response: 'Success'}));
+        });
     }
 
 });

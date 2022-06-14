@@ -1,18 +1,18 @@
 import BaseModel from "./base/Base";
-import { RegisterData } from "../types";
-import {Query} from "mysql2";
+import { RegisterData, RegisterReturnData } from "../types";
 
 class Users extends BaseModel {
     constructor() {
         super();
     }
 
-    async registerUser(data: RegisterData) : Promise<boolean> {
-        const result: Query = await this.connection.execute('CALL Users_registerUser(?, ?)', [data.username, data.password]);
-        console.log(result)
-        return true;
+    registerUser(data: RegisterData) : Promise<RegisterReturnData> {
+        let resultQuery: boolean;
+        return this.connection.promise().execute(
+            'CALL Users_registerUser(?, ?)',
+            [data.username, data.password]);
     }
-};
+}
 
 const User: Users = new Users();
 
