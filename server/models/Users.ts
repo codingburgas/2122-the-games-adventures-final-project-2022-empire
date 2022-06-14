@@ -1,23 +1,23 @@
 import BaseModel from "./base/Base";
 import {RegisterData, RegisterReturnData} from "../types";
-import {FieldPacket, ResultSetHeader} from "mysql2";
+import sql from 'mssql/msnodesqlv8';
 
 class Users extends BaseModel {
     constructor() {
         super();
     }
 
-    registerUser(data: RegisterData) : Promise<RegisterReturnData | null>{
-        // @ts-ignore
-        return this.connection.promise().execute(
-            'INSERT INTO Users(Username, Password) VALUES(?, ?)',
-            [data.username, data.password])
-            .then((results: [ResultSetHeader, FieldPacket[]]) => {
-                return new RegisterReturnData(results[0].insertId, data.username);
-            })
-            .catch((_) => {
-                return null;
-            })
+    registerUser(data: RegisterData) : Promise< RegisterReturnData | null> {
+        return this.connection.request()
+        .input('Username', sql.VarChar, data.username)
+        .input('Password', sql.VarChar, data.password)
+        .query('INSERT INTO Users(Username, Password) VALUES(@Username, @Password); SELECT SCOPE_IDENTITY() AS id')
+        .then((result) => {
+            return new RegisterReturnData(result.recordset[0].id, data.username);
+        })
+        .catch((_) => {
+            return null;
+        })
     }
 }
 

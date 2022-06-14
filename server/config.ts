@@ -2,9 +2,12 @@ import dotenv from 'dotenv';
 
 dotenv.config();
 
-export const dbConfig =  {
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    port: Number(process.env.DB_PORT),
-    database: process.env.DB_NAME,
+export const dbConfig = {
+    driver: 'msnodesqlv8',
+    server: process.env.DB_SERVER as string,
+    database: process.env.DB_NAME as string,
+    options: {
+        trustedConnection: true,
+        trustServerCertificate: true,
+    }
 };
