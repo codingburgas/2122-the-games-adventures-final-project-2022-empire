@@ -14,7 +14,7 @@ private:
     unsigned int id;
     
 public:
-    Object(unsigned int id) : id(id) {};
+    Object(unsigned int _id) : id(_id) {};
     virtual ~Object()
     {
         printf("Destroyed Object with id %u\n", id);
