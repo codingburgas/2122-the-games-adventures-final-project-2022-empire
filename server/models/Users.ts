@@ -7,7 +7,8 @@ class Users extends BaseModel {
         super();
     }
 
-    registerUser(data: RegisterData) {
+    registerUser(data: RegisterData) : Promise<RegisterReturnData | null>{
+        // @ts-ignore
         return this.connection.promise().execute(
             'INSERT INTO Users(Username, Password) VALUES(?, ?)',
             [data.username, data.password])
