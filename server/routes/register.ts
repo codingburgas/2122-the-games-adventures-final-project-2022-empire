@@ -1,7 +1,7 @@
 import express, { Router, Request, Response } from "express";
 import { isRegisterDataValid } from "../validations";
 import User from "../models/Users";
-import {RegisterReturnData, UserData} from "../types";
+import {UserReturnData, UserData} from "../types";
 import {
     invalidArgumentsResponse,
     invalidDataResponse,
@@ -25,7 +25,7 @@ registerRouter.post("/", (req: Request, res: Response) => {
 
     if(isRegisterDataValid(registerData)) {
         User.registerUser({username: registerData.username, password: registerData.password})
-        .then((value: RegisterReturnData | null) => {
+        .then((value: UserReturnData | null) => {
             return res.send(successOrFailureResponse(value));
         });
     } else {

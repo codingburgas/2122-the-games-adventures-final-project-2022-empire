@@ -1,6 +1,6 @@
 export type UserData = {username: string, password: string};
 
-export class RegisterReturnData {
+export class UserReturnData {
     public id: number;
     public username: string;
 

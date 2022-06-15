@@ -1,7 +1,13 @@
 import  express, { Router, Request, Response } from "express";
-import { UserData } from "../types";
+import {UserReturnData, UserData} from "../types";
 import { isLoginDataValid } from "../validations";
-import { invalidArgumentsResponse, invalidDataResponse, notEnoughArgumentsResponse } from "../constants";
+import {
+    invalidArgumentsResponse,
+    invalidDataResponse,
+    notEnoughArgumentsResponse,
+    successOrFailureResponse
+} from "../constants";
+import User from "../models/Users";
 
 const loginRouter: Router = express.Router();
 
@@ -20,7 +26,10 @@ loginRouter.post("/", (req: Request, res: Response) => {
     if(isLoginDataValid(loginData))
     {
         // TODO: Implement actual login
-        return res.send(JSON.stringify({response: "Success"}));
+        User.getUser(loginData)
+        .then((value: UserReturnData | null) => {
+            return res.send(successOrFailureResponse(value));
+        });
     } else {
         return res.send(invalidDataResponse);
     }
