@@ -52,6 +52,77 @@
                 })(),
                 onRuntimeInitialized() {
                     Module.Init();
+
+                    const fShader = `
+#version 100
+
+precision mediump float;
+
+// Input vertex attributes (from vertex shader)
+varying vec2 fragTexCoord;
+varying vec4 fragColor;
+
+// Input uniform values
+uniform sampler2D texture0;
+uniform float iTime;
+
+// NOTE: Add here your custom variables
+
+void main()
+{
+    vec2 uv = fragTexCoord;
+    vec3 col = 0.5 + 0.5*cos(iTime+uv.xyx+vec3(0,2,4));
+
+    // NOTE: Implement here your fragment shader code
+
+    gl_FragColor = vec4(col, 1.0);
+}
+`;
+
+                    let ent = new Module.CEntity();
+                    let comp = new Module.CComponent();
+                    let rTex = new Module.CRenderTexture();
+                    let sh = new Module.CShader();
+                    
+                    ent.AddComponent(comp);
+                    
+                    let pos = {
+                        x: 100,
+                        y: 100
+                    };
+                    
+                    comp.BindFunction("OnCreate", () => {
+                        sh.LoadFragmentOnly(fShader);
+                        rTex.Load(Module.GetScreenWidth(), Module.GetScreenHeight());
+                    })
+
+                    comp.BindFunction("OnUpdate", () => {
+                        if (Module.IsKeyDown(87))
+                        pos.y -= 100 * Module.GetFrameTime();
+                        if (Module.IsKeyDown(83))
+                        pos.y += 100 * Module.GetFrameTime();
+                        if (Module.IsKeyDown(65))
+                        pos.x -= 100 * Module.GetFrameTime();
+                        if (Module.IsKeyDown(68))
+                        pos.x += 100 * Module.GetFrameTime();
+                        
+                        
+                        sh.SetShaderValueFloat("iTime", Module.GetTime());
+                        sh.DrawWithShader(() => {
+                            // Module.DrawRectangle(0, 0, Module.GetScreenWidth(), Module.GetScreenHeight(), {r: 255, g: 255, b: 255, a: 255});
+                            Module.DrawTexture(rTex.RenderTexture.texture, 0, 0, {r: 255, g: 255, b: 255, a: 255});
+                        });
+                        // Module.DrawCircle(pos.x, pos.y, 50, {r: 255, g: 0, b: 0, a: 255});
+                    })
+
+                    comp.BindFunction("OnDestroy", () => {
+                    })
+                    
+                    ent.deleteLater();
+                    comp.deleteLater();
+                    rTex.deleteLater();
+                    
+                    Module.InitComponents();
                     setInterval(Module.Tick, 1/60*1000);
                 }
             };
