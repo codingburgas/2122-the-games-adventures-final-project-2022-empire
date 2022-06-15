@@ -81,7 +81,7 @@ private:
     };
 
     Shader m_shader {};
-    std::unordered_map<int, ShaderValue> m_shaderData {};
+    std::unordered_map<std::string, ShaderValue> m_shaderData {};
     
 public:
     CShader() : CObject() {}
@@ -147,14 +147,14 @@ public:
     {
         if (m_shader.id == 0) return {};
 
+        if (m_shaderData.find(uniformName) != m_shaderData.end())
+        {
+            return m_shaderData[uniformName];
+        }
+        
         int shaderLoc = GetShaderLocation(m_shader, uniformName.c_str());
         
         if (shaderLoc == -1) return {};
-        
-        if (m_shaderData.find(shaderLoc) != m_shaderData.end())
-        {
-            return m_shaderData[shaderLoc];
-        }
 
         auto shaderVal = ShaderValue {
             SHADER_UNIFORM_FLOAT,
@@ -164,7 +164,7 @@ public:
 
         std::cout << "Allocated data for shader uniform " << uniformName << std::endl;
 
-        m_shaderData[shaderLoc] = shaderVal;
+        m_shaderData[uniformName] = shaderVal;
 
         return shaderVal;
     }
@@ -181,6 +181,13 @@ public:
     {
         if (m_shader.id == 0) return;
         auto shaderVal = GetValue<int>(uniformName);
+
+        if (shaderVal.dataType != SHADER_UNIFORM_INT)
+        {
+            printf("WARN: %s is set with a different type", uniformName.c_str());
+            return;
+        }
+
         *(int*)shaderVal.data = value;
         SetShaderValue(m_shader, shaderVal.location, shaderVal.data, SHADER_UNIFORM_INT);
     }
@@ -189,6 +196,13 @@ public:
     {
         if (m_shader.id == 0) return;
         auto shaderVal = GetValue<Vector2>(uniformName);
+
+        if (shaderVal.dataType != SHADER_UNIFORM_VEC2)
+        {
+            printf("WARN: %s is set with a different type", uniformName.c_str());
+            return;
+        }
+
         *(Vector2*)shaderVal.data = value;
         SetShaderValue(m_shader, shaderVal.location, shaderVal.data, SHADER_UNIFORM_VEC2);
     }
@@ -197,6 +211,13 @@ public:
     {
         if (m_shader.id == 0) return;
         auto shaderVal = GetValue<Vector3>(uniformName);
+
+        if (shaderVal.dataType != SHADER_UNIFORM_VEC3)
+        {
+            printf("WARN: %s is set with a different type", uniformName.c_str());
+            return;
+        }
+
         *(Vector3*)shaderVal.data = value;
         SetShaderValue(m_shader, shaderVal.location, shaderVal.data, SHADER_UNIFORM_VEC3);
     }
@@ -205,6 +226,13 @@ public:
     {
         if (m_shader.id == 0) return;
         auto shaderVal = GetValue<Vector4>(uniformName);
+
+        if (shaderVal.dataType != SHADER_UNIFORM_VEC4)
+        {
+            printf("WARN: %s is set with a different type", uniformName.c_str());
+            return;
+        }
+
         *(Vector4*)shaderVal.data = value;
         SetShaderValue(m_shader, shaderVal.location, shaderVal.data, SHADER_UNIFORM_VEC4);
     }
