@@ -1,4 +1,4 @@
-export type RegisterData = {username: string, password: string};
+export type UserData = {username: string, password: string};
 
 export class RegisterReturnData {
     public id: number;

@@ -1,5 +1,5 @@
 import BaseModel from "./base/Base";
-import {RegisterData, RegisterReturnData} from "../types";
+import {UserData, RegisterReturnData} from "../types";
 import sql from 'mssql/msnodesqlv8';
 
 class Users extends BaseModel {
@@ -7,7 +7,7 @@ class Users extends BaseModel {
         super();
     }
 
-    registerUser(data: RegisterData) : Promise< RegisterReturnData | null> {
+    registerUser(data: UserData) : Promise< RegisterReturnData | null > {
         return this.connection.request()
         .input('Username', sql.VarChar, data.username)
         .input('Password', sql.VarChar, data.password)

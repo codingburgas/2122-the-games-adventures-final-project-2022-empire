@@ -6,7 +6,13 @@ export default abstract class BaseModel {
     protected connection: ConnectionPool;
 
   protected constructor() {
-        this._connectDb();
+        this._connectDb()
+        .then(() => {
+            console.log("Connection to  database initialized!");
+        })
+        .catch((err) => {
+            console.log(err);
+        });
   }
 
   private async _connectDb() {

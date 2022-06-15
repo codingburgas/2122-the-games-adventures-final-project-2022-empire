@@ -1,30 +1,35 @@
 import express, { Router, Request, Response } from "express";
 import { isRegisterDataValid } from "../validations";
 import User from "../models/Users";
-import { RegisterData } from "../types";
+import {RegisterReturnData, UserData} from "../types";
+import {
+    invalidArgumentsResponse,
+    invalidDataResponse,
+    notEnoughArgumentsResponse,
+    successOrFailureResponse
+} from "../constants";
 
 const registerRouter: Router = express.Router();
 
 registerRouter.post("/", (req: Request, res: Response) => {
     if(!(req.body.username && req.body.password))
-        return res.send(JSON.stringify({response: "Not enough arguments!"}));
+        return res.send(notEnoughArgumentsResponse);
 
     if (typeof(req.body.username) != "string" || typeof(req.body.username) != "string")
-        return res.send(JSON.stringify({response: "Invalid arguments"}));
+        return res.send(invalidArgumentsResponse);
 
-    const username: string = req.body.username;
-    const password: string = req.body.password;
-
-    const data: RegisterData = {
-        username: username,
-        password: password
+    const registerData: UserData = {
+        username: req.body.username,
+        password: req.body.password,
     };
 
-    if(isRegisterDataValid(data)) {
-        User.registerUser({username: data.username, password: data.password})
-        .then((value => {
-            return res.send(JSON.stringify({response: value ? "Success" : "Failure"}));
-        }));
+    if(isRegisterDataValid(registerData)) {
+        User.registerUser({username: registerData.username, password: registerData.password})
+        .then((value: RegisterReturnData | null) => {
+            return res.send(successOrFailureResponse(value));
+        });
+    } else {
+        return res.send(invalidDataResponse);
     }
 
 });
