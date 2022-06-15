@@ -25,3 +25,5 @@ loginRouter.post("/", (req: Request, res: Response) => {
         return res.send(invalidDataResponse);
     }
 })
+
+export default loginRouter;
