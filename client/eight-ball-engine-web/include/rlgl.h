@@ -85,7 +85,7 @@
 *
 *   LICENSE: zlib/libpng
 *
-*   Copyright (c) 2014-2021 Ramon Santamaria (@raysan5)
+*   Copyright (c) 2014-2022 Ramon Santamaria (@raysan5)
 *
 *   This software is provided "as-is", without any express or implied warranty. In no event
 *   will the authors be held liable for any damages arising from the use of this software.
@@ -418,7 +418,7 @@ typedef enum {
 // NOTE 1: Filtering considers mipmaps if available in the texture
 // NOTE 2: Filter is accordingly set for minification and magnification
 typedef enum {
-    RL_TEXTURE_FILTER_POINT = 0,               // No filter, just pixel aproximation
+    RL_TEXTURE_FILTER_POINT = 0,               // No filter, just pixel approximation
     RL_TEXTURE_FILTER_BILINEAR,                // Linear filtering
     RL_TEXTURE_FILTER_TRILINEAR,               // Trilinear filtering (linear with mipmaps)
     RL_TEXTURE_FILTER_ANISOTROPIC_4X,          // Anisotropic filtering 4x
@@ -433,7 +433,8 @@ typedef enum {
     RL_BLEND_MULTIPLIED,               // Blend textures multiplying colors
     RL_BLEND_ADD_COLORS,               // Blend textures adding colors (alternative)
     RL_BLEND_SUBTRACT_COLORS,          // Blend textures subtracting colors (alternative)
-    RL_BLEND_CUSTOM                    // Belnd textures using custom src/dst factors (use SetBlendModeCustom())
+    RL_BLEND_ALPHA_PREMUL,             // Blend premultiplied textures considering alpha
+    RL_BLEND_CUSTOM                    // Blend textures using custom src/dst factors (use rlSetBlendFactors())
 } rlBlendMode;
 
 // Shader location point type
@@ -597,7 +598,9 @@ RLAPI void rlglInit(int width, int height);           // Initialize rlgl (buffer
 RLAPI void rlglClose(void);                           // De-inititialize rlgl (buffers, shaders, textures)
 RLAPI void rlLoadExtensions(void *loader);            // Load OpenGL extensions (loader function required)
 RLAPI int rlGetVersion(void);                         // Get current OpenGL version
+RLAPI void rlSetFramebufferWidth(int width);          // Set current framebuffer width
 RLAPI int rlGetFramebufferWidth(void);                // Get default framebuffer width
+RLAPI void rlSetFramebufferHeight(int height);        // Set current framebuffer height
 RLAPI int rlGetFramebufferHeight(void);               // Get default framebuffer height
 
 RLAPI unsigned int rlGetTextureIdDefault(void);       // Get default texture id
@@ -619,23 +622,24 @@ RLAPI void rlSetTexture(unsigned int id);           // Set current texture for r
 
 // Vertex buffers management
 RLAPI unsigned int rlLoadVertexArray(void);                               // Load vertex array (vao) if supported
-RLAPI unsigned int rlLoadVertexBuffer(void *buffer, int size, bool dynamic);            // Load a vertex buffer attribute
-RLAPI unsigned int rlLoadVertexBufferElement(void *buffer, int size, bool dynamic);     // Load a new attributes element buffer
-RLAPI void rlUpdateVertexBuffer(unsigned int bufferId, void *data, int dataSize, int offset);    // Update GPU buffer with new data
+RLAPI unsigned int rlLoadVertexBuffer(const void *buffer, int size, bool dynamic);            // Load a vertex buffer attribute
+RLAPI unsigned int rlLoadVertexBufferElement(const void *buffer, int size, bool dynamic);     // Load a new attributes element buffer
+RLAPI void rlUpdateVertexBuffer(unsigned int bufferId, const void *data, int dataSize, int offset);     // Update GPU buffer with new data
+RLAPI void rlUpdateVertexBufferElements(unsigned int id, const void *data, int dataSize, int offset);   // Update vertex buffer elements with new data
 RLAPI void rlUnloadVertexArray(unsigned int vaoId);
 RLAPI void rlUnloadVertexBuffer(unsigned int vboId);
-RLAPI void rlSetVertexAttribute(unsigned int index, int compSize, int type, bool normalized, int stride, void *pointer);
+RLAPI void rlSetVertexAttribute(unsigned int index, int compSize, int type, bool normalized, int stride, const void *pointer);
 RLAPI void rlSetVertexAttributeDivisor(unsigned int index, int divisor);
 RLAPI void rlSetVertexAttributeDefault(int locIndex, const void *value, int attribType, int count); // Set vertex attribute default value
 RLAPI void rlDrawVertexArray(int offset, int count);
-RLAPI void rlDrawVertexArrayElements(int offset, int count, void *buffer);
+RLAPI void rlDrawVertexArrayElements(int offset, int count, const void *buffer);
 RLAPI void rlDrawVertexArrayInstanced(int offset, int count, int instances);
-RLAPI void rlDrawVertexArrayElementsInstanced(int offset, int count, void *buffer, int instances);
+RLAPI void rlDrawVertexArrayElementsInstanced(int offset, int count, const void *buffer, int instances);
 
 // Textures management
-RLAPI unsigned int rlLoadTexture(void *data, int width, int height, int format, int mipmapCount); // Load texture in GPU
+RLAPI unsigned int rlLoadTexture(const void *data, int width, int height, int format, int mipmapCount); // Load texture in GPU
 RLAPI unsigned int rlLoadTextureDepth(int width, int height, bool useRenderBuffer);               // Load depth texture/renderbuffer (to be attached to fbo)
-RLAPI unsigned int rlLoadTextureCubemap(void *data, int size, int format);                        // Load texture cubemap
+RLAPI unsigned int rlLoadTextureCubemap(const void *data, int size, int format);                        // Load texture cubemap
 RLAPI void rlUpdateTexture(unsigned int id, int offsetX, int offsetY, int width, int height, int format, const void *data);  // Update GPU texture with new data
 RLAPI void rlGetGlTextureFormats(int format, int *glInternalFormat, int *glFormat, int *glType);  // Get OpenGL internal formats
 RLAPI const char *rlGetPixelFormatName(unsigned int format);              // Get name string for pixel format
@@ -925,8 +929,8 @@ typedef struct rlglData {
         int glBlendDstFactor;               // Blending destination factor
         int glBlendEquation;                // Blending equation
 
-        int framebufferWidth;               // Default framebuffer width
-        int framebufferHeight;              // Default framebuffer height
+        int framebufferWidth;               // Current framebuffer width
+        int framebufferHeight;              // Current framebuffer height
 
     } State;            // Renderer state
     struct {
@@ -1228,6 +1232,7 @@ void rlOrtho(double left, double right, double bottom, double top, double znear,
 #endif
 
 // Set the viewport area (transformation from normalized device coordinates to window coordinates)
+// NOTE: We store current viewport dimensions
 void rlViewport(int x, int y, int width, int height)
 {
     glViewport(x, y, width, height);
@@ -1535,7 +1540,7 @@ void rlTextureParameters(unsigned int id, int param, int value)
             if (value <= RLGL.ExtSupported.maxAnisotropyLevel) glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, (float)value);
             else if (RLGL.ExtSupported.maxAnisotropyLevel > 0.0f)
             {
-                TRACELOG(RL_LOG_WARNING, "GL: Maximum anisotropic filter level supported is %iX", id, RLGL.ExtSupported.maxAnisotropyLevel);
+                TRACELOG(RL_LOG_WARNING, "GL: Maximum anisotropic filter level supported is %iX", id, (int)RLGL.ExtSupported.maxAnisotropyLevel);
                 glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MAX_ANISOTROPY_EXT, (float)value);
             }
             else TRACELOG(RL_LOG_WARNING, "GL: Anisotropic filtering not supported");
@@ -1778,7 +1783,12 @@ void rlSetBlendMode(int mode)
             case RL_BLEND_MULTIPLIED: glBlendFunc(GL_DST_COLOR, GL_ONE_MINUS_SRC_ALPHA); glBlendEquation(GL_FUNC_ADD); break;
             case RL_BLEND_ADD_COLORS: glBlendFunc(GL_ONE, GL_ONE); glBlendEquation(GL_FUNC_ADD); break;
             case RL_BLEND_SUBTRACT_COLORS: glBlendFunc(GL_ONE, GL_ONE); glBlendEquation(GL_FUNC_SUBTRACT); break;
-            case RL_BLEND_CUSTOM: glBlendFunc(RLGL.State.glBlendSrcFactor, RLGL.State.glBlendDstFactor); glBlendEquation(RLGL.State.glBlendEquation); break;
+            case RL_BLEND_ALPHA_PREMUL: glBlendFunc(GL_ONE, GL_ONE_MINUS_SRC_ALPHA); glBlendEquation(GL_FUNC_ADD); break;
+            case RL_BLEND_CUSTOM:
+            {
+                // NOTE: Using GL blend src/dst factors and GL equation configured with rlSetBlendFactors()
+                glBlendFunc(RLGL.State.glBlendSrcFactor, RLGL.State.glBlendDstFactor); glBlendEquation(RLGL.State.glBlendEquation);
+            } break;
             default: break;
         }
 
@@ -2160,13 +2170,12 @@ void rlLoadExtensions(void *loader)
     for (int i = 0; i < capability; i++) TRACELOG(RL_LOG_INFO, "        %s", rlGetCompressedFormatName(compFormats[i]));
     RL_FREE(compFormats);
 
-    /*
-    // Following capabilities are only supported by OpenGL 4.3 or greater
+#if defined(GRAPHICS_API_OPENGL_43)
     glGetIntegerv(GL_MAX_VERTEX_ATTRIB_BINDINGS, &capability);
     TRACELOG(RL_LOG_INFO, "    GL_MAX_VERTEX_ATTRIB_BINDINGS: %i", capability);
     glGetIntegerv(GL_MAX_UNIFORM_LOCATIONS, &capability);
     TRACELOG(RL_LOG_INFO, "    GL_MAX_UNIFORM_LOCATIONS: %i", capability);
-    */
+#endif  // GRAPHICS_API_OPENGL_43
 #else   // RLGL_SHOW_GL_DETAILS_INFO
 
     // Show some basic info about GL supported features
@@ -2211,6 +2220,22 @@ int rlGetVersion(void)
     glVersion = OPENGL_ES_20;
 #endif
     return glVersion;
+}
+
+// Set current framebuffer width
+void rlSetFramebufferWidth(int width)
+{
+#if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
+    RLGL.State.framebufferWidth = width;
+#endif
+}
+
+// Set current framebuffer height
+void rlSetFramebufferHeight(int height)
+{
+#if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
+    RLGL.State.framebufferHeight = height;
+#endif
 }
 
 // Get default framebuffer width
@@ -2595,6 +2620,9 @@ void rlDrawRenderBatch(rlRenderBatch *batch)
 
         glUseProgram(0);    // Unbind shader program
     }
+
+    // Restore viewport to default measures
+    if (eyeCount == 2) rlViewport(0, 0, RLGL.State.framebufferWidth, RLGL.State.framebufferHeight);
     //------------------------------------------------------------------------------------------------------------
 
     // Reset batch buffers
@@ -2677,7 +2705,7 @@ bool rlCheckRenderBatchLimit(int vCount)
 // Textures data management
 //-----------------------------------------------------------------------------------------
 // Convert image data to OpenGL texture (returns OpenGL valid Id)
-unsigned int rlLoadTexture(void *data, int width, int height, int format, int mipmapCount)
+unsigned int rlLoadTexture(const void *data, int width, int height, int format, int mipmapCount)
 {
     glBindTexture(GL_TEXTURE_2D, 0);    // Free any old binding
 
@@ -2879,7 +2907,7 @@ unsigned int rlLoadTextureDepth(int width, int height, bool useRenderBuffer)
 // Load texture cubemap
 // NOTE: Cubemap data is expected to be 6 images in a single data array (one after the other),
 // expected the following convention: +X, -X, +Y, -Y, +Z, -Z
-unsigned int rlLoadTextureCubemap(void *data, int size, int format)
+unsigned int rlLoadTextureCubemap(const void *data, int size, int format)
 {
     unsigned int id = 0;
 
@@ -2966,7 +2994,7 @@ void rlUpdateTexture(unsigned int id, int offsetX, int offsetY, int width, int h
 
     if ((glInternalFormat != -1) && (format < RL_PIXELFORMAT_COMPRESSED_DXT1_RGB))
     {
-        glTexSubImage2D(GL_TEXTURE_2D, 0, offsetX, offsetY, width, height, glFormat, glType, (unsigned char *)data);
+        glTexSubImage2D(GL_TEXTURE_2D, 0, offsetX, offsetY, width, height, glFormat, glType, data);
     }
     else TRACELOG(RL_LOG_WARNING, "TEXTURE: [ID %i] Failed to update for current texture format (%i)", id, format);
 }
@@ -3314,7 +3342,7 @@ void rlUnloadFramebuffer(unsigned int id)
 // Vertex data management
 //-----------------------------------------------------------------------------------------
 // Load a new attributes buffer
-unsigned int rlLoadVertexBuffer(void *buffer, int size, bool dynamic)
+unsigned int rlLoadVertexBuffer(const void *buffer, int size, bool dynamic)
 {
     unsigned int id = 0;
 
@@ -3328,7 +3356,7 @@ unsigned int rlLoadVertexBuffer(void *buffer, int size, bool dynamic)
 }
 
 // Load a new attributes element buffer
-unsigned int rlLoadVertexBufferElement(void *buffer, int size, bool dynamic)
+unsigned int rlLoadVertexBufferElement(const void *buffer, int size, bool dynamic)
 {
     unsigned int id = 0;
 
@@ -3375,7 +3403,7 @@ void rlDisableVertexBufferElement(void)
 
 // Update vertex buffer with new data
 // NOTE: dataSize and offset must be provided in bytes
-void rlUpdateVertexBuffer(unsigned int id, void *data, int dataSize, int offset)
+void rlUpdateVertexBuffer(unsigned int id, const void *data, int dataSize, int offset)
 {
 #if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
     glBindBuffer(GL_ARRAY_BUFFER, id);
@@ -3385,7 +3413,7 @@ void rlUpdateVertexBuffer(unsigned int id, void *data, int dataSize, int offset)
 
 // Update vertex buffer elements with new data
 // NOTE: dataSize and offset must be provided in bytes
-void rlUpdateVertexBufferElements(unsigned int id, void *data, int dataSize, int offset)
+void rlUpdateVertexBufferElements(unsigned int id, const void *data, int dataSize, int offset)
 {
 #if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
     glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, id);
@@ -3438,9 +3466,9 @@ void rlDrawVertexArray(int offset, int count)
 }
 
 // Draw vertex array elements
-void rlDrawVertexArrayElements(int offset, int count, void *buffer)
+void rlDrawVertexArrayElements(int offset, int count, const void *buffer)
 {
-    glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, (unsigned short *)buffer + offset);
+    glDrawElements(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, (const unsigned short *)buffer + offset);
 }
 
 // Draw vertex array instanced
@@ -3452,10 +3480,10 @@ void rlDrawVertexArrayInstanced(int offset, int count, int instances)
 }
 
 // Draw vertex array elements instanced
-void rlDrawVertexArrayElementsInstanced(int offset, int count, void *buffer, int instances)
+void rlDrawVertexArrayElementsInstanced(int offset, int count, const void *buffer, int instances)
 {
 #if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
-    glDrawElementsInstanced(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, (unsigned short *)buffer + offset, instances);
+    glDrawElementsInstanced(GL_TRIANGLES, count, GL_UNSIGNED_SHORT, (const unsigned short *)buffer + offset, instances);
 #endif
 }
 
@@ -3496,7 +3524,7 @@ unsigned int rlLoadVertexArray(void)
 }
 
 // Set vertex attribute
-void rlSetVertexAttribute(unsigned int index, int compSize, int type, bool normalized, int stride, void *pointer)
+void rlSetVertexAttribute(unsigned int index, int compSize, int type, bool normalized, int stride, const void *pointer)
 {
 #if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
     glVertexAttribPointer(index, compSize, type, normalized, stride, pointer);
@@ -3542,56 +3570,69 @@ unsigned int rlLoadShaderCode(const char *vsCode, const char *fsCode)
     unsigned int id = 0;
 
 #if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
-    unsigned int vertexShaderId = RLGL.State.defaultVShaderId;
-    unsigned int fragmentShaderId = RLGL.State.defaultFShaderId;
+    unsigned int vertexShaderId = 0;
+    unsigned int fragmentShaderId = 0;
 
+    // Compile vertex shader (if provided)
     if (vsCode != NULL) vertexShaderId = rlCompileShader(vsCode, GL_VERTEX_SHADER);
-    if (fsCode != NULL) fragmentShaderId = rlCompileShader(fsCode, GL_FRAGMENT_SHADER);
+    // In case no vertex shader was provided or compilation failed, we use default vertex shader
+    if (vertexShaderId == 0) vertexShaderId = RLGL.State.defaultVShaderId;
 
+    // Compile fragment shader (if provided)
+    if (fsCode != NULL) fragmentShaderId = rlCompileShader(fsCode, GL_FRAGMENT_SHADER);
+    // In case no fragment shader was provided or compilation failed, we use default fragment shader
+    if (fragmentShaderId == 0) fragmentShaderId = RLGL.State.defaultFShaderId;
+
+    // In case vertex and fragment shader are the default ones, no need to recompile, we can just assign the default shader program id
     if ((vertexShaderId == RLGL.State.defaultVShaderId) && (fragmentShaderId == RLGL.State.defaultFShaderId)) id = RLGL.State.defaultShaderId;
     else
     {
+        // One of or both shader are new, we need to compile a new shader program
         id = rlLoadShaderProgram(vertexShaderId, fragmentShaderId);
 
+        // We can detach and delete vertex/fragment shaders (if not default ones)
+        // NOTE: We detach shader before deletion to make sure memory is freed
         if (vertexShaderId != RLGL.State.defaultVShaderId)
         {
-            // Detach shader before deletion to make sure memory is freed
             glDetachShader(id, vertexShaderId);
             glDeleteShader(vertexShaderId);
         }
         if (fragmentShaderId != RLGL.State.defaultFShaderId)
         {
-            // Detach shader before deletion to make sure memory is freed
             glDetachShader(id, fragmentShaderId);
             glDeleteShader(fragmentShaderId);
         }
 
+        // In case shader program loading failed, we assign default shader
         if (id == 0)
         {
-            TRACELOG(RL_LOG_WARNING, "SHADER: Failed to load custom shader code");
+            // In case shader loading fails, we return the default shader
+            TRACELOG(RL_LOG_WARNING, "SHADER: Failed to load custom shader code, using default shader");
             id = RLGL.State.defaultShaderId;
         }
-    }
+        /*
+        else
+        {
+            // Get available shader uniforms
+            // NOTE: This information is useful for debug...
+            int uniformCount = -1;
+            glGetProgramiv(id, GL_ACTIVE_UNIFORMS, &uniformCount);
 
-    // Get available shader uniforms
-    // NOTE: This information is useful for debug...
-    int uniformCount = -1;
+            for (int i = 0; i < uniformCount; i++)
+            {
+                int namelen = -1;
+                int num = -1;
+                char name[256] = { 0 };     // Assume no variable names longer than 256
+                GLenum type = GL_ZERO;
 
-    glGetProgramiv(id, GL_ACTIVE_UNIFORMS, &uniformCount);
+                // Get the name of the uniforms
+                glGetActiveUniform(id, i, sizeof(name) - 1, &namelen, &num, &type, name);
 
-    for (int i = 0; i < uniformCount; i++)
-    {
-        int namelen = -1;
-        int num = -1;
-        char name[256] = { 0 };     // Assume no variable names longer than 256
-        GLenum type = GL_ZERO;
-
-        // Get the name of the uniforms
-        glGetActiveUniform(id, i, sizeof(name) - 1, &namelen, &num, &type, name);
-
-        name[namelen] = 0;
-
-        TRACELOGD("SHADER: [ID %i] Active uniform (%s) set at location: %i", id, name, glGetUniformLocation(id, name));
+                name[namelen] = 0;
+                TRACELOGD("SHADER: [ID %i] Active uniform (%s) set at location: %i", id, name, glGetUniformLocation(id, name));
+            }
+        }
+        */
     }
 #endif
 
@@ -3895,11 +3936,13 @@ void rlComputeShaderDispatch(unsigned int groupX, unsigned int groupY, unsigned 
 unsigned int rlLoadShaderBuffer(unsigned long long size, const void *data, int usageHint)
 {
     unsigned int ssbo = 0;
-    
+
 #if defined(GRAPHICS_API_OPENGL_43)
     glGenBuffers(1, &ssbo);
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, ssbo);
     glBufferData(GL_SHADER_STORAGE_BUFFER, size, data, usageHint? usageHint : RL_STREAM_COPY);
+    glClearBufferData(GL_SHADER_STORAGE_BUFFER, GL_R8UI, GL_RED_INTEGER, GL_UNSIGNED_BYTE, 0);
+    glBindBuffer(GL_SHADER_STORAGE_BUFFER, 0);
 #endif
 
     return ssbo;
@@ -3926,7 +3969,7 @@ void rlUpdateShaderBufferElements(unsigned int id, const void *data, unsigned lo
 unsigned long long rlGetShaderBufferSize(unsigned int id)
 {
     long long size = 0;
-    
+
 #if defined(GRAPHICS_API_OPENGL_43)
     glBindBuffer(GL_SHADER_STORAGE_BUFFER, id);
     glGetInteger64v(GL_SHADER_STORAGE_BUFFER_SIZE, &size);
@@ -4048,7 +4091,7 @@ Matrix rlGetMatrixTransform(void)
 }
 
 // Get internal projection matrix for stereo render (selected eye)
-RLAPI Matrix rlGetMatrixProjectionStereo(int eye)
+Matrix rlGetMatrixProjectionStereo(int eye)
 {
     Matrix mat = rlMatrixIdentity();
 #if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
@@ -4058,7 +4101,7 @@ RLAPI Matrix rlGetMatrixProjectionStereo(int eye)
 }
 
 // Get internal view offset matrix for stereo render (selected eye)
-RLAPI Matrix rlGetMatrixViewOffsetStereo(int eye)
+Matrix rlGetMatrixViewOffsetStereo(int eye)
 {
     Matrix mat = rlMatrixIdentity();
 #if defined(GRAPHICS_API_OPENGL_33) || defined(GRAPHICS_API_OPENGL_ES2)
@@ -4337,7 +4380,8 @@ static void rlLoadShaderDefault(void)
     "}                                  \n";
 #endif
 
-    // NOTE: Compiled vertex/fragment shaders are kept for re-use
+    // NOTE: Compiled vertex/fragment shaders are not deleted,
+    // they are kept for re-use as default shaders in case some shader loading fails
     RLGL.State.defaultVShaderId = rlCompileShader(defaultVShaderCode, GL_VERTEX_SHADER);     // Compile default vertex shader
     RLGL.State.defaultFShaderId = rlCompileShader(defaultFShaderCode, GL_FRAGMENT_SHADER);   // Compile default fragment shader
 
@@ -4382,80 +4426,75 @@ static void rlUnloadShaderDefault(void)
 // Get compressed format official GL identifier name
 static char *rlGetCompressedFormatName(int format)
 {
-    static char compName[64] = { 0 };
-    memset(compName, 0, 64);
-
     switch (format)
     {
         // GL_EXT_texture_compression_s3tc
-        case 0x83F0: strcpy(compName, "GL_COMPRESSED_RGB_S3TC_DXT1_EXT"); break;
-        case 0x83F1: strcpy(compName, "GL_COMPRESSED_RGBA_S3TC_DXT1_EXT"); break;
-        case 0x83F2: strcpy(compName, "GL_COMPRESSED_RGBA_S3TC_DXT3_EXT"); break;
-        case 0x83F3: strcpy(compName, "GL_COMPRESSED_RGBA_S3TC_DXT5_EXT"); break;
+        case 0x83F0: return "GL_COMPRESSED_RGB_S3TC_DXT1_EXT"; break;
+        case 0x83F1: return "GL_COMPRESSED_RGBA_S3TC_DXT1_EXT"; break;
+        case 0x83F2: return "GL_COMPRESSED_RGBA_S3TC_DXT3_EXT"; break;
+        case 0x83F3: return "GL_COMPRESSED_RGBA_S3TC_DXT5_EXT"; break;
         // GL_3DFX_texture_compression_FXT1
-        case 0x86B0: strcpy(compName, "GL_COMPRESSED_RGB_FXT1_3DFX"); break;
-        case 0x86B1: strcpy(compName, "GL_COMPRESSED_RGBA_FXT1_3DFX"); break;
+        case 0x86B0: return "GL_COMPRESSED_RGB_FXT1_3DFX"; break;
+        case 0x86B1: return "GL_COMPRESSED_RGBA_FXT1_3DFX"; break;
         // GL_IMG_texture_compression_pvrtc
-        case 0x8C00: strcpy(compName, "GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG"); break;
-        case 0x8C01: strcpy(compName, "GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG"); break;
-        case 0x8C02: strcpy(compName, "GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG"); break;
-        case 0x8C03: strcpy(compName, "GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG"); break;
+        case 0x8C00: return "GL_COMPRESSED_RGB_PVRTC_4BPPV1_IMG"; break;
+        case 0x8C01: return "GL_COMPRESSED_RGB_PVRTC_2BPPV1_IMG"; break;
+        case 0x8C02: return "GL_COMPRESSED_RGBA_PVRTC_4BPPV1_IMG"; break;
+        case 0x8C03: return "GL_COMPRESSED_RGBA_PVRTC_2BPPV1_IMG"; break;
         // GL_OES_compressed_ETC1_RGB8_texture
-        case 0x8D64: strcpy(compName, "GL_ETC1_RGB8_OES"); break;
+        case 0x8D64: return "GL_ETC1_RGB8_OES"; break;
         // GL_ARB_texture_compression_rgtc
-        case 0x8DBB: strcpy(compName, "GL_COMPRESSED_RED_RGTC1"); break;
-        case 0x8DBC: strcpy(compName, "GL_COMPRESSED_SIGNED_RED_RGTC1"); break;
-        case 0x8DBD: strcpy(compName, "GL_COMPRESSED_RG_RGTC2"); break;
-        case 0x8DBE: strcpy(compName, "GL_COMPRESSED_SIGNED_RG_RGTC2"); break;
+        case 0x8DBB: return "GL_COMPRESSED_RED_RGTC1"; break;
+        case 0x8DBC: return "GL_COMPRESSED_SIGNED_RED_RGTC1"; break;
+        case 0x8DBD: return "GL_COMPRESSED_RG_RGTC2"; break;
+        case 0x8DBE: return "GL_COMPRESSED_SIGNED_RG_RGTC2"; break;
         // GL_ARB_texture_compression_bptc
-        case 0x8E8C: strcpy(compName, "GL_COMPRESSED_RGBA_BPTC_UNORM_ARB"); break;
-        case 0x8E8D: strcpy(compName, "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_ARB"); break;
-        case 0x8E8E: strcpy(compName, "GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT_ARB"); break;
-        case 0x8E8F: strcpy(compName, "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_ARB"); break;
+        case 0x8E8C: return "GL_COMPRESSED_RGBA_BPTC_UNORM_ARB"; break;
+        case 0x8E8D: return "GL_COMPRESSED_SRGB_ALPHA_BPTC_UNORM_ARB"; break;
+        case 0x8E8E: return "GL_COMPRESSED_RGB_BPTC_SIGNED_FLOAT_ARB"; break;
+        case 0x8E8F: return "GL_COMPRESSED_RGB_BPTC_UNSIGNED_FLOAT_ARB"; break;
         // GL_ARB_ES3_compatibility
-        case 0x9274: strcpy(compName, "GL_COMPRESSED_RGB8_ETC2"); break;
-        case 0x9275: strcpy(compName, "GL_COMPRESSED_SRGB8_ETC2"); break;
-        case 0x9276: strcpy(compName, "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2"); break;
-        case 0x9277: strcpy(compName, "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2"); break;
-        case 0x9278: strcpy(compName, "GL_COMPRESSED_RGBA8_ETC2_EAC"); break;
-        case 0x9279: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC"); break;
-        case 0x9270: strcpy(compName, "GL_COMPRESSED_R11_EAC"); break;
-        case 0x9271: strcpy(compName, "GL_COMPRESSED_SIGNED_R11_EAC"); break;
-        case 0x9272: strcpy(compName, "GL_COMPRESSED_RG11_EAC"); break;
-        case 0x9273: strcpy(compName, "GL_COMPRESSED_SIGNED_RG11_EAC"); break;
+        case 0x9274: return "GL_COMPRESSED_RGB8_ETC2"; break;
+        case 0x9275: return "GL_COMPRESSED_SRGB8_ETC2"; break;
+        case 0x9276: return "GL_COMPRESSED_RGB8_PUNCHTHROUGH_ALPHA1_ETC2"; break;
+        case 0x9277: return "GL_COMPRESSED_SRGB8_PUNCHTHROUGH_ALPHA1_ETC2"; break;
+        case 0x9278: return "GL_COMPRESSED_RGBA8_ETC2_EAC"; break;
+        case 0x9279: return "GL_COMPRESSED_SRGB8_ALPHA8_ETC2_EAC"; break;
+        case 0x9270: return "GL_COMPRESSED_R11_EAC"; break;
+        case 0x9271: return "GL_COMPRESSED_SIGNED_R11_EAC"; break;
+        case 0x9272: return "GL_COMPRESSED_RG11_EAC"; break;
+        case 0x9273: return "GL_COMPRESSED_SIGNED_RG11_EAC"; break;
         // GL_KHR_texture_compression_astc_hdr
-        case 0x93B0: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_4x4_KHR"); break;
-        case 0x93B1: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_5x4_KHR"); break;
-        case 0x93B2: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_5x5_KHR"); break;
-        case 0x93B3: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_6x5_KHR"); break;
-        case 0x93B4: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_6x6_KHR"); break;
-        case 0x93B5: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_8x5_KHR"); break;
-        case 0x93B6: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_8x6_KHR"); break;
-        case 0x93B7: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_8x8_KHR"); break;
-        case 0x93B8: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_10x5_KHR"); break;
-        case 0x93B9: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_10x6_KHR"); break;
-        case 0x93BA: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_10x8_KHR"); break;
-        case 0x93BB: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_10x10_KHR"); break;
-        case 0x93BC: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_12x10_KHR"); break;
-        case 0x93BD: strcpy(compName, "GL_COMPRESSED_RGBA_ASTC_12x12_KHR"); break;
-        case 0x93D0: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR"); break;
-        case 0x93D1: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR"); break;
-        case 0x93D2: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR"); break;
-        case 0x93D3: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR"); break;
-        case 0x93D4: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR"); break;
-        case 0x93D5: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR"); break;
-        case 0x93D6: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR"); break;
-        case 0x93D7: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR"); break;
-        case 0x93D8: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR"); break;
-        case 0x93D9: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR"); break;
-        case 0x93DA: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR"); break;
-        case 0x93DB: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR"); break;
-        case 0x93DC: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR"); break;
-        case 0x93DD: strcpy(compName, "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"); break;
-        default: strcpy(compName, "GL_COMPRESSED_UNKNOWN"); break;
+        case 0x93B0: return "GL_COMPRESSED_RGBA_ASTC_4x4_KHR"; break;
+        case 0x93B1: return "GL_COMPRESSED_RGBA_ASTC_5x4_KHR"; break;
+        case 0x93B2: return "GL_COMPRESSED_RGBA_ASTC_5x5_KHR"; break;
+        case 0x93B3: return "GL_COMPRESSED_RGBA_ASTC_6x5_KHR"; break;
+        case 0x93B4: return "GL_COMPRESSED_RGBA_ASTC_6x6_KHR"; break;
+        case 0x93B5: return "GL_COMPRESSED_RGBA_ASTC_8x5_KHR"; break;
+        case 0x93B6: return "GL_COMPRESSED_RGBA_ASTC_8x6_KHR"; break;
+        case 0x93B7: return "GL_COMPRESSED_RGBA_ASTC_8x8_KHR"; break;
+        case 0x93B8: return "GL_COMPRESSED_RGBA_ASTC_10x5_KHR"; break;
+        case 0x93B9: return "GL_COMPRESSED_RGBA_ASTC_10x6_KHR"; break;
+        case 0x93BA: return "GL_COMPRESSED_RGBA_ASTC_10x8_KHR"; break;
+        case 0x93BB: return "GL_COMPRESSED_RGBA_ASTC_10x10_KHR"; break;
+        case 0x93BC: return "GL_COMPRESSED_RGBA_ASTC_12x10_KHR"; break;
+        case 0x93BD: return "GL_COMPRESSED_RGBA_ASTC_12x12_KHR"; break;
+        case 0x93D0: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_4x4_KHR"; break;
+        case 0x93D1: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x4_KHR"; break;
+        case 0x93D2: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_5x5_KHR"; break;
+        case 0x93D3: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x5_KHR"; break;
+        case 0x93D4: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_6x6_KHR"; break;
+        case 0x93D5: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x5_KHR"; break;
+        case 0x93D6: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x6_KHR"; break;
+        case 0x93D7: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_8x8_KHR"; break;
+        case 0x93D8: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x5_KHR"; break;
+        case 0x93D9: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x6_KHR"; break;
+        case 0x93DA: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x8_KHR"; break;
+        case 0x93DB: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_10x10_KHR"; break;
+        case 0x93DC: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x10_KHR"; break;
+        case 0x93DD: return "GL_COMPRESSED_SRGB8_ALPHA8_ASTC_12x12_KHR"; break;
+        default: return "GL_COMPRESSED_UNKNOWN"; break;
     }
-
-    return compName;
 }
 #endif  // RLGL_SHOW_GL_DETAILS_INFO
 
@@ -4547,8 +4586,8 @@ static unsigned char *rlGenNextMipmapData(unsigned char *srcData, int srcWidth, 
 {
     int x2 = 0;
     int y2 = 0;
-    unsigned char prow[4];
-    unsigned char pcol[4];
+    unsigned char prow[4] = { 0 };
+    unsigned char pcol[4] = { 0 };
 
     int width = srcWidth/2;
     int height = srcHeight/2;
