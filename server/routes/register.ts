@@ -1,37 +1,61 @@
 import express, { Router, Request, Response } from "express";
-import { isRegisterDataValid } from "../validations";
+import { isRegisterDataValid } from "../helpers/validations";
 import User from "../models/Users";
-import {UserReturnData, UserData} from "../types";
+import { UserReturnData, UserData } from "../types";
 import {
-    invalidArgumentsResponse,
-    invalidDataResponse,
-    notEnoughArgumentsResponse,
-    successOrFailureResponse
+  invalidArgumentsResponse,
+  invalidDataResponse,
+  notEnoughArgumentsResponse,
+  successOrFailureResponse,
 } from "../constants";
+import { LoggerManager } from "../helpers/loggerManager";
 
 const registerRouter: Router = express.Router();
+const loggerManager = new LoggerManager();
 
 registerRouter.post("/", (req: Request, res: Response) => {
-    if(!(req.body.username && req.body.password))
-        return res.send(notEnoughArgumentsResponse);
+  loggerManager.logInfo(
+    `User with username: ${req.body.username} is trying to register.`
+  );
 
-    if (typeof(req.body.username) != "string" || typeof(req.body.username) != "string")
-        return res.send(invalidArgumentsResponse);
+  if (!(req.body.username && req.body.password)) {
+    loggerManager.logWarn(
+      `Register failed. Reason: Not enough arguments in request.`
+    );
 
-    const registerData: UserData = {
-        username: req.body.username,
-        password: req.body.password,
-    };
+    return res.send(notEnoughArgumentsResponse);
+  }
 
-    if(isRegisterDataValid(registerData)) {
-        User.registerUser({username: registerData.username, password: registerData.password})
-        .then((value: UserReturnData | null) => {
-            return res.send(successOrFailureResponse(value));
-        });
-    } else {
-        return res.send(invalidDataResponse);
-    }
+  if (
+    typeof req.body.username != "string" ||
+    typeof req.body.password != "string"
+  ) {
+    loggerManager.logWarn(
+      `Register failed. Reason: Invalid arguments in request.`
+    );
 
+    return res.send(invalidArgumentsResponse);
+  }
+
+  const registerData: UserData = {
+    username: req.body.username,
+    password: req.body.password,
+  };
+
+  if (!isRegisterDataValid(registerData)) {
+    loggerManager.logWarn(`Register failed. Reason: Validations failed.`);
+
+    return res.send(invalidDataResponse);
+  }
+
+  User.registerUser({
+    username: registerData.username,
+    password: registerData.password,
+  }).then((value: UserReturnData | null) => {
+    loggerManager.logInfo(`Register successful.`);
+
+    return res.send(successOrFailureResponse(value));
+  });
 });
 
 export default registerRouter;
