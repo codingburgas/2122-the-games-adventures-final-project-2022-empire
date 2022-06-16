@@ -259,6 +259,131 @@ public:
     }
 };
 
+class CCamera2D : public CObject
+{
+private:
+    Camera2D cam;
+
+public:
+    CCamera2D() : CObject() {};
+
+    Camera2D GetCamera() const
+    {
+        return cam;
+    }
+
+    void SetCamera(Camera2D val)
+    {
+        cam = val;
+    }
+
+    void DrawWithCamera(emscripten::val fn)
+    {
+        BeginMode2D(cam);
+            fn();
+        EndMode2D();
+    }
+
+    virtual ~CCamera2D() = default;
+};
+
+class CAudio : public CObject
+{
+private:
+    std::unique_ptr<Sound> snd { nullptr };
+    std::unique_ptr<Music> mus { nullptr };
+
+public:
+    CAudio() : CObject() {};
+
+    void Unload()
+    {
+        if (mus)
+        {
+            UnloadMusicStream(*mus);
+            mus.reset();
+        }
+
+        if (snd)
+        {
+            UnloadSound(*snd);
+            snd.reset();
+        }
+    }
+
+    void LoadAsSound(std::string fileName)
+    {
+        Unload();
+        if (!IsAudioDeviceReady())
+            InitAudioDevice();
+        snd = std::make_unique<Sound>();
+        *snd = LoadSound(fileName.c_str());
+    }
+
+    void LoadAsMusic(std::string fileName)
+    {
+        Unload();
+        if (!IsAudioDeviceReady())
+            InitAudioDevice();
+        snd = std::make_unique<Sound>();
+        *snd = LoadSound(fileName.c_str());
+    }
+
+    void Play()
+    {
+        if (snd) PlaySound(*snd);
+        else if (mus) PlayMusicStream(*mus);
+    }
+
+    void Stop()
+    {
+        if (snd) StopSound(*snd);
+        else if (mus) StopMusicStream(*mus);
+    }
+
+    void Pause()
+    {
+        if (snd) PauseSound(*snd);
+        else if (mus) PauseMusicStream(*mus);
+    }
+    
+    void Resume()
+    {
+        if (snd) ResumeSound(*snd);
+        else if (mus) ResumeMusicStream(*mus);
+    }
+
+    void Seek(float position)
+    {
+        if (mus) SeekMusicStream(*mus, position);
+    }
+
+    bool IsPlaying()
+    {
+        if (snd) return IsSoundPlaying(*snd);
+        else if (mus) return IsMusicStreamPlaying(*mus);
+        else return false;
+    }
+
+    void SetVolume(float vol)
+    {
+        if (snd) SetSoundVolume(*snd, vol);
+        else if (mus) SetMusicVolume(*mus, vol);
+    }
+
+    void SetPitch(float pitch)
+    {
+        if (snd) SetSoundPitch(*snd, pitch);
+        else if (mus) SetMusicPitch(*mus, pitch);
+    }
+
+    void SetPan(float pan)
+    {
+        if (snd) SetSoundPan(*snd, pan);
+        else if (mus) SetMusicPan(*mus, pan);
+    }
+};
+
 void DrawTextSafe(const std::string text, int posX, int posY, int fontSize, Color color)
 {
     DrawText(text.c_str(), posX, posY, fontSize, color);
@@ -287,6 +412,7 @@ EMSCRIPTEN_BINDINGS(raylib_module) {
     function("GetKeyPressed", &GetKeyPressed);
     function("GetCharPressed", &GetCharPressed);
     function("IsMouseButtonPressed", &IsMouseButtonPressed);
+    function("IsMouseButtonReleased", &IsMouseButtonReleased);
     function("IsMouseButtonDown", &IsMouseButtonDown);
     function("IsMouseButtonUp", &IsMouseButtonUp);
     function("GetMouseX", &GetMouseX);
@@ -298,6 +424,7 @@ EMSCRIPTEN_BINDINGS(raylib_module) {
     function("SetMouseScale", &SetMouseScale);
     function("GetMouseWheelMove", &GetMouseWheelMove);
     function("SetMouseCursor", &SetMouseCursor);
+    function("ClearBackground", &ClearBackground);
 
     // shapes
     function("DrawPixel", &DrawPixel);
@@ -362,15 +489,6 @@ EMSCRIPTEN_BINDINGS(raylib_module) {
     function("ColorAlpha", &ColorAlpha);
     function("ColorAlphaBlend", &ColorAlphaBlend);
     function("GetColor", &GetColor);
-
-    function("DrawTexture", &DrawTexture);
-    function("DrawTextureV", &DrawTextureV);
-    function("DrawTextureEx", &DrawTextureEx);
-    function("DrawTextureRec", &DrawTextureRec);
-    function("DrawTextureQuad", &DrawTextureQuad);
-    function("DrawTextureTiled", &DrawTextureTiled);
-    function("DrawTexturePro", &DrawTexturePro);
-    function("DrawTextureNPatch", &DrawTextureNPatch);
 
     // text
     function("DrawFPS", &DrawFPS);
@@ -452,6 +570,13 @@ EMSCRIPTEN_BINDINGS(raylib_module) {
         .field("source", &NPatchInfo::source)
         ;
 
+    value_object<Camera2D>("Camera2D")
+        .field("offset", &Camera2D::offset)
+        .field("rotation", &Camera2D::rotation)
+        .field("target", &Camera2D::target)
+        .field("zoom", &Camera2D::zoom)
+        ;
+
     class_<CTexture, base<CObject>>("CTexture")
         .smart_ptr_constructor("CTexture", &std::make_shared<CTexture>)
         .property("Texture", &CTexture::GetTexture)
@@ -481,5 +606,27 @@ EMSCRIPTEN_BINDINGS(raylib_module) {
         .function("SetShaderValueTexture", &CShader::SetShaderValueTexture)
         .function("SetShaderValueMatrix", &CShader::SetShaderValueMatrix)
         .function("DrawWithShader", &CShader::DrawWithShader)
+        ;
+
+    class_<CCamera2D, base<CObject>>("CCamera2D")
+        .smart_ptr_constructor("CCamera2D", &std::make_shared<CCamera2D>)
+        .property("Camera", &CCamera2D::GetCamera, &CCamera2D::SetCamera)
+        .function("DrawWithCamera", &CCamera2D::DrawWithCamera)
+        ;
+
+    class_<CAudio, base<CObject>>("CAudio")
+        .smart_ptr_constructor("CAudio", &std::make_shared<CAudio>)
+        .function("Unload", &CAudio::Unload)
+        .function("LoadAsSound", &CAudio::LoadAsSound)
+        .function("LoadAsMusic", &CAudio::LoadAsMusic)
+        .function("Play", &CAudio::Play)
+        .function("Stop", &CAudio::Stop)
+        .function("Pause", &CAudio::Pause)
+        .function("Resume", &CAudio::Resume)
+        .function("Seek", &CAudio::Seek)
+        .function("IsPlaying", &CAudio::IsPlaying)
+        .function("SetVolume", &CAudio::SetVolume)
+        .function("SetPitch", &CAudio::SetPitch)
+        .function("SetPan", &CAudio::SetPan)
         ;
 }

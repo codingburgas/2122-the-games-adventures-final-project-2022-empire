@@ -14,10 +14,10 @@ object_dir = "obj"
 compiler = "emcc"
 compile_pattern = ".*\.cpp$"
 
-cflags = f"-I{source_dir} -Iinclude -Llib -sFORCE_FILESYSTEM -sFETCH -sUSE_GLFW=3 -sASYNCIFY -DPLATFORM_WEB -DGRAPHICS_API_OPENGL_ES2"
+cflags = f"-I{source_dir} -Iinclude -Llib -sUSE_ES6_IMPORT_META=0 -sENVIRONMENT='web' -sSINGLE_FILE=1 -sFORCE_FILESYSTEM -sUSE_GLFW=3 -sALLOW_MEMORY_GROWTH -sASYNCIFY -DPLATFORM_WEB -DGRAPHICS_API_OPENGL_ES2"
 err_flags = "-Wall -Wunused-variable -Wextra -Wno-enum-compare"
 ext_libs = "./lib/libraylib.a"
-out = "dist/engine.js"
+out = "dist/engine.mjs"
 
 source_files = []
 thread_pool = []
