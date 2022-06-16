@@ -12,13 +12,9 @@ interface ValidationFunctionInterface {
   [key: string]: Function;
 }
 
-/**
- * Validations for every input
- */
 const validations: ValidationFunctionInterface = {
-  isEmailValid: (data: string): boolean => {
-    let pattern =
-      /(([a-z]+)([._a-z0-9])([a-z0-9]+)).{1,64}(@)([a-z]+)([.a-z])([a-z])+/gim;
+  isPasswordValid: (data: string): boolean => {
+    let pattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}/;
     return Boolean(data.match(pattern));
   },
 
@@ -28,63 +24,37 @@ const validations: ValidationFunctionInterface = {
   },
 };
 
-/**
- * To check certain data if it is valid
- * @function
- * @param {string} data data to check
- * @param {object} toCheck For what to check
- * @returns {boolean} Is the data valid?
- */
-function isDataValid(data: string, toCheck: object): boolean {
+const isDataValid = (data: string, toCheck: object): boolean => {
   for (const key in toCheck) {
     if (!validations[key](data)) {
       return false;
     }
   }
-
   return true;
-}
+};
 
-/**
- * Function to validate the form received from client
- * @function
- * @param {object} dataToValidate Data that needs to be validated
- * @param {object} criterias Criterias for evaluating the date
- * @returns {(boolean|Array)} Booleant if the data is valid or array of errors
- */
-function formValidation(
-  dataToValidate: DataInterface,
-  criterias: ValidationsInterface
-): boolean | DataInterface {
+const formValidation = (dataToValidate: DataInterface, criteria: ValidationsInterface): boolean => {
   let errorArr: DataInterface = {};
 
   for (const key in dataToValidate) {
-    if (!isDataValid(dataToValidate[key], criterias[key])) {
-      errorArr[key] = criterias[Object.keys(criterias[key])[0]];
+    if (!isDataValid(dataToValidate[key], criteria[key])) {
+      errorArr[key] = criteria[Object.keys(criteria[key])[0]];
     }
   }
-
-  if (Object.keys(errorArr).length === 0) {
-    return true;
-  }
-
-  return errorArr;
-}
-
-/**
- * Validations for registering form
- */
-const registerValidations = {
-  username: { isUsernameValid: 1 },
-  isUsernameValid: "Invalid username",
+  return Object.keys(errorArr).length === 0;
 };
 
-export const isRegisterDataValid = (
-  data: UserData
-): boolean | DataInterface => {
+const registerValidations = {
+  username: { isUsernameValid: 1 },
+  password: { isPasswordValid: 1},
+  isUsernameValid: "Invalid username",
+  isPasswordValid: "Invalid password"
+};
+
+export const isRegisterDataValid = (data: UserData): boolean => {
   return formValidation(data, registerValidations);
 };
 
-export const isLoginDataValid = (data: UserData): boolean | DataInterface => {
+export const isLoginDataValid = (data: UserData): boolean => {
   return formValidation(data, registerValidations);
 };
