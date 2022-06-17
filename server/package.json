@@ -2,7 +2,7 @@
   "name": "server",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "",
   "scripts": {
     "build": "npx tsc",
     "start": "node outDir/app.js",
@@ -24,6 +24,9 @@
     "dotenv": "^16.0.1",
     "express": "^4.18.1",
     "msnodesqlv8": "^2.4.8",
-    "mssql": "^8.1.2"
+    "mssql": "^8.1.2",
+    "winston": "^3.7.2",
+    "winston-loki": "^6.0.5",
+    "winston3-discord": "^1.1.1"
   }
 }

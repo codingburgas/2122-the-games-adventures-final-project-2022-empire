@@ -8,10 +8,13 @@ import {
     successOrFailureResponse
 } from "../constants";
 import User from "../models/Users";
+import { LoggerManager } from "../helpers/loggerManager";
 
 const loginRouter: Router = express.Router();
+const loggerManager = new LoggerManager();
 
 loginRouter.post("/", (req: Request, res: Response) => {
+    loggerManager.logDebug("Qsha");
     if(!(req.body.username && req.body.password))
         return res.send(notEnoughArgumentsResponse);
 
@@ -26,7 +29,7 @@ loginRouter.post("/", (req: Request, res: Response) => {
     if(isLoginDataValid(loginData))
     {
         // TODO: Implement actual login
-        User.getUser(loginData)
+        User.loginUser(loginData)
         .then((value: UserReturnData | null) => {
             return res.send(successOrFailureResponse(value));
         });
