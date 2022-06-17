@@ -127,7 +127,7 @@ CREATE TABLE [dbo].[Users](
                               [Id] [int] IDENTITY(1,1) NOT NULL,
                               [Username] [varchar](64) NOT NULL,
                               [Password] [varchar](256) NOT NULL,
-                              [PasswordHash] [varchar](64) NOT NULL,
+                              [Salt] [varchar](64) NOT NULL,
                               [SumOfPoints] [int] NOT NULL,
                               CONSTRAINT [PK_Users] PRIMARY KEY CLUSTERED
                                   (

@@ -1,5 +1,5 @@
 import express, { Router, Request, Response } from "express";
-import { isRegisterDataValid } from "../validations";
+import { isRegisterDataValid } from "../helpers/validations";
 import User from "../models/Users";
 import {UserReturnData, UserData} from "../types";
 import {

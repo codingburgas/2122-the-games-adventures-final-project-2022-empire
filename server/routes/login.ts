@@ -1,6 +1,6 @@
 import  express, { Router, Request, Response } from "express";
 import {UserReturnData, UserData} from "../types";
-import { isLoginDataValid } from "../validations";
+import { isLoginDataValid } from "../helpers/validations";
 import {
     invalidArgumentsResponse,
     invalidDataResponse,
