@@ -8,5 +8,6 @@ export class UserReturnData {
         this.id = _id;
         this.username = _username;
     }
-};
+}
 
+export interface FilterData{id?: number, username?: string}

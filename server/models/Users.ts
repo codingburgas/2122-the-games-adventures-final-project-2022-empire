@@ -1,9 +1,11 @@
 import BaseModel from "./base/Base";
-import { UserData, UserReturnData } from "../types";
-import sql from 'mssql/msnodesqlv8';
+import {FilterData, UserData, UserReturnData} from "../types";
+import sql, {IResult} from 'mssql/msnodesqlv8';
 import * as bcrypt from "bcrypt";
 
 class Users extends BaseModel {
+    private _transitionalVar!: Promise<IResult<any>>;
+
     constructor() {
         super();
     }
@@ -48,6 +50,33 @@ class Users extends BaseModel {
             console.log(err);
             return null;
         });
+    };
+
+    getUser = (): this => {
+        this._transitionalVar = this.connection.request()
+        .query('SELECT Id as id, Username as username FROM Users')
+
+        return this;
+    };
+
+    by = async (data: FilterData): Promise<UserReturnData[]> => {
+
+       const keys: Array<keyof FilterData> = ["id", "username"];
+
+       let filterData: UserReturnData[] = [];
+
+       return this._transitionalVar.then((result) => {
+           for (let key of keys) {
+               if(data[key]) {
+                   for (let object of result.recordset) {
+                       if(object[key] == data[key]) {
+                           filterData.push(new UserReturnData(object.id, object.username));
+                       }
+                   }
+               }
+           }
+           return filterData;
+       });
     };
 
 }
