@@ -52,7 +52,7 @@ class Users extends BaseModel {
         });
     };
 
-    getUser = (): this => {
+    getUsers = (): this => {
         this._transitionalVar = this.connection.request()
         .query('SELECT Id as id, Username as username FROM Users')
 
@@ -60,7 +60,6 @@ class Users extends BaseModel {
     };
 
     by = async (data: FilterData): Promise<UserReturnData[]> => {
-
        const keys: Array<keyof FilterData> = ["id", "username"];
 
        let filterData: UserReturnData[] = [];
@@ -75,7 +74,11 @@ class Users extends BaseModel {
                    }
                }
            }
-           return filterData;
+       return filterData;
+       })
+       .catch((err) => {
+           console.log(err);
+           return [];
        });
     };
 
