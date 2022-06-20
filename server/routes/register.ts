@@ -14,16 +14,25 @@ const registerRouter: Router = express.Router();
 const loggerManager = new LoggerManager();
 
 registerRouter.post("/", (req: Request, res: Response) => {
-  loggerManager.logInfo(`User with username: ${req.body.username} is trying to register.`);
+  loggerManager.logInfo(
+    `User with username: ${req.body.username} is trying to register.`
+  );
 
   if (!(req.body.username && req.body.password)) {
-    loggerManager.logWarn(`Register failed. Reason: Not enough arguments in request.`);
+    loggerManager.logWarn(
+      `Register failed. Reason: Not enough arguments in request.`
+    );
 
     return res.send(notEnoughArgumentsResponse);
   }
 
-  if (typeof req.body.username != "string" || typeof req.body.password != "string") {
-    loggerManager.logWarn(`Register failed. Reason: Invalid arguments in request.`);
+  if (
+    typeof req.body.username != "string" ||
+    typeof req.body.password != "string"
+  ) {
+    loggerManager.logWarn(
+      `Register failed. Reason: Invalid arguments in request.`
+    );
 
     return res.send(invalidArgumentsResponse);
   }
@@ -39,11 +48,12 @@ registerRouter.post("/", (req: Request, res: Response) => {
     return res.send(invalidDataResponse);
   }
 
-  User.registerUser(registerData)
-  .then((value: UserReturnData | null) => {
-      value ? loggerManager.logInfo(`Register successful.`) : loggerManager.logWarn("Register failed. Reason: Database refused.")
+  User.registerUser(registerData).then((value: UserReturnData | null) => {
+    value
+      ? loggerManager.logInfo(`Register successful.`)
+      : loggerManager.logWarn("Register failed. Reason: Database refused.");
 
-      return res.send(successOrFailureResponse(value));
+    return res.send(successOrFailureResponse(value));
   });
 });
 

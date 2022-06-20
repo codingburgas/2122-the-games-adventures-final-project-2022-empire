@@ -14,7 +14,7 @@
         this.#logger = this.#winston.createLogger();
 
         this.#logger.add(new this.#winston.transports.Console({
-            format: this.#winston.format.json(),
+            format: this.#winston.format.simple(),
             level: 'silly'
         }));
 
