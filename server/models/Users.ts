@@ -76,7 +76,7 @@ class Users extends BaseModel {
         );
         return null;
       });
-  };и аз
+  };
 
   getUsers = (): this => {
     this._transitionalVar = this.connection
@@ -121,11 +121,11 @@ class Users extends BaseModel {
               });
       };
 
-      updateUserById = (data: {oldUsername: string, newUsername: string}): Promise<boolean> => {
+      updateUserById = (data: {id: number, newUsername: string}): Promise<boolean> => {
           return this.connection.request()
-              .input('OldUsername', sql.VarChar, data.oldUsername)
+              .input('Id', sql.Int, data.id)
               .input('NewUsername', sql.VarChar, data.newUsername)
-              .query('UPDATE Users SET Username = @NewUsername WHERE Username = @OldUsername')
+              .query('UPDATE Users SET Username = @NewUsername WHERE Id = @Id')
               .then((result) => {
                   return !!result.rowsAffected[0];
               })

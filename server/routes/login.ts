@@ -10,6 +10,7 @@ import {
 import User from "../models/Users";
 import { LoggerManager } from "../helpers/loggerManager";
 
+const jwt = require("jsonwebtoken");
 const loginRouter: Router = express.Router();
 const loggerManager = new LoggerManager();
 
@@ -45,11 +46,17 @@ loginRouter.post("/", (req: Request, res: Response) => {
 
   // TODO: Implement actual login
   User.loginUser(loginData).then((value: UserReturnData | null) => {
-    value
-      ? loggerManager.logInfo(`Login successful.`)
-      : loggerManager.logWarn("Login failed. Reason: Database refused.");
+    if (!value) {
+        loggerManager.logWarn(`Login failed. Reason: Database refused.`);
+        return res.send(successOrFailureResponse(value));
+    }
+    
+    const accessToken = jwt.sign({
+        expiresIn: "1d",
+        subject: value.id
+    }, process.env.ACCESS_TOKEN_SECRET);
 
-    return res.send(successOrFailureResponse(value));
+    return res.send(successOrFailureResponse(value, accessToken));
   });
 });
 
