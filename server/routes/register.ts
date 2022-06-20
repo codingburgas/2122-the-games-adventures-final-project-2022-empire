@@ -41,7 +41,7 @@ registerRouter.post("/", (req: Request, res: Response) => {
 
   User.registerUser(registerData)
   .then((value: UserReturnData | null) => {
-      loggerManager.logInfo(`Register successful.`);
+      value ? loggerManager.logInfo(`Register successful.`) : loggerManager.logWarn("Register failed. Reason: Database refused.")
 
       return res.send(successOrFailureResponse(value));
   });

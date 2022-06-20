@@ -14,7 +14,6 @@ const loginRouter: Router = express.Router();
 const loggerManager = new LoggerManager();
 
 loginRouter.post("/", (req: Request, res: Response) => {
-    loggerManager.logDebug("Qsha");
     if(!(req.body.username && req.body.password))
         return res.send(notEnoughArgumentsResponse);
 
