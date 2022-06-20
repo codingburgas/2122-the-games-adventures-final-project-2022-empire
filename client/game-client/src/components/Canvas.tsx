@@ -1,43 +1,62 @@
-import { useContext, useEffect, useState } from "react";
-import { Engine, EngineModule } from "../Engine";
+import { createContext, useContext, useEffect, useRef, useState } from "react";
+import { CCamera2D, Engine, EngineModule } from "../Engine";
+
+export const CameraContext = createContext<CCamera2D>({} as CCamera2D);
 
 export default function Canvas({ children }: { children: React.ReactNode }) {
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string>();
-    const [engine, setEngine] = useState<EngineModule>();
-    const [tickInterval, setTickInterval] = useState<number>();
+    const engineRef = useRef<EngineModule>();
+    const cameraRef = useRef<CCamera2D>();
+    const tickIntervalRef = useRef<number>();
 
     useEffect(() => {
-        Engine.Instance()
-            .then(engine => {
-                console.log(engine);
-                setLoading(false);
-                setEngine(engine);
-            })
-            .catch(error => setError(error.message));
-    }, []);
+        (async () => {
+            Engine.Instance()
+                .then(engine => {
+                    engineRef.current = engine;
+                    let camera = new engineRef.current.CCamera2D();
+                    camera.Camera = {
+                        offset: { x: 0, y: 0 },
+                        target: { x: 0, y: 0 },
+                        zoom: 1,
+                        rotation: 0
+                    };
+                
+                    cameraRef.current = camera;
+                    setLoading(false);
+                })
+                .catch(error => setError(error.message));
+        })();
         
-    useEffect(() => {
-        if (engine) {
-            engine.Init();
-            
-            if (tickInterval) clearInterval(tickInterval);
-            setTickInterval(setInterval(() => engine.Tick(), 1000 / 60));
-        }
-
         return () => {
-            engine?.Deinit();
-            clearInterval(tickInterval);
+            engineRef.current?.Deinit();
+            engineRef.current?.DeinitComponents();
+            engineRef.current = undefined;
+            cameraRef.current?.delete();
+            cameraRef.current = undefined;
+            if (tickIntervalRef.current) clearInterval(tickIntervalRef.current);
         };
-    }, [engine]);
+    }, []);
+
+    useEffect(() => {
+        if (tickIntervalRef.current) clearInterval(tickIntervalRef.current);
+        if (!engineRef.current) return;
+        
+        engineRef.current.Init();
+       
+        tickIntervalRef.current = setInterval(() => engineRef.current?.Tick(), 1000 / 60);
+    }, [loading]);
     
     if (loading)
         return <div>Engine is loading...</div>;
-    else if (engine) return <>
-        {children}
+    else if (engineRef.current) return <>
+        {cameraRef.current ? <CameraContext.Provider value={cameraRef.current}>
+            {children}
+        </CameraContext.Provider> : <></>}
         <canvas id="canvas" ref={canvas => {
-            if (canvas) {
-                engine.canvas = canvas;
+            if (canvas && engineRef.current) {
+                engineRef.current.canvas = canvas;
             }
         }} />
     </>;

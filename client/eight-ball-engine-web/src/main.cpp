@@ -17,7 +17,7 @@ void InitComponents() {
 }
 
 void DeinitComponents() {
-    ECS::Destroy();
+    // ECS::Destroy();
     ObjectManager::GetInstance()->DestroyAllObjects();
 }
 
@@ -35,4 +35,5 @@ EMSCRIPTEN_BINDINGS(game_module) {
     emscripten::function("Tick", &Tick);
     emscripten::function("Deinit", &Deinit);
     emscripten::function("InitComponents", &InitComponents);
+    emscripten::function("DeinitComponents", &DeinitComponents);
 }

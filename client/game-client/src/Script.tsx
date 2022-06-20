@@ -1,12 +1,14 @@
-import React from "react";
-import { CComponent, CEntity, Engine, EngineModule } from "./Engine";
+import React, { useContext, useEffect, useRef, useState } from "react";
+import { CameraContext } from "./components/Canvas";
+import { Camera2D, CCamera2D, CComponent, CEntity, Engine, EngineModule } from "./Engine";
 
 export abstract class Script {
     protected engine: EngineModule;
     protected entity: CEntity;
     protected attachedComponent: CComponent;
+    protected camera: CCamera2D | null | undefined;
 
-    protected constructor(engine: EngineModule) {
+    protected constructor(engine: EngineModule, camera?: CCamera2D) {
         this.engine = engine;
 
         let entity = new engine.CEntity();
@@ -16,11 +18,19 @@ export abstract class Script {
         this.attachedComponent = attachedComponent;
 
         this.entity.AddComponent(this.attachedComponent);
+
+        if (camera) this.camera = camera;
     }
 
     public abstract OnCreate(): void;
     public abstract OnUpdate(): void;
     public abstract OnDestroy(): void;
+
+    public _internalOnDestroy() {
+        this.OnDestroy();
+        this.entity.delete();
+        this.attachedComponent.delete();
+    }
 
     get Entity() {
         return this.entity;
@@ -31,12 +41,19 @@ export abstract class Script {
     }
 }
 
-export class ScriptComponent<T extends Script> extends React.Component<{buildFn: () => Promise<T>}, T> {
-    async componentDidMount() {
-        this.state = await this.props.buildFn();
-    }
+export function ScriptComponent<T extends Script>(props: { buildFn: (camera?: CCamera2D) => Promise<T> }) {
+    const camContext = useContext(CameraContext);
+    const scriptRef = useRef<T>();
 
-    render () {
-        return <></>;
-    }
+    useEffect(() => {
+        (async () => {
+            scriptRef.current = await props.buildFn(camContext);
+        })();
+
+        return () => {
+            scriptRef.current?._internalOnDestroy();
+        };
+    }, []);
+
+    return <></>;
 }

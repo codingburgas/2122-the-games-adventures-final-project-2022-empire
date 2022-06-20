@@ -3,18 +3,18 @@ import Canvas from './components/Canvas';
 import { EmscriptenModule } from './EmscriptenTypes';
 import PlayerScript from './components/PlayerScript';
 import { ScriptComponent } from './Script';
+import { CCamera2D, Engine } from './Engine';
 
 function App() {
-  const [count, setCount] = useState(0);
+  const [canvasOn, setCanvasOn] = useState(false);
 
   return (
     <>
       <h1>le nice app</h1>
-      <h2>le nice count: {count}</h2>
-      <button onClick={() => setCount(count + 1)}>le nice button</button>
-      <Canvas>
-        {/* <ScriptComponent<PlayerScript> buildFn={PlayerScript.Build} /> */}
-      </Canvas>
+      <button onClick={() => setCanvasOn(!canvasOn)}>toggle le canvas</button>
+      {canvasOn ? <Canvas>
+          <ScriptComponent<PlayerScript> buildFn={PlayerScript.Build} />
+      </Canvas> : null}
     </>
   )
 }

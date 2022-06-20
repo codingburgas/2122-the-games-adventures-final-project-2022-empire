@@ -257,6 +257,7 @@ export interface FunctionBindings {
     Deinit(): void;
     Tick(): void;
     InitComponents(): void;
+    DeinitComponents(): void;
 
     CObject: CObjectCtor;
     CComponent: CComponentCtor;
