@@ -253,6 +253,35 @@ export interface FunctionBindings {
     ColorAlphaBlend(dst: Color, src: Color, tint: Color): void;
     GetColor(hexVal: number): void;
 
+    EaseLinearNone(t: number, b: number, c: number, d: number): number;
+    EaseLinearIn(t: number, b: number, c: number, d: number): number;
+    EaseLinearOut(t: number, b: number, c: number, d: number): number;
+    EaseLinearInOut(t: number, b: number, c: number, d: number): number;
+    EaseSineIn(t: number, b: number, c: number, d: number): number;
+    EaseSineOut(t: number, b: number, c: number, d: number): number;
+    EaseSineInOut(t: number, b: number, c: number, d: number): number;
+    EaseCircIn(t: number, b: number, c: number, d: number): number;
+    EaseCircOut(t: number, b: number, c: number, d: number): number;
+    EaseCircInOut(t: number, b: number, c: number, d: number): number;
+    EaseCubicIn(t: number, b: number, c: number, d: number): number;
+    EaseCubicOut(t: number, b: number, c: number, d: number): number;
+    EaseCubicInOut(t: number, b: number, c: number, d: number): number;
+    EaseQuadIn(t: number, b: number, c: number, d: number): number;
+    EaseQuadOut(t: number, b: number, c: number, d: number): number;
+    EaseQuadInOut(t: number, b: number, c: number, d: number): number;
+    EaseExpoIn(t: number, b: number, c: number, d: number): number;
+    EaseExpoOut(t: number, b: number, c: number, d: number): number;
+    EaseExpoInOut(t: number, b: number, c: number, d: number): number;
+    EaseBackIn(t: number, b: number, c: number, d: number): number;
+    EaseBackOut(t: number, b: number, c: number, d: number): number;
+    EaseBackInOut(t: number, b: number, c: number, d: number): number;
+    EaseBounceOut(t: number, b: number, c: number, d: number): number;
+    EaseBounceIn(t: number, b: number, c: number, d: number): number;
+    EaseBounceInOut(t: number, b: number, c: number, d: number): number;
+    EaseElasticIn(t: number, b: number, c: number, d: number): number;
+    EaseElasticOut(t: number, b: number, c: number, d: number): number;
+    EaseElasticInOut(t: number, b: number, c: number, d: number): number;
+
     Init(): void;
     Deinit(): void;
     Tick(): void;
