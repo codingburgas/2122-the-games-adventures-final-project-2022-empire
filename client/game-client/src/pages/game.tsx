@@ -4,19 +4,24 @@ import { EmscriptenModule } from "../EmscriptenTypes";
 import PlayerScript from "../components/PlayerScript";
 import { ScriptComponent } from "../Script";
 import { CCamera2D, Engine } from "../Engine";
+import { 
+  MenuArt, PlayButton
+} from './gameStyles'
 
 function Game() {
   const [canvasOn, setCanvasOn] = useState(false);
 
   return (
     <>
-      <h1>le nice app</h1>
-      <button onClick={() => setCanvasOn(!canvasOn)}>toggle le canvas</button>
       {canvasOn ? (
         <Canvas>
           <ScriptComponent<PlayerScript> buildFn={PlayerScript.Build} />
         </Canvas>
-      ) : null}
+      ) : (
+        <MenuArt image={"../../assets/menuArt.png"} onClick={() => setCanvasOn(!canvasOn)}>
+          <PlayButton>Click to Play</PlayButton>
+        </MenuArt>
+      )}
     </>
   );
 }
