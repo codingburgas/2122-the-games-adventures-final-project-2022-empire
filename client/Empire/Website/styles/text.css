@@ -1,0 +1,137 @@
+/* TEXT STYLE */
+.text
+{
+		width: 1000px;   
+		height: 100px;
+		border: none;  
+		padding-top: 50px;
+		padding-right: 50px;
+		padding-left: 140px;
+		padding-bottom: 50px;
+
+		display:inline-block;
+		text-align: left;
+		font-size: 22px;
+		color:aliceblue;
+		
+	  }  
+	  .class_name {  
+		word-wrap: normal;   
+}
+.row 
+{
+	margin-top: 5%;
+	display: flex;
+	justify-content: space-between;
+	column-count: 4;
+	column-gap: 30px;
+  } 
+.row p
+{
+	text-align: left;
+	font-size: 17px;
+}
+.col 
+{
+    flex-basis: 50%;
+}
+.p
+{
+	color:darkgray;
+}
+
+span{
+	position: relative;
+	display: inline-flex;
+	width: 180px;
+	height: 55px;
+	padding-top: 10px;
+	perspective: 1000px;
+	font-weight: 700;
+  }
+  span a{
+	font-size: 19px;
+	letter-spacing: 1px;
+	transform-style: preserve-3d;
+	transform: translateZ(-25px);
+	transition: transform .25s;
+	font-family: 'Montserrat', sans-serif;
+	font-weight: 700;
+	
+  }
+  span a:before,
+  span a:after{
+	position: absolute;
+	content: "PLAY";
+	height: 55px;
+	width: 180px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	border: 5px solid #273b91;
+	color:#273b91;
+	box-sizing: border-box;
+	border-radius: 5px;
+	font-weight: 700;
+  }
+  span a:before{
+	color: #273b91;
+	transform: rotateY(0deg) translateZ(25px);
+  }
+  span a:after{
+	background-color: #fff;
+	transform: rotateX(90deg) translateZ(25px);
+  }
+  span a:hover{
+	transform: translateZ(-25px) rotateX(-90deg);
+  }
+.gradient-shape
+{
+	color:aliceblue;
+	background-image: linear-gradient(to bottom right, #67656d, #08091d);
+	width: 980px;
+	height: 80px;
+	border-radius: 15px;
+	font-size: 16px;
+	padding:10px;
+	margin-left: 150px;
+	margin-top: 45px;
+}
+#gradient-shape1
+{
+	color:aliceblue;
+	background-image: linear-gradient(to bottom right, #67656d, #08091d);
+	width: 980px;
+	height: 250px;
+	border-radius: 15px;
+	font-size: 16px;
+	padding:10px;
+	margin-left: 140px;
+	margin-top: 45px;
+}
+.centered-header
+{
+	text-align: center;
+}
+.text-without-left-margin
+{
+	margin-left: 0;
+}
+.square
+{
+	background-color:#fff;
+	width: 70px;
+	height: 70px;
+	border-radius: 15px;
+	margin-bottom: 15px;
+}
+.changed-font-size
+{
+	font-size:20px;
+	margin-bottom: 10px;
+}
+.p-changed-font-size
+{
+	font-size:13px;
+	color:#85828d;
+}
