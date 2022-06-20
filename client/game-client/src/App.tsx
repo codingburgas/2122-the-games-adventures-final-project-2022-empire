@@ -1,22 +1,23 @@
-import { useContext, useState, useMemo, useEffect } from 'react';
-import Canvas from './components/Canvas';
-import { EmscriptenModule } from './EmscriptenTypes';
-import PlayerScript from './components/PlayerScript';
-import { ScriptComponent } from './Script';
-import { CCamera2D, Engine } from './Engine';
+import { useContext, Suspense, useState, createContext, lazy } from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 
-function App() {
-  const [canvasOn, setCanvasOn] = useState(false);
+const Index = lazy(() => import("./pages/index"));
+const Game = lazy(() => import("./pages/game"));
+//const UserContext = createContext();
 
-  return (
-    <>
-      <h1>le nice app</h1>
-      <button onClick={() => setCanvasOn(!canvasOn)}>toggle le canvas</button>
-      {canvasOn ? <Canvas>
-          <ScriptComponent<PlayerScript> buildFn={PlayerScript.Build} />
-      </Canvas> : null}
-    </>
-  )
+function App() {  
+  return(
+    <Router>
+        <Suspense>
+          <Routes>
+            <Route path="/" element={<Index />} />
+          </Routes>
+          <Routes>
+            <Route path="/game" element={<Game />} />
+          </Routes>
+        </Suspense>
+    </Router>
+  );
 }
 
 export default App;
