@@ -6,6 +6,6 @@ export const invalidArgumentsResponse: string = JSON.stringify({response: "Inval
 
 export const invalidDataResponse: string = JSON.stringify({response: "Invalid data"});
 
-export const successOrFailureResponse = (value: UserReturnData | null): string => {
+export const successOrFailureResponse = (value: UserReturnData | boolean | null): string => {
     return JSON.stringify({response: value ? "Success" : "Failure"})
 };
