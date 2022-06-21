@@ -20,6 +20,23 @@ usersRouter.get('/:id(\\d+)/', async(req: Request, res:Response) => {
    return res.send(JSON.stringify({response: "A user with that id doesn't exist!"}));
 });
 
+usersRouter.use(AuthMiddleware).get('/@me',async (req:Request, res:Response) => {
+   const user = await User.getUsers().by({ id: req.id });
+
+  if (user.length != 0) {
+    loggerManager.logInfo(`User with id: ${req.id} found.`);
+    return res.send({response: "Success", data: user[0]});
+  }
+  
+  loggerManager.logWarn(
+    `User with username: ${req.params.username} not found.`
+  );
+
+  return res.send(
+    JSON.stringify({ response: "A user with that username doesn't exist!" })
+  );
+})
+
 usersRouter.get('/:username', async (req: Request, res: Response) => {
   const user = await User.getUsers().by({ username: req.params.username });
 
