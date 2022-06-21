@@ -1,7 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
 
-
 function Login() {
   const userContext = useContext(UserContext);
 
@@ -9,7 +8,7 @@ function Login() {
   const [successMsg, setsuccessMsg] = useState("");
 
   const handleSubmit = useCallback(
-    (e) => {
+    (e: any) => {
       e.preventDefault();
 
       let data = {
@@ -17,15 +16,17 @@ function Login() {
         password: e.target.pass.value,
       };
 
-      userContext!.loginUser(data).then(
+      if (!userContext?.loginUser) return;
+
+      userContext.loginUser(data).then(
         () => {
           setErrMsg("");
           setsuccessMsg("Successfully logged in. Redirecting...");
           //window.location.href = "/account";
           return;
         },
-        (err: Array) => {
-          setErrMsg(err.fields.join(", "));
+        (err: string) => {
+          setErrMsg(err);
         }
       );
     },
@@ -36,7 +37,7 @@ function Login() {
     <>
       <h1>Login</h1>
       <br />
-      <form method="POST">
+      <form method="POST" onSubmit={handleSubmit}>
         <label>Username:</label>
         <br />
         <input
@@ -52,6 +53,8 @@ function Login() {
         <br />
         <br />
         <input type="submit" value="Submit" />
+        <p>{successMsg}</p>
+        <p>{errMsg}</p>
       </form>
     </>
   );

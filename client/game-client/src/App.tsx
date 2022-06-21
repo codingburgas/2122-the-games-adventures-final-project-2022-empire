@@ -4,19 +4,26 @@ import { fetchAPI, fetchUser, validateToken } from "./api";
 
 import { readStorage, deleteStorage, writeStorage } from "./localstorage";
 
+import AuthenticatedRoute from "./components/AuthenticatedRoute";
+import Failback from "./pages/Fallback";
+import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
+
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const Index = lazy(() => import("./pages/index"));
-const Game = lazy(() => import("./pages/game"));
+const Index = lazy(() => import("./pages/Index"));
+const Game = lazy(() => import("./pages/Game"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
+const Account = lazy(() => import("./pages/Account"));
 
 interface userContextInterface {
   authenticated?: boolean;
+  isLoading?: boolean;
   token?: string | null;
   userData?: Object | null;
-  loginUser?: any
+  loginUser?: Function;
+  registerUser?: Function;
 }
 
 const UserContext = createContext<userContextInterface | null>(null);
@@ -26,6 +33,7 @@ const MySwal = withReactContent(Swal);
 function App() {
   const [state, setState] = useState<userContextInterface | null>({
     authenticated: false,
+    isLoading: true,
   });
 
   useEffect(() => {
@@ -71,15 +79,19 @@ function App() {
     }
   }, []);
 
+  if (state?.isLoading) {
+    return <Failback />;
+  }
+
   const loginUser = async (userData: object) => {
     return new Promise((resolve, reject) => {
       fetchAPI("/login", userData, {}, "POST")
         .then((responseData) => {
-          if (responseData.type === "login-success") {
-            fetchUser(responseData.data[0]).then((userDataFromServer) => {
+          if (responseData.response === "Success") {
+            fetchUser(responseData.data).then((userDataFromServer) => {
               let updatedState = {
                 userData: userDataFromServer.data,
-                token: responseData.data[0],
+                token: responseData.data,
                 authenticated: true,
               };
 
@@ -88,36 +100,35 @@ function App() {
               });
 
               writeStorage("auth", updatedState.token);
-              writeStorage("refresh", responseData.data[1]);
 
               resolve({});
             });
           } else {
-            reject(responseData);
+            reject(responseData.response);
           }
         })
         .catch((error) => {
           console.log(`Internal server error: ${error}`);
 
           MySwal.fire(
-            'Oops...',
-            'There was problem with the server. Please try again later!',
-            'error'
+            "Oops...",
+            "There was problem with the server. Please try again later!",
+            "error"
           );
 
           reject(error);
         });
     });
-  }
+  };
 
   const registerUser = async (userData: object) => {
     return new Promise((resolve, reject) => {
       fetchAPI("/register", userData, {}, "POST")
         .then((responseData) => {
-          if (responseData.type === "register-success") {
+          if (responseData.response === "Success") {
             resolve(responseData);
           } else {
-            reject(responseData);
+            reject(responseData.response);
           }
         })
         .catch((error) => {
@@ -141,21 +152,46 @@ function App() {
           authenticated: state?.authenticated,
           token: state?.token,
           userData: state?.userData,
-          loginUser
+          loginUser,
+          registerUser,
         }}
       >
-        <Suspense>
-          <Routes>
-            <Route path="/" element={<Index />} />
-          </Routes>
+        <Suspense fallback={<Failback />}>
           <Routes>
             <Route path="/game" element={<Game />} />
           </Routes>
           <Routes>
-            <Route path="/login" element={<Login />} />
+            <Route
+              path="/login"
+              element={
+                <UnauthenticatedRoute>
+                  <Login />
+                </UnauthenticatedRoute>
+              }
+            />
           </Routes>
           <Routes>
-            <Route path="/register" element={<Register />} />
+            <Route
+              path="/register"
+              element={
+                <UnauthenticatedRoute>
+                  <Register />
+                </UnauthenticatedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route
+              path="/account"
+              element={
+                <AuthenticatedRoute>
+                  <Account />
+                </AuthenticatedRoute>
+              }
+            />
+          </Routes>
+          <Routes>
+            <Route path="/" element={<Index />} />
           </Routes>
         </Suspense>
       </UserContext.Provider>

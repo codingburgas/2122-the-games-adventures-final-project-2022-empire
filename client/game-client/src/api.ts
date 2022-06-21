@@ -60,13 +60,7 @@ export async function validateToken(token: string): Promise<boolean> {
   try {
     let response = await fetchUser(token);
 
-    if (response.type === "user-success") {
-      return true;
-    } else if (response.type === "user-failure") {
-      return false;
-    } else {
-      return false;
-    }
+    return response.response === "Success";
   } catch {
     return false;
   }
