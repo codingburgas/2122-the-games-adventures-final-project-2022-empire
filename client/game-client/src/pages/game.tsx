@@ -18,7 +18,7 @@ function Game() {
           <ScriptComponent<PlayerScript> buildFn={PlayerScript.Build} />
         </Canvas>
       ) : (
-        <MenuArt image={"../../assets/menuArt.png"} onClick={() => setCanvasOn(!canvasOn)}>
+        <MenuArt onClick={() => setCanvasOn(!canvasOn)}>
           <PlayButton>Click to Play</PlayButton>
         </MenuArt>
       )}

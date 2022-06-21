@@ -1,5 +1,6 @@
 import styled, {keyframes} from 'styled-components';
 import SpaceMission from '../../assets/fonts/PressStart2P.ttf';
+import ScreenImage from '../../assets/menuArt.png';
 
 const blinkingEffect = keyframes`
     50% {
@@ -9,7 +10,7 @@ const blinkingEffect = keyframes`
   `;
 
 export const MenuArt = styled.div`
-  background-image: url(${props => props.image});
+  background-image: url(${ScreenImage});
   background-size: 100% 100%;
   height: 100vh;
 `;
