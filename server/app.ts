@@ -3,9 +3,11 @@ import usersRouter from "./routes/users";
 import registerRouter from "./routes/register";
 import loginRouter from "./routes/login";
 import { LoggerManager } from "./helpers/loggerManager";
+const cors = require('cors');
 
 const app: Express = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded());
 app.use((req: Request, res: Response, next: Function) => {
