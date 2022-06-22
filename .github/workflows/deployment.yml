@@ -10,15 +10,6 @@ env:
   AZURE_WEBAPP_NAME: projectempire    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '14.x'                # set this to the node version to use
-  DB_SERVER: ${{ secrets.DB_SERVER }}
-  DB_NAME: ${{ secrets.DB_NAME }}
-  ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
-  LOKI_IP: ${{ secrets.LOKI_IP }}
-  LOKI_USER: ${{ secrets.LOKI_USER }}
-  LOKI_PASSWORD: ${{ secrets.LOKI_PASSWORD }}
-  DISCORD_ID: ${{ secrets.DISCORD_ID }}
-  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
-  PORT: 80
 
 permissions:
   contents: read
@@ -69,6 +60,7 @@ jobs:
          cd server
          npm i
          npm run build
+         sudo cp -r /node_modules /outDir/node_modules
          
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
