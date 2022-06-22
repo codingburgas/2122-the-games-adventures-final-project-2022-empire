@@ -18,6 +18,7 @@ env:
   LOKI_PASSWORD: ${{ secrets.LOKI_PASSWORD }}
   DISCORD_ID: ${{ secrets.DISCORD_ID }}
   DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
+  PORT: 80
 
 permissions:
   contents: read
