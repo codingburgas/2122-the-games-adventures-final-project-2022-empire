@@ -73,7 +73,7 @@ jobs:
         uses: actions/upload-artifact@v3
         with:
           name: node-app
-          path: ./server/outDir/.
+          path: server/outDir
          
   deploy:
     permissions:
