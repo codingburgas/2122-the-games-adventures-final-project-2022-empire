@@ -13,6 +13,9 @@ import { LoggerManager } from "../helpers/loggerManager";
 const registerRouter: Router = express.Router();
 const loggerManager = new LoggerManager();
 
+registerRouter.use(express.json());
+registerRouter.use(express.urlencoded());
+
 registerRouter.post("/", (req: Request, res: Response) => {
   loggerManager.logInfo(
     `User with username: ${req.body.username} is trying to register.`

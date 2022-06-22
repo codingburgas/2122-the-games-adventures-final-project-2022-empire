@@ -11,8 +11,8 @@ import UnauthenticatedRoute from "./components/UnauthenticatedRoute";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
-const Index = lazy(() => import("./pages/Index"));
-const Game = lazy(() => import("./pages/Game"));
+const Index = lazy(() => import("./pages/index"));
+const Game = lazy(() => import("./pages/game"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Account = lazy(() => import("./pages/Account"));

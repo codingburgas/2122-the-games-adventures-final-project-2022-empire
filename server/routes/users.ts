@@ -7,6 +7,9 @@ import AuthMiddleware from "../middlewares/authMiddleware";
 const usersRouter: Router = express.Router();
 const loggerManager = new LoggerManager();
 
+usersRouter.use(express.json());
+usersRouter.use(express.urlencoded());
+
 usersRouter.get('/:id(\\d+)/', async(req: Request, res:Response) => {
    loggerManager.logInfo(
       `Trying to get info for user with username: ${req.params.username}.`

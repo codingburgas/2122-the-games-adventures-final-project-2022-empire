@@ -14,6 +14,9 @@ const jwt = require("jsonwebtoken");
 const loginRouter: Router = express.Router();
 const loggerManager = new LoggerManager();
 
+loginRouter.use(express.json());
+loginRouter.use(express.urlencoded());
+
 loginRouter.post("/", (req: Request, res: Response) => {
   if (!(req.body.username && req.body.password)) {
     loggerManager.logWarn(
