@@ -4,9 +4,9 @@ import { EmscriptenModule } from "../EmscriptenTypes";
 import PlayerScript from "../components/PlayerScript";
 import { ScriptComponent } from "../Script";
 import { CCamera2D, Engine } from "../Engine";
-import { 
+import {
   MenuArt, PlayButton
-} from './gameStyles'
+} from '../components/gameStyles'
 
 function Game() {
   const [canvasOn, setCanvasOn] = useState(false);

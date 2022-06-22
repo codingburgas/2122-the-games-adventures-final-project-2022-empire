@@ -37,7 +37,7 @@ input[type=text]:focus, input[type=password]:focus {
 
 /* Overwrite the style of hr */
 hr {
-    border: 3.7354 px;
+    border: 3.7354px;
     color: #A74B61;
     border-style: solid;
     width: 67.24px;
@@ -87,6 +87,7 @@ hr {
     margin-right: 5px;
     margin-top: 2px;
 }
+
 .form-class
 {
     display:flex;

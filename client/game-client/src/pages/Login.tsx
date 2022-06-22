@@ -1,8 +1,10 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
+import { Hr, Container } from '../components/RegisterComponents'
 import styles from'./Login.module.css';
+import './Login.module.css';
 
-function Login() {
+export default function Login() {
     const userContext = useContext(UserContext);
 
     const [errMsg, setErrMsg] = useState("");
@@ -41,9 +43,12 @@ function Login() {
             </div>
 
             <div className= {styles["registration-col"]}>
-                <div className= {styles["container"]}>
+                <Container>
                     <h1> Register </h1>
-                    <hr/>
+                    <br/>
+                    <br/>
+                    <Hr/>
+                    <br/>
                     <br/>
                     <label className= {styles["text-registration"]} htmlFor="username">
                         <b>Username</b>
@@ -77,10 +82,8 @@ function Login() {
                         <img className={styles["button-image"]} src="../../assets/images/register/button-image.png" alt="Mountains"/>
                         REGISTER
                     </button>
-                </div>
+                </Container>
             </div>
         </form>
     );
-}
-
-export default Login;
+};

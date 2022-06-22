@@ -7,7 +7,7 @@ const blinkingEffect = keyframes`
       opacity: 0.2;
       font-size: 2.95em;
     }
-  `;
+`;
 
 export const MenuArt = styled.div`
   background-image: url(${ScreenImage});
