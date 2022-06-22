@@ -50,15 +50,14 @@ jobs:
       - run: |
           cd client
           python populate.py
-          cd game-client
           
       - name: Set up Node.js
         uses: actions/setup-node@v3
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
-          cache-dependency-path: "./client/game-clinet/package-lock.json"
-
+          cache-dependency-path: "client/game-client/package-lock.json"
+          
       - name: npm install, build, and test
         run: |
           npm install
