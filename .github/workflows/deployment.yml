@@ -72,5 +72,5 @@ jobs:
           mkdir outDir
           cd outDir
           mkdir client
-          cp -a ../../../client/game-client/dist/. /client/
+          cp -a ../../client/game-client/dist/. /client/
   
