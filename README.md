@@ -19,6 +19,28 @@
 </p>
 
 ---
+
+## 🚀 Languages 
+  <p align="left"> 
+  <a href="https://www.cplusplus.com/"><img src="https://img.icons8.com/color/48/000000/c-plus-plus-logo.png" alt="C++"/></a>
+  <a href="https://developer.mozilla.org/en-US/docs/Glossary/HTML5"><img src="https://img.icons8.com/color/48/000000/html-5.png" alt="HTML 5"/></a>
+  <a href="https://sass-lang.com/"><img src="https://img.icons8.com/color/48/000000/css3.png"/></a>
+  <a href="https://www.sfml-dev.org/"><img src="https://img.icons8.com/fluency/48/000000/typescript.png"/></a></a>
+  <a href="https://www.sfml-dev.org/"><img src="https://img.icons8.com/fluency/48/000000/python.png"/></a></a>
+  </p>
+
+## 🔧 Tools 
+  <p align="left"> 
+  <a href="https://code.visualstudio.com/"><img src="https://img.icons8.com/color/48/000000/visual-studio-code-2019.png" alt="Visual Studio Code"/></a>
+  <a href="https://www.figma.com/"><img src="https://img.icons8.com/color/48/000000/figma--v1.png"/></a>
+  <a href="https://www.adobe.com/creativecloud.html"><img src="https://www.adobe.com/content/dam/shared/images/product-icons/svg/creative-cloud.svg" alt="adobe creative cloud" width=48px /></a>
+    <a href="https://www.microsoft.com/en-ww/microsoft-365/word"><img src="https://img.icons8.com/fluency/48/000000/microsoft-word-2019.png" alt="MS Word logo" width=48px /></a>
+    <a href="https://www.microsoft.com/en-us/microsoft-365/powerpoint"><img src="https://img.icons8.com/fluency/48/000000/microsoft-powerpoint-2019.png" alt="MS PowerPoint logo" width=48px />
+    <a href="https://www.microsoft.com/en-us/microsoft-365/excel"><img src="https://img.icons8.com/fluency/48/000000/microsoft-excel-2019.png" alt="MS Excel logo"/></a>
+    <a href="https://git-scm.com/"><img src="https://img.icons8.com/color/48/000000/git.png" alt="Git"/></a>
+  </p> 
+
+
 ## About 💻 <a name = "about"></a>
 lorem ipsum
 
