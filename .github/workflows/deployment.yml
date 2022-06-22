@@ -29,6 +29,14 @@ env:
   AZURE_WEBAPP_NAME: your-app-name    # set this to your application's name
   AZURE_WEBAPP_PACKAGE_PATH: '.'      # set this to the path to your web app project, defaults to the repository root
   NODE_VERSION: '14.x'                # set this to the node version to use
+  DB_SERVER: ${{ secrets.DB_SERVER }}
+  DB_NAME: ${{ secrets.DB_NAME }}
+  ACCESS_TOKEN_SECRET: ${{ secrets.ACCESS_TOKEN_SECRET }}
+  LOKI_IP: ${{ secrets.LOKI_IP }}
+  LOKI_USER: ${{ secrets.LOKI_USER }}
+  LOKI_PASSWORD: ${{ secrets.LOKI_PASSWORD }}
+  DISCORD_ID: ${{ secrets.DISCORD_ID }}
+  DISCORD_TOKEN: ${{ secrets.DISCORD_TOKEN }}
 
 permissions:
   contents: read
@@ -73,4 +81,9 @@ jobs:
           cd outDir
           mkdir client
           sudo cp -a ../../client/game-client/dist/. ./client/
-  
+        
+      - name: Build the express server
+        run: |
+         cd server
+         npm i
+         npm run build
