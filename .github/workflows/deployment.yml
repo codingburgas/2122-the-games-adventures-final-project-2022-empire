@@ -57,6 +57,7 @@ jobs:
         with:
           node-version: ${{ env.NODE_VERSION }}
           cache: 'npm'
+          cache-dependency-path: "./client/game-clinet/package-lock.json"
 
       - name: npm install, build, and test
         run: |
