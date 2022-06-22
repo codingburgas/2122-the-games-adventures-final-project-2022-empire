@@ -1,63 +1,86 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
+import styles from'./Login.module.css';
 
 function Login() {
-  const userContext = useContext(UserContext);
+    const userContext = useContext(UserContext);
 
-  const [errMsg, setErrMsg] = useState("");
-  const [successMsg, setsuccessMsg] = useState("");
+    const [errMsg, setErrMsg] = useState("");
+    const [successMsg, setsuccessMsg] = useState("");
 
-  const handleSubmit = useCallback(
-    (e: any) => {
-      e.preventDefault();
+    const handleSubmit = useCallback(
+        (e: any) => {
+            e.preventDefault();
 
-      let data = {
-        username: e.target.username.value,
-        password: e.target.pass.value,
-      };
+            let data = {
+                username: e.target.username.value,
+                password: e.target.pass.value,
+            };
 
-      if (!userContext?.loginUser) return;
+            if (!userContext?.loginUser) return;
 
-      userContext.loginUser(data).then(
-        () => {
-          setErrMsg("");
-          setsuccessMsg("Successfully logged in. Redirecting...");
-          //window.location.href = "/account";
-          return;
+            userContext.loginUser(data).then(
+                () => {
+                    setErrMsg("");
+                    setsuccessMsg("Successfully logged in. Redirecting...");
+                    //window.location.href = "/account";
+                    return;
+                },
+                (err: string) => {
+                    setErrMsg(err);
+                }
+            );
         },
-        (err: string) => {
-          setErrMsg(err);
-        }
-      );
-    },
-    [userContext]
-  );
+        [userContext]
+    );
 
-  return (
-    <>
-      <h1>Login</h1>
-      <br />
-      <form method="POST" onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <br />
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
-        />
-        <br />
-        <label>Password:</label>
-        <br />
-        <input type="password" id="pass" name="pass" placeholder="*******" />
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
-        <p>{successMsg}</p>
-        <p>{errMsg}</p>
-      </form>
-    </>
-  );
+    return (
+        <form className= {styles["form-class"]}>
+            <div>
+                <img src="../../assets/images/register/registration-image.jpg" alt="Mountains"/>
+            </div>
+
+            <div className= {styles["registration-col"]}>
+                <div className= {styles["container"]}>
+                    <h1> Register </h1>
+                    <hr/>
+                    <br/>
+                    <label className= {styles["text-registration"]} htmlFor="username">
+                        <b>Username</b>
+                        <img className= {styles["registration-images"]} src="../../assets/images/register/username.png" alt="Username icon"/>
+                    </label>
+                    <br/>
+                    <input className={styles["register-box"]} type="text" placeholder="Enter your username here." name="username" id="username" required />
+                    <br/>
+                    <label className= {styles["text-registration"]} htmlFor="email">
+                        <b>Email</b>
+                        <img className={styles["registration-images"]} src="../../assets/images/register/email.png" alt="Email icon"/>
+                    </label>
+                    <br/>
+                    <input type="text" placeholder="Enter your email here." name="email" id="email" required/>
+                    <br/>
+                    <label className={styles["text-registration"]} htmlFor="psw">
+                        <b>Password</b>
+                        <img className={styles["registration-images"]} src="../../assets/images/register/password.png" alt="Password icon"/>
+                    </label>
+                    <br/>
+                    <input type="password" placeholder="Enter your password here." name="psw" id="psw" required/>
+                    <br/>
+                    <label className={styles["text-registration"]} htmlFor="psw-repeat">
+                        <b>Repeat Password</b>
+                        <img className={styles["registration-images"]} src="../../assets/images/register/psw-repeat.png" alt="Password-repeat icon"/>
+                    </label>
+                    <br/>
+                    <input type="password" placeholder="Repeat your password here." name="psw-repeat" id="psw-repeat" required />
+                    <br/>
+                    <button type="submit" className={styles["registerbtn"]}>
+                        <img className={styles["button-image"]} src="../../assets/images/register/button-image.png" alt="Mountains"/>
+                        REGISTER
+                    </button>
+                </div>
+            </div>
+        </form>
+    );
 }
 
 export default Login;
