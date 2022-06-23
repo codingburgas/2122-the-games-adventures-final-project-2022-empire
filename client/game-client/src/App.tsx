@@ -161,8 +161,6 @@ function App() {
         <Suspense fallback={<Failback />}>
           <Routes>
             <Route path="/game" element={<Game />} />
-          </Routes>
-          <Routes>
             <Route
               path="/login"
               element={
@@ -171,8 +169,6 @@ function App() {
                 </UnauthenticatedRoute>
               }
             />
-          </Routes>
-          <Routes>
             <Route
               path="/register"
               element={
@@ -181,8 +177,6 @@ function App() {
                 </UnauthenticatedRoute>
               }
             />
-          </Routes>
-          <Routes>
             <Route
               path="/account"
               element={
@@ -191,8 +185,6 @@ function App() {
                 </AuthenticatedRoute>
               }
             />
-          </Routes>
-          <Routes>
             <Route path="/" element={<Index />} />
           </Routes>
         </Suspense>
