@@ -120,23 +120,23 @@ public:
             {
             case SHADER_UNIFORM_FLOAT:
                 delete (float*)val.second.data;
-                std::cout << "Deallocated SHADER_UNIFORM_FLOAT" << std::endl;
+                printf("Deallocated SHADER_UNIFORM_FLOAT");
                 break;
             case SHADER_UNIFORM_VEC2:
                 delete (Vector2*)val.second.data;
-                std::cout << "Deallocated SHADER_UNIFORM_VEC2" << std::endl;
+                printf("Deallocated SHADER_UNIFORM_VEC2");
                 break;
             case SHADER_UNIFORM_VEC3:
                 delete (Vector3*)val.second.data;
-                std::cout << "Deallocated SHADER_UNIFORM_VEC3" << std::endl;
+                printf("Deallocated SHADER_UNIFORM_VEC3");
                 break;
             case SHADER_UNIFORM_VEC4:
                 delete (Vector4*)val.second.data;
-                std::cout << "Deallocated SHADER_UNIFORM_VEC4" << std::endl;
+                printf("Deallocated SHADER_UNIFORM_VEC4");
                 break;
             case SHADER_UNIFORM_INT:
                 delete (int*)val.second.data;
-                std::cout << "Deallocated SHADER_UNIFORM_INT" << std::endl;
+                printf("Deallocated SHADER_UNIFORM_INT");
                 break;
             }
         }
@@ -162,7 +162,7 @@ public:
             new T
         };
 
-        std::cout << "Allocated data for shader uniform " << uniformName << std::endl;
+        printf("Allocated data for shader uniform %s", uniformName.c_str());
 
         m_shaderData[uniformName] = shaderVal;
 
@@ -394,6 +394,20 @@ int MeasureTextSafe(const std::string text, int fontSize)
     return MeasureText(text.c_str(), fontSize);
 }
 
+std::string GetFileContents(std::string fileName)
+{
+    unsigned char *buffer = nullptr;
+    unsigned int *length = new unsigned int;
+    
+    LoadFileData(fileName.c_str(), length);
+    std::string out = std::string(reinterpret_cast<char*>(buffer));
+    out.resize(*length);
+    delete length;
+    UnloadFileData(buffer);
+
+    return out;
+}
+
 EMSCRIPTEN_BINDINGS(raylib_module) {
     // core
     function("GetScreenWidth", &GetScreenWidth);
@@ -494,6 +508,9 @@ EMSCRIPTEN_BINDINGS(raylib_module) {
     function("DrawFPS", &DrawFPS);
     function("DrawText", &DrawTextSafe);
     function("MeasureText", &MeasureTextSafe);
+
+    // files
+    function("GetFileContents", &GetFileContents);
 
     // structs
     value_object<Vector2>("Vector2")
