@@ -253,6 +253,8 @@ export interface FunctionBindings {
     ColorAlphaBlend(dst: Color, src: Color, tint: Color): void;
     GetColor(hexVal: number): void;
 
+    GetFileContents(fileName: string): string;
+
     EaseLinearNone(t: number, b: number, c: number, d: number): number;
     EaseLinearIn(t: number, b: number, c: number, d: number): number;
     EaseLinearOut(t: number, b: number, c: number, d: number): number;
