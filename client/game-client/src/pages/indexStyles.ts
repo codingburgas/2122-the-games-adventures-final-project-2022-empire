@@ -6,19 +6,22 @@ import TGBold from '../../assets/fonts/texgyreadventor-bold.otf';
 export const FirstGradient = styled.div`
   background: linear-gradient(180deg, #282E48 0%, #16192E 81.14%);
   width: 100%;
-  height: 118vh;
+  height: auto;
+  padding-bottom: 16vh;
 `;
 
 export const SecondGradient = styled.div`
   background: radial-gradient(50% 50% at 50% 50%, #212A36 0%, #16192E 100%);
   width: 100%;
-  height: 106vh;
+  height: auto;
+  padding-bottom: 13vh;
 `;
 
 export const ThirdGradient = styled.div`
   background: #16192E;
   width: 100%;
-  height: 100vh;
+  height: auto;
+  padding-bottom: 15vh;
 `;
 
 export const  NavBar = styled.div`
