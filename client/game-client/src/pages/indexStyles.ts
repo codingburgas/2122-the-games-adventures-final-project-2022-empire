@@ -12,7 +12,7 @@ export const FirstGradient = styled.div`
 export const SecondGradient = styled.div`
   background: radial-gradient(50% 50% at 50% 50%, #212A36 0%, #16192E 100%);
   width: 100%;
-  height: 118vh;
+  height: 106vh;
 `;
 
 export const ThirdGradient = styled.div`
@@ -477,7 +477,7 @@ export const  Text25 = styled.div`
   color: #ffffff;
 `
 export const  Text26 = styled.div`
-  text-align: left;
+  text-align: center;
   vertical-align: top;
   font-size: 52px;
   @font-face {
@@ -488,28 +488,39 @@ export const  Text26 = styled.div`
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
+  margin-bottom: 2em;
 `
 export const  Group14 = styled.div`
   height: 652px;
   width: 1471px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 7em;
+  grid-row-gap: 0px; 
+  margin-left: auto;
+  margin-right: auto;
 `
 export const  Rectangle34 = styled.div`
   border-radius: 20px;
-  height: 652px;
+  height: 684px;
   width: 875px;
   background-color: #d9d9d9;
+  grid-area: 1 / 1 / 6 / 3;
 `
 export const  Rectangle35 = styled.div`
   border-radius: 20px;
   height: 293px;
   width: 511px;
   background-color: #d9d9d9;
+  grid-area: 1 / 4 / 3 / 6;
 `
 export const  Rectangle36 = styled.div`
   border-radius: 20px;
   height: 293px;
   width: 511px;
   background-color: #d9d9d9;
+  grid-area: 4 / 4 / 6 / 6;
 `
 export const  Footer = styled.div`
   height: 302px;
