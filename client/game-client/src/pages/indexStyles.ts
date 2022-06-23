@@ -54,15 +54,6 @@ export const  Text1 = styled.p`
   line-height: auto;
   color: #d9d9d9;
 `
-export const  Text2 = styled.div`
-  text-align: left;
-  vertical-align: top;
-  font-size: 39.253204345703125px;
-  font-family: 'SF';
-  letter-spacing: 45.5%;
-  line-height: auto;
-  color: #d9d9d9;
-`
 export const  Text3 = styled.div`
   text-align: left;
   vertical-align: top;
@@ -118,11 +109,13 @@ export const  Text6 = styled.div`
 export const  HeroText = styled.div`
   height: 750px;
   width: 597px;
-  margin-left: 8%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: left;
   gap: 50px;
+  padding-right: 63em;
 `
 export const  Group4 = styled.div`
   height: 82px;
@@ -143,6 +136,7 @@ export const Rectangle30 = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
 `
 export const  Text7 = styled.div`
   text-align: left;
@@ -209,10 +203,12 @@ export const  Text10 = styled.div`
 export const  Frame9 = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   gap: 54px;
-  margin-left: 8%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 4.2em;
 `
 export const  Group6 = styled.div`
   height: 157px;
