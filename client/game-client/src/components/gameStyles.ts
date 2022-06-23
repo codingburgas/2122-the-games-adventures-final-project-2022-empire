@@ -27,7 +27,7 @@ export const PlayButton = styled.p`
   @font-face {
     font-family: 'SpaceMission';
     src: url("${SpaceMission}") format("opentype");
-    }
+  }
   font-family: 'SpaceMission';
   animation: ${blinkingEffect} 1.5s infinite ease-in-out;
   @media (max-width: 1100px) {
