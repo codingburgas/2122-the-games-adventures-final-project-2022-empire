@@ -1,5 +1,7 @@
 import styled, {keyframes} from 'styled-components';
 import SF from '../../assets/fonts/sf.ttf';
+import TGRegular from '../../assets/fonts/texgyreadventor-regular.otf';
+import TGBold from '../../assets/fonts/texgyreadventor-bold.otf';
 
 export const FirstGradient = styled.div`
   background: linear-gradient(180deg, #282E48 0%, #16192E 81.14%);
@@ -156,7 +158,11 @@ export const  Text8 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 96px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
@@ -185,8 +191,12 @@ export const  InfoGradient = styled.div`
 export const  Text10 = styled.div`
   text-align: left;
   vertical-align: top;
-  font-size: 52px;
-  font-family: TeX Gyre Adventor;
+  font-size: 51px;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
@@ -210,7 +220,11 @@ export const  Text11 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 64px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
@@ -249,7 +263,11 @@ export const  Text14 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 64px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
@@ -275,7 +293,11 @@ export const  Text16 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 64px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
@@ -294,7 +316,11 @@ export const  Text17 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 52px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
@@ -323,7 +349,11 @@ export const  Text19 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 24px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 23.5%;
   line-height: auto;
   color: #ffffff;
@@ -345,7 +375,11 @@ export const  Text21 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 24px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 23.5%;
   line-height: auto;
   color: #ffffff;
@@ -367,7 +401,11 @@ export const  Text23 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 24px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 23.5%;
   line-height: auto;
   color: #ffffff;
@@ -389,7 +427,11 @@ export const  Text25 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 24px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 23.5%;
   line-height: auto;
   color: #ffffff;
@@ -398,7 +440,11 @@ export const  Text26 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 52px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 23.5%;
   line-height: auto;
   color: #ffffff;
@@ -523,7 +569,11 @@ export const  Text34 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 39.253204345703125px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 45.5%;
   line-height: auto;
   color: #d9d9d9;
@@ -532,7 +582,11 @@ export const  Text35 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 39.253204345703125px;
-  font-family: TeX Gyre Adventor;
+  @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
   letter-spacing: 45.5%;
   line-height: auto;
   color: #d9d9d9;
