@@ -24,7 +24,7 @@ function Index() {
           <SC.Text5>Preview</SC.Text5>
           <SC.Group4>
             <SC.Rectangle30
-              onClick={() => navigate("/login", { replace: false })}
+              onClick={() => navigate("login", { replace: false })}
             >
               <SC.Text6>Login</SC.Text6>
             </SC.Rectangle30>
@@ -37,14 +37,14 @@ function Index() {
             Website description will stay here. This is just referance text to
             put
           </SC.Text9>
-          <SC.Rectangle30 onClick={() => navigate("/game", { replace: false })}>
+          <SC.Rectangle30 onClick={() => navigate("game", { replace: false })}>
             <SC.Text7>PLAY</SC.Text7>
           </SC.Rectangle30>
         </SC.HeroText>
       </SC.FirstGradient>
       <SC.SecondGradient>
         <SC.Frame9>
-        <SC.Text10>Make it yours with me</SC.Text10>
+          <SC.Text10>Make it yours with me</SC.Text10>
           <SC.Group6>
             <SC.Text11>4K</SC.Text11>
             <SC.Text12>There is 4k most popular websites</SC.Text12>
@@ -58,35 +58,37 @@ function Index() {
             <SC.Text15>There is 4k most popular websites</SC.Text15>
           </SC.Group8>
         </SC.Frame9>
+        <SC.Rectangle32>
+          <SC.NaskoiSasho>
+            <SC.Text17>Nasko i Sasho</SC.Text17>
+            <SC.Frame10>
+              <SC.Group10>
+                <SC.Rectangle33 />
+                <SC.Text19>Online classes</SC.Text19>
+                <SC.Text18>Make it happen this is very cool</SC.Text18>
+              </SC.Group10>
+              <SC.Group13>
+                <SC.Rectangle33 />
+                <SC.Text21>Online classes</SC.Text21>
+                <SC.Text20>Make it happen this is very cool</SC.Text20>
+                
+              </SC.Group13>
+              <SC.Group11>
+                <SC.Rectangle33 />
+                <SC.Text23>Online classes</SC.Text23>
+                <SC.Text22>Make it happen this is very cool</SC.Text22>
+              </SC.Group11>
+              <SC.Group12>
+                <SC.Rectangle33 />
+                <SC.Text25>Online classes</SC.Text25>
+                <SC.Text24>Make it happen this is very cool</SC.Text24>
+              </SC.Group12>
+            </SC.Frame10>
+          </SC.NaskoiSasho>
+        </SC.Rectangle32>
       </SC.SecondGradient>
       <SC.ThirdGradient></SC.ThirdGradient>
       {/*
-        <SC.Rectangle32 />
-        <SC.NaskoiSasho>
-          <SC.Text17>Nasko i Sasho</SC.Text17>
-          <SC.Frame10>
-            <SC.Group10>
-              <SC.Rectangle33 />
-              <SC.Text18>Make it happen this is very cool</SC.Text18>
-              <SC.Text19>Online classes</SC.Text19>
-            </SC.Group10>
-            <SC.Group13>
-              <SC.Rectangle33 />
-              <SC.Text20>Make it happen this is very cool</SC.Text20>
-              <SC.Text21>Online classes</SC.Text21>
-            </SC.Group13>
-            <SC.Group11>
-              <SC.Rectangle33 />
-              <SC.Text22>Make it happen this is very cool</SC.Text22>
-              <SC.Text23>Online classes</SC.Text23>
-            </SC.Group11>
-            <SC.Group12>
-              <SC.Rectangle33 />
-              <SC.Text24>Make it happen this is very cool</SC.Text24>
-              <SC.Text25>Online classes</SC.Text25>
-            </SC.Group12>
-          </SC.Frame10>
-        </SC.NaskoiSasho>
         <SC.Text26>Game Preview</SC.Text26>
         <SC.Group14>
           <SC.Rectangle34 />
@@ -122,9 +124,6 @@ function Index() {
         </SC.Switch> */}
       {!userContext?.authenticated ? (
         <>
-          <Link to="/login">
-            <button>Go to login</button>
-          </Link>
           <br />
           <br />
           <Link to="/register">

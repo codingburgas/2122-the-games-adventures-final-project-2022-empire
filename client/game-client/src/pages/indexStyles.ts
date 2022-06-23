@@ -12,7 +12,7 @@ export const FirstGradient = styled.div`
 export const SecondGradient = styled.div`
   background: radial-gradient(50% 50% at 50% 50%, #212A36 0%, #16192E 100%);
   width: 100%;
-  height: 100vh;
+  height: 118vh;
 `;
 
 export const ThirdGradient = styled.div`
@@ -71,7 +71,7 @@ export const  Text3 = styled.div`
   font-family: 'SF';
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
 `
 export const  Text4 = styled.div`
   text-align: left;
@@ -84,7 +84,7 @@ export const  Text4 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
 `
 export const  Text5 = styled.div`
   text-align: left;
@@ -97,7 +97,7 @@ export const  Text5 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
 `
 export const  Text6 = styled.div`
   text-align: center;
@@ -110,7 +110,7 @@ export const  Text6 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
 `
 export const  HeroText = styled.div`
   height: 750px;
@@ -152,7 +152,7 @@ export const  Text7 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
 `
 export const  Text8 = styled.div`
   text-align: left;
@@ -180,7 +180,7 @@ export const  Text9 = styled.div`
   letter-spacing: 0.235em;
   line-height: auto;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  InfoGradient = styled.div`
   border-radius: 20px;
@@ -240,7 +240,7 @@ export const  Text12 = styled.div`
   font-family: SF;
   letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Group7 = styled.div`
   height: 157px;
@@ -257,7 +257,7 @@ export const  Text13 = styled.div`
   font-family: SF;
   letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text14 = styled.div`
   text-align: left;
@@ -287,7 +287,7 @@ export const  Text15 = styled.div`
   font-family: SF;
   letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text16 = styled.div`
   text-align: left;
@@ -306,14 +306,21 @@ export const  Rectangle32 = styled.div`
   border-radius: 20px;
   height: 546px;
   width: 1471px;
-  background-color: ;
+  background: linear-gradient(245.36deg, #1E2235 1.16%, #494D5D 92.35%, #4D5261 101.81%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 13em;
 `
 export const  NaskoiSasho = styled.div`
   height: 421px;
   width: 1297px;
 `
 export const  Text17 = styled.div`
-  text-align: left;
+  text-align: center;
   vertical-align: top;
   font-size: 52px;
   @font-face {
@@ -324,26 +331,35 @@ export const  Text17 = styled.div`
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
+  margin-top: -.5em;
 `
 export const  Frame10 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 127px;
 `
 export const  Group10 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text18 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text19 = styled.div`
   text-align: left;
@@ -354,22 +370,30 @@ export const  Text19 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
 export const  Group13 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text20 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text21 = styled.div`
   text-align: left;
@@ -380,22 +404,30 @@ export const  Text21 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
 export const  Group11 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text22 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text23 = styled.div`
   text-align: left;
@@ -406,22 +438,30 @@ export const  Text23 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
 export const  Group12 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text24 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text25 = styled.div`
   text-align: left;
@@ -432,7 +472,7 @@ export const  Text25 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
@@ -445,7 +485,7 @@ export const  Text26 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
