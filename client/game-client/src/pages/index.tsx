@@ -71,7 +71,6 @@ function Index() {
                 <SC.Rectangle33 />
                 <SC.Text21>Online classes</SC.Text21>
                 <SC.Text20>Make it happen this is very cool</SC.Text20>
-                
               </SC.Group13>
               <SC.Group11>
                 <SC.Rectangle33 />
@@ -87,14 +86,15 @@ function Index() {
           </SC.NaskoiSasho>
         </SC.Rectangle32>
       </SC.SecondGradient>
-      <SC.ThirdGradient></SC.ThirdGradient>
-      {/*
+      <SC.ThirdGradient>
         <SC.Text26>Game Preview</SC.Text26>
         <SC.Group14>
           <SC.Rectangle34 />
           <SC.Rectangle35 />
           <SC.Rectangle36 />
         </SC.Group14>
+      </SC.ThirdGradient>
+      {/*
         <SC.Footer>
           <SC.Rectangle3 />
           <SC.Group2>
