@@ -23,7 +23,9 @@ function Index() {
           <SC.Text4>Stats</SC.Text4>
           <SC.Text5>Preview</SC.Text5>
           <SC.Group4>
-            <SC.Rectangle30>
+            <SC.Rectangle30
+              onClick={() => navigate("/login", { replace: false })}
+            >
               <SC.Text6>Login</SC.Text6>
             </SC.Rectangle30>
           </SC.Group4>
@@ -40,25 +42,25 @@ function Index() {
           </SC.Rectangle30>
         </SC.HeroText>
       </SC.FirstGradient>
-      <SC.SecondGradient></SC.SecondGradient>
-      <SC.ThirdGradient></SC.ThirdGradient>
-      {/*
-        <SC.InfoGradient />
-        <SC.Text10>Make it yours with me</SC.Text10>
+      <SC.SecondGradient>
         <SC.Frame9>
+        <SC.Text10>Make it yours with me</SC.Text10>
           <SC.Group6>
             <SC.Text11>4K</SC.Text11>
             <SC.Text12>There is 4k most popular websites</SC.Text12>
           </SC.Group6>
           <SC.Group7>
-            <SC.Text13>There is 4k most popular websites</SC.Text13>
             <SC.Text14>21+</SC.Text14>
+            <SC.Text13>There is 4k most popular websites</SC.Text13>
           </SC.Group7>
           <SC.Group8>
-            <SC.Text15>There is 4k most popular websites</SC.Text15>
             <SC.Text16>200</SC.Text16>
+            <SC.Text15>There is 4k most popular websites</SC.Text15>
           </SC.Group8>
         </SC.Frame9>
+      </SC.SecondGradient>
+      <SC.ThirdGradient></SC.ThirdGradient>
+      {/*
         <SC.Rectangle32 />
         <SC.NaskoiSasho>
           <SC.Text17>Nasko i Sasho</SC.Text17>

@@ -4,7 +4,7 @@ import SF from '../../assets/fonts/sf.ttf';
 export const FirstGradient = styled.div`
   background: linear-gradient(180deg, #282E48 0%, #16192E 81.14%);
   width: 100%;
-  height: 100vh;
+  height: 118vh;
 `;
 
 export const SecondGradient = styled.div`
@@ -187,9 +187,11 @@ export const  Text10 = styled.div`
   vertical-align: top;
   font-size: 52px;
   font-family: TeX Gyre Adventor;
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
+  width: 500px;
+  font-weight: bold;
 `
 export const  Frame9 = styled.div`
   display: flex;
@@ -197,17 +199,19 @@ export const  Frame9 = styled.div`
   justify-content: flex-start;
   align-items: flex-start;
   gap: 54px;
+  margin-left: 8%;
 `
 export const  Group6 = styled.div`
   height: 157px;
   width: 287px;
+  margin-left: 8%;
 `
 export const  Text11 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 64px;
   font-family: TeX Gyre Adventor;
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
@@ -215,8 +219,12 @@ export const  Text12 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 24px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
@@ -228,8 +236,12 @@ export const  Text13 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 24px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
@@ -238,7 +250,7 @@ export const  Text14 = styled.div`
   vertical-align: top;
   font-size: 64px;
   font-family: TeX Gyre Adventor;
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
@@ -250,8 +262,12 @@ export const  Text15 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 24px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
@@ -260,7 +276,7 @@ export const  Text16 = styled.div`
   vertical-align: top;
   font-size: 64px;
   font-family: TeX Gyre Adventor;
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
@@ -279,7 +295,7 @@ export const  Text17 = styled.div`
   vertical-align: top;
   font-size: 52px;
   font-family: TeX Gyre Adventor;
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
