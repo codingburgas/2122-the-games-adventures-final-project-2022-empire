@@ -3,7 +3,10 @@ import usersRouter from "./routes/users";
 import registerRouter from "./routes/register";
 import loginRouter from "./routes/login";
 import { LoggerManager } from "./helpers/loggerManager";
-const cors = require("cors");
+import cors from 'cors';
+import { createServer } from 'http';
+import {Server, Socket} from 'socket.io';
+import {auth} from "./middlewares/authSocket";
 
 const app: Express = express();
 const bodyParser = require("body-parser");
@@ -24,10 +27,17 @@ const port = process.env.PORT || 4000;
 
 app.get("/", (req: Request, res: Response) => {
   res.contentType(".html").sendFile(process.cwd() + "/client/index.html");
+  res.send('Qsha!');
 });
 
-app.listen(port, () => {
-  const loggerManager = new LoggerManager();
+const httpServer = createServer(app);
 
-  loggerManager.logInfo(`Server is running on port ${port}`);
+const io = new Server(httpServer);
+
+io.use(auth);
+
+io.on('connection', (socket: Socket) => {
+  console.log('nice');
 });
+
+httpServer.listen(port);

@@ -8,6 +8,11 @@ export const Hr = styled.hr`
     float: left;
 `;
 
+export const InputContainer = styled.div`
+  flex-basis: 48%;
+  padding: 30px 2px;
+`;
+
 export const Container = styled.div`
   padding-right: 50px;
   padding-left: 140px;
@@ -26,10 +31,15 @@ export const Emoji = styled.img`
 `;
 
 export const Button = styled.button`
-  width: 16px;
-  height: 16px;
-  margin-right: 5px;
-  margin-top: 2px;
+  background-color: #A74B61;
+  color: #fff;
+  padding: 16px 20px;
+  margin: 8px 0;
+  border: none;
+  cursor: pointer;
+  width: 379px;
+  border-radius: 15px;
+  font-size: 16pt;
 `;
 
 export const Input = styled.input`
@@ -47,5 +57,8 @@ export const Input = styled.input`
     background-color: #d8c3c8;
     outline: none;
   }
+`;
 
+export const Form = styled.form`
+  display:flex;
 `;

@@ -17,6 +17,8 @@ const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Account = lazy(() => import("./pages/Account"));
 
+import './App.css';
+
 interface userContextInterface {
   authenticated?: boolean;
   isLoading?: boolean;

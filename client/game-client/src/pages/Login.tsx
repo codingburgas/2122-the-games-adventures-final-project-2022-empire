@@ -1,8 +1,6 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
-import { Hr, Container } from '../components/RegisterComponents'
-import styles from'./Login.module.css';
-import './Login.module.css';
+import { Hr, Container, InputContainer, Label, Emoji, Input, Button, Form } from '../components/RegisterComponents'
 
 export default function Login() {
     const userContext = useContext(UserContext);
@@ -37,12 +35,12 @@ export default function Login() {
     );
 
     return (
-        <form className= {styles["form-class"]}>
+        <Form>
             <div>
                 <img src="../../assets/images/register/registration-image.jpg" alt="Mountains"/>
             </div>
 
-            <div className= {styles["registration-col"]}>
+            <InputContainer>
                 <Container>
                     <h1> Register </h1>
                     <br/>
@@ -50,40 +48,40 @@ export default function Login() {
                     <Hr/>
                     <br/>
                     <br/>
-                    <label className= {styles["text-registration"]} htmlFor="username">
+                    <Label htmlFor="username">
                         <b>Username</b>
-                        <img className= {styles["registration-images"]} src="../../assets/images/register/username.png" alt="Username icon"/>
-                    </label>
+                        <Emoji src="../../assets/images/register/username.png" alt="Username icon"/>
+                    </Label>
                     <br/>
-                    <input className={styles["register-box"]} type="text" placeholder="Enter your username here." name="username" id="username" required />
+                    <Input type="text" placeholder="Enter your username here." name="username" required />
                     <br/>
-                    <label className= {styles["text-registration"]} htmlFor="email">
+                    <Label htmlFor="email">
                         <b>Email</b>
-                        <img className={styles["registration-images"]} src="../../assets/images/register/email.png" alt="Email icon"/>
-                    </label>
+                        <Emoji src="../../assets/images/register/email.png" alt="Email icon"/>
+                    </Label>
                     <br/>
-                    <input type="text" placeholder="Enter your email here." name="email" id="email" required/>
+                    <Input type="text" placeholder="Enter your email here." name="email" required/>
                     <br/>
-                    <label className={styles["text-registration"]} htmlFor="psw">
+                    <Label htmlFor="psw">
                         <b>Password</b>
-                        <img className={styles["registration-images"]} src="../../assets/images/register/password.png" alt="Password icon"/>
-                    </label>
+                        <Emoji src="../../assets/images/register/password.png" alt="Password icon"/>
+                    </Label>
                     <br/>
-                    <input type="password" placeholder="Enter your password here." name="psw" id="psw" required/>
+                    <Input type="password" placeholder="Enter your password here." name="psw" required/>
                     <br/>
-                    <label className={styles["text-registration"]} htmlFor="psw-repeat">
+                    <Label htmlFor="psw-repeat">
                         <b>Repeat Password</b>
-                        <img className={styles["registration-images"]} src="../../assets/images/register/psw-repeat.png" alt="Password-repeat icon"/>
-                    </label>
+                        <Emoji src="../../assets/images/register/psw-repeat.png" alt="Password-repeat icon"/>
+                    </Label>
                     <br/>
-                    <input type="password" placeholder="Repeat your password here." name="psw-repeat" id="psw-repeat" required />
+                    <Input type="password" placeholder="Repeat your password here." name="psw-repeat" required />
                     <br/>
-                    <button type="submit" className={styles["registerbtn"]}>
-                        <img className={styles["button-image"]} src="../../assets/images/register/button-image.png" alt="Mountains"/>
+                    <Button type="submit" >
+                        <Emoji src="../../assets/images/register/button-image.png" alt="Mountains"/>
                         REGISTER
-                    </button>
+                    </Button>
                 </Container>
-            </div>
-        </form>
+            </InputContainer>
+        </Form>
     );
 };
