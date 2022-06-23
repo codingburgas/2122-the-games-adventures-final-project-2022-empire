@@ -52,7 +52,7 @@ header{
     margin: 8px 0;
     border: none;
     cursor: pointer;
-    width: 379px;
+    width: 100%;
     border-radius: 15px;
     font-size: 16pt;
   }
@@ -95,4 +95,13 @@ header{
 .form-class
 {
     display:flex;
+}
+#login
+{
+  font-size: 16px;
+  color:#A74B61;
+  margin-left: 85px;
+}
+.remember{
+  font-family: ;
 }
