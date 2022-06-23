@@ -1,14 +1,15 @@
-import React, { useContext, useEffect, useRef, useState } from "react";
-import { CameraContext } from "./components/Canvas";
-import { Camera2D, CCamera2D, CComponent, CEntity, Engine, EngineModule } from "./Engine";
+import { useContext, useEffect, useRef } from "react";
+import { CameraContext, EngineContext, RoomRefContext } from "./components/Canvas";
+import { CCamera2D, CComponent, CEntity, EngineModule } from "./Engine";
+import { CRoom } from "./Room";
 
 export abstract class Script {
     protected engine: EngineModule;
     protected entity: CEntity;
     protected attachedComponent: CComponent;
-    protected camera: CCamera2D | null | undefined;
+    protected camera: CCamera2D;
 
-    protected constructor(engine: EngineModule, camera?: CCamera2D) {
+    public constructor(engine: EngineModule, camera: CCamera2D) {
         this.engine = engine;
 
         let entity = new engine.CEntity();
@@ -19,7 +20,7 @@ export abstract class Script {
 
         this.entity.AddComponent(this.attachedComponent);
 
-        if (camera) this.camera = camera;
+        this.camera = camera;
     }
 
     public abstract OnCreate(): void;
@@ -41,13 +42,15 @@ export abstract class Script {
     }
 }
 
-export function ScriptComponent<T extends Script>(props: { buildFn: (camera?: CCamera2D) => Promise<T> }) {
+export function ScriptComponent<T extends Script>(props: { type: { new (engine: EngineModule, camera: CCamera2D, roomRef: React.MutableRefObject<CRoom | undefined>): T } }) {
     const camContext = useContext(CameraContext);
+    const engineContext = useContext(EngineContext);
+    const roomRef = useContext(RoomRefContext);
     const scriptRef = useRef<T>();
 
     useEffect(() => {
-        (async () => {
-            scriptRef.current = await props.buildFn(camContext);
+        (() => {
+            scriptRef.current = new props.type(engineContext, camContext, roomRef);
         })();
 
         return () => {
