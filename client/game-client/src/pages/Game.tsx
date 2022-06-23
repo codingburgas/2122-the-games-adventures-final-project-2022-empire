@@ -1,9 +1,7 @@
-import {useState } from "react";
+import { useState } from "react";
 import Canvas from "../components/Canvas";
-import { EmscriptenModule } from "../EmscriptenTypes";
 import PlayerScript from "../components/PlayerScript";
 import { ScriptComponent } from "../Script";
-import { CCamera2D, Engine } from "../Engine";
 import {
   MenuArt, PlayButton
 } from '../components/gameStyles'
@@ -15,7 +13,7 @@ function Game() {
     <>
       {canvasOn ? (
         <Canvas>
-          <ScriptComponent<PlayerScript> buildFn={PlayerScript.Build} />
+          <ScriptComponent<PlayerScript> type={PlayerScript} />
         </Canvas>
       ) : (
         <MenuArt onClick={() => setCanvasOn(!canvasOn)}>
