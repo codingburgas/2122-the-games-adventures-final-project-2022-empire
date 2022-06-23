@@ -25,7 +25,7 @@ export const  NavBar = styled.div`
   justify-content: center;
   align-items: center;
   gap: 175px;
-  padding-top: 3rem;
+  padding-top: 4rem;
 `
 export const  Mainlogo = styled.div`
   height: 80px;
@@ -111,13 +111,24 @@ export const  Text6 = styled.div`
   color: #afaeae;
 `
 export const  HeroText = styled.div`
-  height: 571px;
-  width: 838px;
+  height: 750px;
+  width: 597px;
+  margin-left: 8%;
+  display: flex;
+  flex-direction: column;
+  justify-content: left;
+  gap: 50px;
 `
 export const  Group4 = styled.div`
   height: 82px;
   width: 306px;
 `
+
+export const  Group42 = styled.div`
+  height: 40px;
+  width: 306px;
+`
+
 export const Rectangle30 = styled.div`
   display: flex;
   border-radius: 15px;
@@ -132,8 +143,12 @@ export const  Text7 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 32px;
-  font-family: SF Pro;
-  letter-spacing: 33%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.33em;
   line-height: auto;
   color: #afaeae;
 `
@@ -142,17 +157,23 @@ export const  Text8 = styled.div`
   vertical-align: top;
   font-size: 96px;
   font-family: TeX Gyre Adventor;
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
+  font-weight: bold;
 `
 export const  Text9 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 32px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
+  margin-bottom: 20px;
   color: #ffffff;
 `
 export const  InfoGradient = styled.div`

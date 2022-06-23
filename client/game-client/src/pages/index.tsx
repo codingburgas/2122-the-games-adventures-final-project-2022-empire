@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { deleteStorage } from "../localstorage";
 import mainLogo from "../../assets/Mainlogo.svg?url";
@@ -7,7 +7,7 @@ import * as SC from "./indexStyles";
 
 function Index() {
   const userContext = useContext(UserContext);
-
+  const navigate = useNavigate();
   // Better to go in separate component
   const handleLogOut = () => {
     deleteStorage("auth");
@@ -28,7 +28,17 @@ function Index() {
             </SC.Rectangle30>
           </SC.Group4>
         </SC.NavBar>
-        
+        <SC.HeroText>
+          <SC.Group42></SC.Group42>
+          <SC.Text8>Brewing the time</SC.Text8>
+          <SC.Text9>
+            Website description will stay here. This is just referance text to
+            put
+          </SC.Text9>
+          <SC.Rectangle30 onClick={() => navigate("/game", { replace: false })}>
+            <SC.Text7>PLAY</SC.Text7>
+          </SC.Rectangle30>
+        </SC.HeroText>
       </SC.FirstGradient>
       <SC.SecondGradient></SC.SecondGradient>
       <SC.ThirdGradient></SC.ThirdGradient>
