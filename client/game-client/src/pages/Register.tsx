@@ -1,13 +1,14 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
 import { debounce } from "lodash";
+import { Emoji, Label, Button, Input, InputContainer, Form, Container, Hr } from '../components/RegisterComponents'
 
 const USERNAME_REGEX =
   /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
 
 const PASSWORD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])[a-zA-Z0-9]{8,}$/;
 
-function Login() {
+function Register() {
   const userContext = useContext(UserContext);
 
   const [isUsernameEntered, setIsUsernameEntered] = useState(false);
@@ -85,53 +86,55 @@ function Login() {
   );
 
   return (
-    <>
-      <h1>Register</h1>
-      <br />
-      <form method="POST" onSubmit={handleSubmit}>
-        <label>Username:</label>
-        <br />
-        <input
-          type="text"
-          id="username"
-          name="username"
-          placeholder="Username"
-          onChange={(e) => {
-            fieldHandler(
-              USERNAME_REGEX,
-              setIsUsernameValid,
-              setIsUsernameEntered,
-              e
-            );
-          }}
-        />
-        <br />
-        <label>Password:</label>
-        <br />
-        <input
-          type="password"
-          id="pass"
-          name="pass"
-          placeholder="*******"
-          onChange={(e) => {
-            fieldHandler(
-              PASSWORD_REGEX,
-              setIsPasswordValid,
-              setIsPasswordEntered,
-              e
-            );
-          }}
-        />
-        <br />
-        <br />
-        <input type="submit" value="Submit" />
-        <p>Is username valid: {isUsernameValid ? "true" : "false"}</p>
-        <p>Is password valid: {isPasswordValid ? "true" : "false"}</p>
-        <p>{successMsg}</p>
-        <p>{errMsg}</p>
-      </form>
-    </>
-  );
+        <Form>
+            <div>
+                <img src="../../assets/images/register/registration-image.jpg" alt="Mountains"/>
+            </div>
+
+            <InputContainer>
+                <Container>
+                    <h1> Register </h1>
+                    <br/>
+                    <br/>
+                    <Hr/>
+                    <br/>
+                    <br/>
+                    <Label htmlFor="username">
+                        <b>Username</b>
+                        <Emoji src="../../assets/images/register/username.png" alt="Username icon"/>
+                    </Label>
+                    <br/>
+                    <Input type="text" placeholder="Enter your username here." name="username" required />
+                    <br/>
+                    <Label htmlFor="email">
+                        <b>Email</b>
+                        <Emoji src="../../assets/images/register/email.png" alt="Email icon"/>
+                    </Label>
+                    <br/>
+                    <Input type="text" placeholder="Enter your email here." name="email" required/>
+                    <br/>
+                    <Label htmlFor="psw">
+                        <b>Password</b>
+                        <Emoji src="../../assets/images/register/password.png" alt="Password icon"/>
+                    </Label>
+                    <br/>
+                    <Input type="password" placeholder="Enter your password here." name="psw" required/>
+                    <br/>
+                    <Label htmlFor="psw-repeat">
+                        <b>Repeat Password</b>
+                        <Emoji src="../../assets/images/register/psw-repeat.png" alt="Password-repeat icon"/>
+                    </Label>
+                    <br/>
+                    <Input type="password" placeholder="Repeat your password here." name="psw-repeat" required />
+                    <br/>
+                    <Button type="submit" >
+                        <Emoji src="../../assets/images/register/button-image.png" alt="Mountains"/>
+                        REGISTER
+                    </Button>
+                </Container>
+            </InputContainer>
+        </Form>
+    );
 }
 
-export default Login;
+export default Register;

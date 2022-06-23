@@ -1,8 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
-import { Hr, Container, InputContainer, Label, Emoji, Input, Button, Form } from '../components/RegisterComponents'
 
-export default function Login() {
+function Login() {
     const userContext = useContext(UserContext);
 
     const [errMsg, setErrMsg] = useState("");
@@ -35,53 +34,30 @@ export default function Login() {
     );
 
     return (
-        <Form>
-            <div>
-                <img src="../../assets/images/register/registration-image.jpg" alt="Mountains"/>
-            </div>
-
-            <InputContainer>
-                <Container>
-                    <h1> Register </h1>
-                    <br/>
-                    <br/>
-                    <Hr/>
-                    <br/>
-                    <br/>
-                    <Label htmlFor="username">
-                        <b>Username</b>
-                        <Emoji src="../../assets/images/register/username.png" alt="Username icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="text" placeholder="Enter your username here." name="username" required />
-                    <br/>
-                    <Label htmlFor="email">
-                        <b>Email</b>
-                        <Emoji src="../../assets/images/register/email.png" alt="Email icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="text" placeholder="Enter your email here." name="email" required/>
-                    <br/>
-                    <Label htmlFor="psw">
-                        <b>Password</b>
-                        <Emoji src="../../assets/images/register/password.png" alt="Password icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="password" placeholder="Enter your password here." name="psw" required/>
-                    <br/>
-                    <Label htmlFor="psw-repeat">
-                        <b>Repeat Password</b>
-                        <Emoji src="../../assets/images/register/psw-repeat.png" alt="Password-repeat icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="password" placeholder="Repeat your password here." name="psw-repeat" required />
-                    <br/>
-                    <Button type="submit" >
-                        <Emoji src="../../assets/images/register/button-image.png" alt="Mountains"/>
-                        REGISTER
-                    </Button>
-                </Container>
-            </InputContainer>
-        </Form>
+        <>
+            <h1>Login</h1>
+            <br />
+            <form method="POST" onSubmit={handleSubmit}>
+                <label>Username:</label>
+                <br />
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Username"
+                />
+                <br />
+                <label>Password:</label>
+                <br />
+                <input type="password" id="pass" name="pass" placeholder="*******" />
+                <br />
+                <br />
+                <input type="submit" value="Submit" />
+                <p>{successMsg}</p>
+                <p>{errMsg}</p>
+            </form>
+        </>
     );
-};
+}
+
+export default Login;
