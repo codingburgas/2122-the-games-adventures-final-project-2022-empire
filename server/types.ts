@@ -13,3 +13,5 @@ export class UserReturnData {
 export interface FilterData {id?: number, username?: string}
 
 export interface UpdateData {id: number, username: string}
+
+

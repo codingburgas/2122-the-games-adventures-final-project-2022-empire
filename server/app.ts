@@ -7,6 +7,7 @@ import cors from 'cors';
 import { createServer } from 'http';
 import {Server, Socket} from 'socket.io';
 import {auth} from "./middlewares/authSocket";
+import {onPlayerMovement} from "./routes/webSocket";
 
 const app: Express = express();
 const bodyParser = require("body-parser");
@@ -38,6 +39,10 @@ io.use(auth);
 
 io.on('connection', (socket: Socket) => {
   console.log('nice');
+
+  socket.on('playerMovement', (data) => {
+    onPlayerMovement(socket, JSON.parse(data));
+  })
 });
 
 httpServer.listen(port);
