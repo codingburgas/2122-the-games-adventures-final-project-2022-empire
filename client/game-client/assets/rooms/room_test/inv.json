@@ -1,0 +1,12 @@
+[
+    {
+        "id": 1,
+        "name": "Basic Badge",
+        "res": "path/to/basic/badge.png"
+    },
+    {
+        "id": 2,
+        "name": "Advanced Badge",
+        "res": "path/to/advanced/badge.png"
+    }
+]
