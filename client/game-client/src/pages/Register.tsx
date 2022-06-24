@@ -1,7 +1,7 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
 import { debounce } from "lodash";
-import { Emoji, Label, Button, Input, InputContainer, Form, Container, Hr } from '../components/RegisterComponents'
+import { Emoji, Label, Button, Input, InputContainer, Form, Container, Hr } from '../components/RegisterAndLogin';
 
 const USERNAME_REGEX =
   /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
