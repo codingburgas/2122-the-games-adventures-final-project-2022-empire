@@ -1,0 +1,77 @@
+    .gradient-shape-stats
+    {
+        color:aliceblue;
+        background-color: #3E435E;
+        border-radius: 15px;
+        font-size: 16px;
+        width: 400px;
+        height: 220px;
+        left: 149px;
+        top: 223px;
+    }
+    #stats-changed-shape
+    {
+        width: 530px;
+        height: 470px;
+        left: 558px;
+        top: 222.4px;
+    }
+    .text-header-stats
+    {
+        position: absolute;
+        width: 258px;
+        height: 39px;
+        left: 105px;
+        top: 228.2px;
+        font-weight: 700;
+        font-size:20px;
+        line-height: 39px;
+        text-align: center;
+        color: #FFFFFF;
+    }
+    #changed-text-header-stats
+    {
+        top: 470px;
+        left: 116px;
+    }
+    .stats-hr
+    {
+        border: 0.6px solid rgba(197, 196, 221, 0.2);
+        width: 89%;
+        height: 0px;
+        margin-left: 20px;
+    }
+    #not-centered-header
+    {
+        text-align: left;
+        margin-left: 30px;
+        margin-top: 30px;
+        font-size: 28px;
+    }
+    #changed-p-stats
+    {
+        max-width: 280px;
+        margin-left: 30px;
+        margin-top: 15px;
+    }
+    /* Ellipse*/
+    .circle
+    {
+        width: 100px;
+        height: 100px;
+        margin-top: 30px;
+        margin-left: 200px;
+        background: #D9D9D9;
+        border-radius: 100%;
+    }
+    #centered-changed-header
+    {
+        margin-top: 15px;
+    }
+    #centered-changed-p-stats
+    {
+        text-align: center;
+        margin-left: 170px;
+        margin-top: 15px;
+        max-width: 170px;
+    }
