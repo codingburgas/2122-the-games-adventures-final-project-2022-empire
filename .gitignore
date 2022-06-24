@@ -356,7 +356,8 @@ MigrationBackup/
 node_modules/
 
 # Typescript transpiler files
-outDir/
+server/outDir/*
+!server/outDir/package.json
 
 server/.env
 
