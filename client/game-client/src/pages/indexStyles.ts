@@ -29,12 +29,8 @@ export const  NavBar = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 175px;
+  gap: 9.4%;
   padding-top: 4rem;
-`
-export const  Mainlogo = styled.div`
-  height: 80px;
-  width: 217px;
 `
 
 export const  Group3 = styled.div`
@@ -66,6 +62,19 @@ export const  Text3 = styled.div`
   letter-spacing: 0.33em;
   line-height: auto;
   color: #c7c7c7;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  cursor: pointer;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
+`
+export const MainLogo = styled.img`
+  @media (max-width: 1450px) {
+    display: none;
+  }
 `
 export const  Text4 = styled.div`
   text-align: left;
@@ -79,6 +88,14 @@ export const  Text4 = styled.div`
   letter-spacing: 0.33em;
   line-height: auto;
   color: #c7c7c7;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  cursor: pointer;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
 `
 export const  Text5 = styled.div`
   text-align: left;
@@ -92,6 +109,14 @@ export const  Text5 = styled.div`
   letter-spacing: 0.33em;
   line-height: auto;
   color: #c7c7c7;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  cursor: pointer;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
 `
 export const  Text6 = styled.div`
   text-align: center;
@@ -105,6 +130,9 @@ export const  Text6 = styled.div`
   letter-spacing: 0.33em;
   line-height: auto;
   color: #c7c7c7;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
 `
 export const  HeroText = styled.div`
   height: 750px;
@@ -137,6 +165,14 @@ export const Rectangle30 = styled.div`
   justify-content: center;
   align-items: center;
   cursor: pointer;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  @media (max-width: 1450px) {
+    height: 82px;
+    width: 217px;
+  }
 `
 export const  Text7 = styled.div`
   text-align: left;
@@ -164,6 +200,9 @@ export const  Text8 = styled.div`
   line-height: auto;
   color: #ffffff;
   font-weight: bold;
+  @media (max-width: 1450px) {
+    font-size: 86px;
+  }
 `
 export const  Text9 = styled.div`
   text-align: left;

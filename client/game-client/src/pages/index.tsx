@@ -1,4 +1,4 @@
-import {useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { deleteStorage } from "../localstorage";
@@ -8,12 +8,13 @@ import * as SC from "./indexStyles";
 import Register from "./Register";
 
 function Index() {
-
   useEffect(() => {
-    localStorage.setItem('hasUserRegistered', 'false');
+    localStorage.setItem("hasUserRegistered", "false");
   }, []);
 
-  const [hasUserRegistered, setHasUserRegistered] = useState<boolean>(localStorage.getItem('hasUserRegistered') != 'false' );
+  const [hasUserRegistered, setHasUserRegistered] = useState<boolean>(
+    localStorage.getItem("hasUserRegistered") != "false"
+  );
 
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
@@ -30,19 +31,41 @@ function Index() {
 
   return (
     <>
-      <Register />
       <SC.FirstGradient>
         <SC.NavBar>
-          <img src={mainLogo} />
+          <SC.MainLogo src={mainLogo} />
           <SC.Text3>Home</SC.Text3>
           <SC.Text4>Stats</SC.Text4>
-          <SC.Text5>Preview</SC.Text5>
+          <SC.Text5
+            onClick={(e) => {
+              e.preventDefault();
+              window.location.href =
+                "https://github.com/codingburgas/2122-the-games-adventures-final-project-2022-empire";
+            }}
+          >
+            Source
+          </SC.Text5>
           <SC.Group4>
-            {/* Conditional rendering should be done here based on hasUserRegistered}
-            {TODO Add conditional rendering */}
-            <SC.Rectangle30 onClick={showRegister}>
-              <SC.Text6>Login</SC.Text6>
-            </SC.Rectangle30>
+            {!userContext?.authenticated ? (
+              <>
+                <SC.Rectangle30
+                  onClick={() => navigate("register", { replace: false })}
+                >
+                  <SC.Text6>Register</SC.Text6>
+                </SC.Rectangle30>
+              </>
+            ) : (
+              <>
+                <br />
+                <br />
+                <Link to="/account">
+                  <button>Go to account</button>
+                </Link>
+                <br />
+                <br />
+                <button onClick={handleLogOut}>Log out</button>
+              </>
+            )}
           </SC.Group4>
         </SC.NavBar>
         <SC.HeroText>
@@ -137,26 +160,6 @@ function Index() {
           <SC.Rectangle4 />
           <SC.Rectangle2 />
         </SC.Switch> */}
-      {!userContext?.authenticated ? (
-        <>
-          <br />
-          <br />
-          <Link to="/register">
-            <button>Go to register</button>
-          </Link>
-        </>
-      ) : (
-        <>
-          <br />
-          <br />
-          <Link to="/account">
-            <button>Go to account</button>
-          </Link>
-          <br />
-          <br />
-          <button onClick={handleLogOut}>Log out</button>
-        </>
-      )}
     </>
   );
 }
