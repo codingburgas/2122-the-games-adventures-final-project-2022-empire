@@ -14,11 +14,11 @@
 
 <p align = "center" style = "font-size:4em">
   <strong>
-  A game .....
+An adventure game project created using our own game engine. The project is 2.5D top-down , adventure, multiplayer co-op, online game and can be played on our website.
   </strong>
 </p>
 
----
+
 
 ## 🚀 Languages 
   <p align="left"> 
