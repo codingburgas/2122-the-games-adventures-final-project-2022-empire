@@ -50,7 +50,6 @@ jobs:
       - name: Copy the React app to out dir of express server
         run: |
           cd server
-          mkdir outDir
           cd outDir
           mkdir client
           sudo cp -a ../../client/game-client/dist/. ./client/
