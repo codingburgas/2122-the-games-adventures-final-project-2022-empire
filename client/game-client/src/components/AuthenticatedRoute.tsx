@@ -11,7 +11,7 @@ function AuthenticatedRoute({ children }: Props): any {
   const userContext = useContext(UserContext);
 
   if (!userContext?.authenticated && !userContext?.isLoading) {
-    return <Navigate to={`/login?redirect=${pathname}${search}`} />;
+    return <Navigate to={`/`} />;
   }
 
   return children;

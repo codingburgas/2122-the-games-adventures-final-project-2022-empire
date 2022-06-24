@@ -1,7 +1,18 @@
 import { useCallback, useContext, useState } from "react";
 import { UserContext } from "../App";
 import { debounce } from "lodash";
-import { Emoji, Label, Button, Input, InputContainer, Form, Container, Hr } from '../components/RegisterComponents'
+import {
+  Emoji,
+  Button,
+  InputContainer,
+  Form,
+  Container,
+  Hr,
+  FormPopup,
+  FormClose,
+} from "../components/RegisterAndLogin";
+import { FormField } from "../components/FormField";
+import { writeStorage } from "../localstorage";
 
 const USERNAME_REGEX =
   /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
@@ -76,7 +87,9 @@ function Register() {
         () => {
           setErrMsg("");
           setsuccessMsg("Successfully register in. Redirecting...");
-          window.location.href = "/login";
+          writeStorage("hasUserRegistered", { isUserEntered: true });
+          
+          window.location.href = "/";
           return;
         },
         (err: string) => {
@@ -88,77 +101,101 @@ function Register() {
   );
 
   return (
-        <Form onSubmit={handleSubmit}>
-            <div>
-                <img src="../../assets/images/register/registration-image.jpg" alt="Mountains"/>
-            </div>
+    <FormClose
+      onClick={(event: any) => {
+        if (event.target != event.currentTarget) return;
 
-            <InputContainer>
-                <Container>
-                    <h1> Register </h1>
-                    <br/>
-                    <br/>
-                    <Hr/>
-                    <br/>
-                    <br/>
-                    <Label htmlFor="username">
-                        <b>Username</b>
-                        <Emoji src="../../assets/images/register/username.png" alt="Username icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="text" placeholder="Enter your username here." name="username" required
-                        onChange={(e) => {
-                        fieldHandler(
-                            USERNAME_REGEX,
-                            setIsUsernameValid,
-                            setIsUsernameEntered,
-                            e
-                        );
-                        }}
-                    />
-                    <br/>
-                    <Label htmlFor="email">
-                        <b>Email</b>
-                        <Emoji src="../../assets/images/register/email.png" alt="Email icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="text" placeholder="Enter your email here." name="email" required/>
-                    <br/>
-                    <Label htmlFor="password">
-                        <b>Password</b>
-                        <Emoji src="../../assets/images/register/password.png" alt="Password icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="password" placeholder="Enter your password here." name="password" required
-                       onChange={(e) => {
-                           fieldHandler(
-                               PASSWORD_REGEX,
-                               setIsPasswordValid,
-                               setIsPasswordEntered,
-                               e
-                           );
-                       }}
-                    />
-                    <br/>
-                    <Label htmlFor="psw-repeat">
-                        <b>Repeat Password</b>
-                        <Emoji src="../../assets/images/register/psw-repeat.png" alt="Password-repeat icon"/>
-                    </Label>
-                    <br/>
-                    <Input type="password" placeholder="Repeat your password here." name="psw-repeat" required />
-                    <br/>
-                    <Button type="submit" >
-                        <Emoji src="../../assets/images/register/button-image.png" alt="Mountains"/>
-                        REGISTER
-                    </Button>
-                    <p>Is username valid: {isUsernameValid ? "true" : "false"}</p>
-                    <p>Is password valid: {isPasswordValid ? "true" : "false"}</p>
-                    <p>{successMsg}</p>
-                    <p>{errMsg}</p>
-                </Container>
-            </InputContainer>
+        document.getElementById("register")!.style.display = "none";
+        document.body.classList.remove("stop-scrolling");
+      }}
+      id="register"
+    >
+      <FormPopup>
+        <Form onSubmit={handleSubmit}>
+          <img
+            src="../../assets/images/register/registration-image.jpg"
+            alt="Mountains"
+            style={{ borderEndStartRadius: 15, borderStartStartRadius: 15 }}
+          />
+
+          <InputContainer>
+            <Container>
+              <h1> Register </h1>
+              <br />
+              <Hr />
+              <br />
+              <FormField
+                label="Username"
+                name="username"
+                inputType="text"
+                placeholder="Enter your username"
+                iconUrl="../../assets/images/register/username.png"
+                iconAltText="Username"
+                isDataEntered={isUsernameEntered}
+                isDataValid={isUsernameValid}
+                helperText="Username must be at least 8 characters long"
+                onChange={(e: any) => {
+                  fieldHandler(
+                    USERNAME_REGEX,
+                    setIsUsernameValid,
+                    setIsUsernameEntered,
+                    e
+                  );
+                }}
+              />
+              <br />
+              <FormField
+                label="Password"
+                iconUrl="../../assets/images/register/password.png"
+                iconAltText="Password icon"
+                inputType="password"
+                placeholder="Enter your password here."
+                name="password"
+                isDataEntered={isPasswordEntered}
+                isDataValid={isPasswordValid}
+                helperText="Password must be at least 8 characters long and contain at least one uppercase, one lowercase, and one number"
+                onChange={(e: any) => {
+                  fieldHandler(
+                    PASSWORD_REGEX,
+                    setIsPasswordValid,
+                    setIsPasswordEntered,
+                    e
+                  );
+                }}
+              />
+              <br />
+              <FormField
+                label="Confirm Password"
+                iconUrl="../../assets/images/register/password.png"
+                iconAltText="Password icon"
+                inputType="password"
+                placeholder="Confirm your password here."
+                name="confirmPassword"
+                onChange={(e: any) => {
+                  if (e.target.value === e.target.form.password.value) {
+                    setIsPasswordValid(true);
+                  } else {
+                    setIsPasswordValid(false);
+                  }
+                }}
+              />
+
+              <br />
+              <Button type="submit">
+                <Emoji
+                  src="../../assets/images/register/button-image.png"
+                  alt="Mountains"
+                />
+                REGISTER
+              </Button>
+              <p>{successMsg}</p>
+              <p>{errMsg}</p>
+            </Container>
+          </InputContainer>
         </Form>
-    );
+      </FormPopup>
+    </FormClose>
+  );
 }
 
 export default Register;

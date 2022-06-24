@@ -1,5 +1,5 @@
 
 
 export const isPlayerInBound = (): boolean => {
-    return true;
+    return false;
 };

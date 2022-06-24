@@ -6,19 +6,22 @@ import TGBold from '../../assets/fonts/texgyreadventor-bold.otf';
 export const FirstGradient = styled.div`
   background: linear-gradient(180deg, #282E48 0%, #16192E 81.14%);
   width: 100%;
-  height: 118vh;
+  height: auto;
+  padding-bottom: 16vh;
 `;
 
 export const SecondGradient = styled.div`
   background: radial-gradient(50% 50% at 50% 50%, #212A36 0%, #16192E 100%);
   width: 100%;
-  height: 100vh;
+  height: auto;
+  padding-bottom: 13vh;
 `;
 
 export const ThirdGradient = styled.div`
   background: #16192E;
   width: 100%;
-  height: 100vh;
+  height: auto;
+  padding-bottom: 15vh;
 `;
 
 export const  NavBar = styled.div`
@@ -26,12 +29,8 @@ export const  NavBar = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  gap: 175px;
+  gap: 9.4%;
   padding-top: 4rem;
-`
-export const  Mainlogo = styled.div`
-  height: 80px;
-  width: 217px;
 `
 
 export const  Group3 = styled.div`
@@ -51,15 +50,6 @@ export const  Text1 = styled.p`
   line-height: auto;
   color: #d9d9d9;
 `
-export const  Text2 = styled.div`
-  text-align: left;
-  vertical-align: top;
-  font-size: 39.253204345703125px;
-  font-family: 'SF';
-  letter-spacing: 45.5%;
-  line-height: auto;
-  color: #d9d9d9;
-`
 export const  Text3 = styled.div`
   text-align: left;
   vertical-align: top;
@@ -71,7 +61,20 @@ export const  Text3 = styled.div`
   font-family: 'SF';
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  cursor: pointer;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
+`
+export const MainLogo = styled.img`
+  @media (max-width: 1450px) {
+    display: none;
+  }
 `
 export const  Text4 = styled.div`
   text-align: left;
@@ -84,7 +87,15 @@ export const  Text4 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  cursor: pointer;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
 `
 export const  Text5 = styled.div`
   text-align: left;
@@ -97,7 +108,15 @@ export const  Text5 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  cursor: pointer;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
 `
 export const  Text6 = styled.div`
   text-align: center;
@@ -110,16 +129,21 @@ export const  Text6 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
+  @media (max-width: 1450px) {
+    font-size: 20px;
+  }
 `
 export const  HeroText = styled.div`
   height: 750px;
   width: 597px;
-  margin-left: 8%;
+  margin-left: auto;
+  margin-right: auto;
   display: flex;
   flex-direction: column;
   justify-content: left;
   gap: 50px;
+  padding-right: 63em;
 `
 export const  Group4 = styled.div`
   height: 82px;
@@ -140,6 +164,15 @@ export const Rectangle30 = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  cursor: pointer;
+  &:hover {
+    text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
+  }
+  transition: 0.5s;
+  @media (max-width: 1450px) {
+    height: 82px;
+    width: 217px;
+  }
 `
 export const  Text7 = styled.div`
   text-align: left;
@@ -152,7 +185,7 @@ export const  Text7 = styled.div`
   font-family: SF;
   letter-spacing: 0.33em;
   line-height: auto;
-  color: #afaeae;
+  color: #c7c7c7;
 `
 export const  Text8 = styled.div`
   text-align: left;
@@ -167,6 +200,9 @@ export const  Text8 = styled.div`
   line-height: auto;
   color: #ffffff;
   font-weight: bold;
+  @media (max-width: 1450px) {
+    font-size: 86px;
+  }
 `
 export const  Text9 = styled.div`
   text-align: left;
@@ -180,7 +216,7 @@ export const  Text9 = styled.div`
   letter-spacing: 0.235em;
   line-height: auto;
   margin-bottom: 20px;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  InfoGradient = styled.div`
   border-radius: 20px;
@@ -206,10 +242,12 @@ export const  Text10 = styled.div`
 export const  Frame9 = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: flex-start;
   gap: 54px;
-  margin-left: 8%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 4.2em;
 `
 export const  Group6 = styled.div`
   height: 157px;
@@ -240,7 +278,7 @@ export const  Text12 = styled.div`
   font-family: SF;
   letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Group7 = styled.div`
   height: 157px;
@@ -257,7 +295,7 @@ export const  Text13 = styled.div`
   font-family: SF;
   letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text14 = styled.div`
   text-align: left;
@@ -287,7 +325,7 @@ export const  Text15 = styled.div`
   font-family: SF;
   letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text16 = styled.div`
   text-align: left;
@@ -306,14 +344,21 @@ export const  Rectangle32 = styled.div`
   border-radius: 20px;
   height: 546px;
   width: 1471px;
-  background-color: ;
+  background: linear-gradient(245.36deg, #1E2235 1.16%, #494D5D 92.35%, #4D5261 101.81%);
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 13em;
 `
 export const  NaskoiSasho = styled.div`
   height: 421px;
   width: 1297px;
 `
 export const  Text17 = styled.div`
-  text-align: left;
+  text-align: center;
   vertical-align: top;
   font-size: 52px;
   @font-face {
@@ -324,26 +369,35 @@ export const  Text17 = styled.div`
   letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
+  margin-top: -.5em;
 `
 export const  Frame10 = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: flex-start;
+  align-items: center;
   gap: 127px;
 `
 export const  Group10 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text18 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text19 = styled.div`
   text-align: left;
@@ -354,22 +408,30 @@ export const  Text19 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
 export const  Group13 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text20 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text21 = styled.div`
   text-align: left;
@@ -380,22 +442,30 @@ export const  Text21 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
 export const  Group11 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text22 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text23 = styled.div`
   text-align: left;
@@ -406,22 +476,30 @@ export const  Text23 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
 export const  Group12 = styled.div`
   height: 243px;
   width: 229px;
+  margin-top: 6em;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 `
 export const  Text24 = styled.div`
   text-align: left;
   vertical-align: top;
   font-size: 20px;
-  font-family: SF Pro;
-  letter-spacing: 23.5%;
+  @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: SF;
+  letter-spacing: 0.235em;
   line-height: auto;
-  color: #ffffff;
+  color: #c7c7c7;
 `
 export const  Text25 = styled.div`
   text-align: left;
@@ -432,12 +510,12 @@ export const  Text25 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
 `
 export const  Text26 = styled.div`
-  text-align: left;
+  text-align: center;
   vertical-align: top;
   font-size: 52px;
   @font-face {
@@ -445,31 +523,42 @@ export const  Text26 = styled.div`
     src: url("${TGBold}") format("opentype");
   }
   font-family: 'TG';
-  letter-spacing: 23.5%;
+  letter-spacing: 0.235em;
   line-height: auto;
   color: #ffffff;
+  margin-bottom: 2em;
 `
 export const  Group14 = styled.div`
   height: 652px;
   width: 1471px;
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
+  grid-column-gap: 7em;
+  grid-row-gap: 0px; 
+  margin-left: auto;
+  margin-right: auto;
 `
 export const  Rectangle34 = styled.div`
   border-radius: 20px;
-  height: 652px;
+  height: 684px;
   width: 875px;
   background-color: #d9d9d9;
+  grid-area: 1 / 1 / 6 / 3;
 `
 export const  Rectangle35 = styled.div`
   border-radius: 20px;
   height: 293px;
   width: 511px;
   background-color: #d9d9d9;
+  grid-area: 1 / 4 / 3 / 6;
 `
 export const  Rectangle36 = styled.div`
   border-radius: 20px;
   height: 293px;
   width: 511px;
   background-color: #d9d9d9;
+  grid-area: 4 / 4 / 6 / 6;
 `
 export const  Footer = styled.div`
   height: 302px;
