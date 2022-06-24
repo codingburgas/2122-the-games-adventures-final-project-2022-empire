@@ -14,4 +14,12 @@ export interface FilterData {id?: number, username?: string}
 
 export interface UpdateData {id: number, username: string}
 
+export class Vector2 {
+    public x: number;
+    public y: number;
 
+    constructor(_x: number, _y: number) {
+        this.x = _x;
+        this.y = _y;
+    }
+}

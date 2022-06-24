@@ -1,13 +1,17 @@
 import { Socket } from "socket.io";
 import { isPlayerInBound } from "../helpers/playerMovement";
-
-interface Vector2 {x: number, y: number}
+import { Vector2 } from '../types';
+import Location from "../models/Locations";
 
 let nice: Vector2;
 
-export const onPlayerMovement = (socket: Socket, data: Vector2): void => {
+export const onPlayerMovement = async (socket: Socket, data: Vector2): Promise<void> => {
     if (isPlayerInBound()) {
         nice = data;
         socket.emit('playerMovementAccepted', nice);
+        await Location.updateUserLocation(socket.data.user.subject, nice);
+    } else {
+         socket.emit('playerMovementDeclined', await  Location.getUserLocation(socket.data.user.subject))
     }
+
 }
