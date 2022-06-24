@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import {useContext, useEffect, useState} from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { deleteStorage } from "../localstorage";
@@ -8,6 +8,13 @@ import * as SC from "./indexStyles";
 import Register from "./Register";
 
 function Index() {
+
+  useEffect(() => {
+    localStorage.setItem('hasUserRegistered', 'false');
+  }, []);
+
+  const [hasUserRegistered, setHasUserRegistered] = useState<boolean>(localStorage.getItem('hasUserRegistered') != 'false' );
+
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
   // Better to go in separate component
@@ -31,6 +38,8 @@ function Index() {
           <SC.Text4>Stats</SC.Text4>
           <SC.Text5>Preview</SC.Text5>
           <SC.Group4>
+            {/* Conditional rendering should be done here based on hasUserRegistered}
+            {TODO Add conditional rendering */}
             <SC.Rectangle30 onClick={showRegister}>
               <SC.Text6>Login</SC.Text6>
             </SC.Rectangle30>
