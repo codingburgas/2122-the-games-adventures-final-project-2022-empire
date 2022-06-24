@@ -1,11 +1,11 @@
 import styled from "styled-components";
 
 export const Hr = styled.hr`
-    border: 3.7354px solid;
-    color: #A74B61;
-    width: 67.24px;
-    height: 1px;
-    float: left;
+  border: 3.7354px solid;
+  color: #282e48;
+  width: 67.24px;
+  height: 1px;
+  float: left;
 `;
 
 export const InputContainer = styled.div`
@@ -15,29 +15,31 @@ export const InputContainer = styled.div`
 
 export const Container = styled.div`
   padding-right: 50px;
-  padding-left: 140px;
-  display:inline-block;
+  padding-left: 30px;
+  display: inline-block;
   text-align: left;
   font-size: 22px;
 `;
 
 export const Label = styled.label`
-  color:#000000;
+  color: #000000;
 `;
 
 export const Emoji = styled.img`
+  padding-left: 10px;
+  padding-right: 10px;
   width: 18px;
   height: 18px;
 `;
 
 export const Button = styled.button`
-  background-color: #A74B61;
+  background-color: #282e48;
   color: #fff;
   padding: 16px 20px;
   margin: 8px 0;
   border: none;
   cursor: pointer;
-  width: 379px;
+  width: 100%;
   border-radius: 15px;
   font-size: 16pt;
 `;
@@ -48,17 +50,46 @@ export const Input = styled.input`
   width: 379px;
   display: inline-block;
   border-style: solid;
-  border-color:#555555;
+  border-color: #555555;
   border-radius: 9.74293px;
-  background: #D7D7D7;
-  
-  &:focus
-  {
+  background: #d7d7d7;
+
+  &:focus {
     background-color: #d8c3c8;
     outline: none;
   }
 `;
 
 export const Form = styled.form`
-  display:flex;
+  display: flex;
+`;
+
+export const FormClose = styled.div`
+  background-color: rgba(255, 255, 255, 0.5);
+  display: none;
+  position: fixed;
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+  z-index: 8;
+`;
+
+export const FormPopup = styled.div`
+  border-radius: 15px;
+  background-color: #d7d7d7;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
+`;
+
+export const HelperText = styled.p`
+  color: #a74b61;
+  font-size: 12px;
+  padding: 0;
+  text-align: left;
+  margin-top: 5px;
+  margin-bottom: 5px;
 `;
