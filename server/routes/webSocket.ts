@@ -11,7 +11,8 @@ export const onPlayerMovement = async (socket: Socket, data: Vector2): Promise<v
         socket.emit('playerMovementAccepted', nice);
         await Location.updateUserLocation(socket.data.user.subject, nice);
     } else {
-         socket.emit('playerMovementDeclined', await  Location.getUserLocation(socket.data.user.subject))
+        console.log(socket.data.user.subject);
+        socket.emit('playerMovementDeclined', await Location.getUserLocation(socket.data.user.subject));
     }
 
 }

@@ -15,18 +15,18 @@ class Locations extends BaseModel {
         .query('UPDATE UserLocations SET CoordinateX = @ChangedX, CoordinateY = @ChangedY WHERE UserId = @Id')
     };
 
-    getUserLocation = (id: number): Promise<void> => {
+    getUserLocation = (id: number): Promise< Vector2 | void> => {
         return this.connection.request()
         .input('Id', sql.Int, id)
         .query('SELECT CoordinateX, CoordinateY FROM UserLocations WHERE UserId = @Id')
         .then((result) => {
-            console.log(result);
+            return new Vector2(result.recordset[0].CoordinateX, result.recordset[0].CoordinateY);
         })
         .catch((err) => {
             console.log(err);
         })
     }
-};
+}
 
 const Location: Locations = new Locations();
 
