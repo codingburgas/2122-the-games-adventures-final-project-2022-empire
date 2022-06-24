@@ -60,7 +60,6 @@ jobs:
          cd server
          npm i
          npm run build
-         sudo cp -r node_modules outDir/node_modules
          
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v3
