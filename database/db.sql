@@ -1,13 +1,7 @@
 USE [master]
 GO
-/****** Object:  Database [Brewing]    Script Date: 6/16/2022 8:35:59 PM ******/
+/****** Object:  Database [Brewing]    Script Date: 6/24/2022 11:36:11 AM ******/
 CREATE DATABASE [Brewing]
-    CONTAINMENT = NONE
-    ON  PRIMARY
-    ( NAME = N'Brewing', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\Brewing.mdf' , SIZE = 8192KB , MAXSIZE = UNLIMITED, FILEGROWTH = 65536KB )
-    LOG ON
-    ( NAME = N'Brewing_log', FILENAME = N'C:\Program Files\Microsoft SQL Server\MSSQL15.SQLEXPRESS\MSSQL\DATA\Brewing_log.ldf' , SIZE = 8192KB , MAXSIZE = 2048GB , FILEGROWTH = 65536KB )
-WITH CATALOG_COLLATION = DATABASE_DEFAULT
 GO
 ALTER DATABASE [Brewing] SET COMPATIBILITY_LEVEL = 150
 GO
@@ -80,7 +74,7 @@ ALTER DATABASE [Brewing] SET QUERY_STORE = OFF
 GO
 USE [Brewing]
 GO
-/****** Object:  Table [dbo].[Attempts]    Script Date: 6/16/2022 8:35:59 PM ******/
+/****** Object:  Table [dbo].[Attempts]    Script Date: 6/24/2022 11:36:11 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -97,7 +91,7 @@ CREATE TABLE [dbo].[Attempts](
                                          )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LeaderboardPoints]    Script Date: 6/16/2022 8:35:59 PM ******/
+/****** Object:  Table [dbo].[LeaderboardPoints]    Script Date: 6/24/2022 11:36:11 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -107,7 +101,7 @@ CREATE TABLE [dbo].[LeaderboardPoints](
                                           [Points] [int] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[LeaderboardTime]    Script Date: 6/16/2022 8:35:59 PM ******/
+/****** Object:  Table [dbo].[LeaderboardTime]    Script Date: 6/24/2022 11:36:11 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -118,7 +112,18 @@ CREATE TABLE [dbo].[LeaderboardTime](
                                         [DateOn] [date] NOT NULL
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Users]    Script Date: 6/16/2022 8:35:59 PM ******/
+/****** Object:  Table [dbo].[UserLocations]    Script Date: 6/24/2022 11:36:11 AM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[UserLocations](
+                                      [UserId] [int] NOT NULL,
+                                      [CoordinateX] [decimal](18, 0) NOT NULL,
+                                      [CoordinateY] [decimal](18, 0) NOT NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Users]    Script Date: 6/24/2022 11:36:11 AM ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -156,10 +161,28 @@ ALTER TABLE [dbo].[LeaderboardTime]  WITH CHECK ADD  CONSTRAINT [FK_LeaderboardT
 GO
 ALTER TABLE [dbo].[LeaderboardTime] CHECK CONSTRAINT [FK_LeaderboardTime_UserId_Users_Id]
 GO
+ALTER TABLE [dbo].[UserLocations]  WITH CHECK ADD  CONSTRAINT [UserLocations_UserId_Users_Id] FOREIGN KEY([UserId])
+    REFERENCES [dbo].[Users] ([Id])
+GO
+ALTER TABLE [dbo].[UserLocations] CHECK CONSTRAINT [UserLocations_UserId_Users_Id]
+GO
 ALTER TABLE [dbo].[Users]  WITH CHECK ADD  CONSTRAINT [CHK_Username] CHECK  ((len([Username])>=(8)))
 GO
 ALTER TABLE [dbo].[Users] CHECK CONSTRAINT [CHK_Username]
 GO
+CREATE TRIGGER [dbo].[Trg_User_Creation]
+    ON [dbo].[Users]
+    AFTER INSERT
+    AS
+BEGIN
+    SET NOCOUNT ON;
+    INSERT INTO UserLocations(UserId, CoordinateX, CoordinateY)
+    SELECT i.Id, 0, 0
+    FROM inserted i
+END
+GO
+
+ALTER TABLE [dbo].[Users] ENABLE TRIGGER [Trg_User_Creation]
 USE [master]
 GO
 ALTER DATABASE [Brewing] SET  READ_WRITE
