@@ -5,6 +5,8 @@ import { deleteStorage } from "../localstorage";
 import mainLogo from "../../assets/Mainlogo.svg?url";
 import * as SC from "./indexStyles";
 
+import Register from "./Register";
+
 function Index() {
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
@@ -14,8 +16,14 @@ function Index() {
     window.location.reload();
   };
 
+  const showRegister = () => {
+    document.getElementById("myForm")!.style.display = "block";
+    document.body.classList.add("stop-scrolling");
+  };
+
   return (
     <>
+      <Register />
       <SC.FirstGradient>
         <SC.NavBar>
           <img src={mainLogo} />
@@ -23,9 +31,7 @@ function Index() {
           <SC.Text4>Stats</SC.Text4>
           <SC.Text5>Preview</SC.Text5>
           <SC.Group4>
-            <SC.Rectangle30
-              onClick={() => navigate("login", { replace: false })}
-            >
+            <SC.Rectangle30 onClick={showRegister}>
               <SC.Text6>Login</SC.Text6>
             </SC.Rectangle30>
           </SC.Group4>
