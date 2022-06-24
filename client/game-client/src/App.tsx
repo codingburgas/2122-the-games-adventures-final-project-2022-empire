@@ -12,7 +12,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 
 const Index = lazy(() => import("./pages/index"));
-const Game = lazy(() => import("./pages/game"));
+const Game = lazy(() => import("./pages/Game"));
 const Login = lazy(() => import("./pages/Login"));
 const Register = lazy(() => import("./pages/Register"));
 const Account = lazy(() => import("./pages/Account"));
@@ -161,22 +161,6 @@ function App() {
         <Suspense fallback={<Failback />}>
           <Routes>
             <Route path="/game" element={<Game />} />
-            <Route
-              path="/login"
-              element={
-                <UnauthenticatedRoute>
-                  <Login />
-                </UnauthenticatedRoute>
-              }
-            />
-            <Route
-              path="/register"
-              element={
-                <UnauthenticatedRoute>
-                  <Register />
-                </UnauthenticatedRoute>
-              }
-            />
             <Route
               path="/account"
               element={

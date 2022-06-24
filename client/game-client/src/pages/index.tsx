@@ -1,20 +1,19 @@
 import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
-import { deleteStorage } from "../localstorage";
+import { deleteStorage, writeStorage, readStorage } from "../localstorage";
 import mainLogo from "../../assets/Mainlogo.svg?url";
 import * as SC from "./indexStyles";
 
 import Register from "./Register";
+import Login from "./Login";
 
 function Index() {
-  useEffect(() => {
-    localStorage.setItem("hasUserRegistered", "false");
-  }, []);
+  const [hasUserRegistered, setHasUserRegistered] = useState<boolean>(false);
 
-  const [hasUserRegistered, setHasUserRegistered] = useState<boolean>(
-    localStorage.getItem("hasUserRegistered") != "false"
-  );
+  useEffect(() => {
+    setHasUserRegistered(Boolean(readStorage("hasUserRegistered")));
+  }, []);
 
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
@@ -24,13 +23,15 @@ function Index() {
     window.location.reload();
   };
 
-  const showRegister = () => {
-    document.getElementById("myForm")!.style.display = "block";
+  const showForm = (id: string) => {
+    document.getElementById(id)!.style.display = "block";
     document.body.classList.add("stop-scrolling");
   };
 
   return (
     <>
+      <Login/>
+      <Register />
       <SC.FirstGradient>
         <SC.NavBar>
           <SC.MainLogo src={mainLogo} />
@@ -48,11 +49,15 @@ function Index() {
           <SC.Group4>
             {!userContext?.authenticated ? (
               <>
-                <SC.Rectangle30
-                  onClick={() => navigate("register", { replace: false })}
-                >
-                  <SC.Text6>Register</SC.Text6>
-                </SC.Rectangle30>
+                {hasUserRegistered ? (
+                  <SC.Rectangle30 onClick={() => showForm("login")}>
+                    <SC.Text6>Login</SC.Text6>
+                  </SC.Rectangle30>
+                ) : (
+                  <SC.Rectangle30 onClick={() => showForm("register")}>
+                    <SC.Text6>Register</SC.Text6>
+                  </SC.Rectangle30>
+                )}
               </>
             ) : (
               <>

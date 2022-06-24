@@ -12,6 +12,7 @@ import {
   FormClose,
 } from "../components/RegisterAndLogin";
 import { FormField } from "../components/FormField";
+import { writeStorage } from "../localstorage";
 
 const USERNAME_REGEX =
   /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
@@ -86,7 +87,9 @@ function Register() {
         () => {
           setErrMsg("");
           setsuccessMsg("Successfully register in. Redirecting...");
-          window.location.href = "/login";
+          writeStorage("hasUserRegistered", { isUserEntered: true });
+          
+          window.location.href = "/";
           return;
         },
         (err: string) => {
@@ -102,10 +105,10 @@ function Register() {
       onClick={(event: any) => {
         if (event.target != event.currentTarget) return;
 
-        document.getElementById("myForm")!.style.display = "none";
+        document.getElementById("register")!.style.display = "none";
         document.body.classList.remove("stop-scrolling");
       }}
-      id="myForm"
+      id="register"
     >
       <FormPopup>
         <Form onSubmit={handleSubmit}>
