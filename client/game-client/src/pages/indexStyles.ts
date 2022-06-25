@@ -9,46 +9,46 @@ export const FirstGradient = styled.div`
   height: auto;
   padding-bottom: 16vh;
 `;
-
 export const SecondGradient = styled.div`
   background: radial-gradient(50% 50% at 50% 50%, #212A36 0%, #16192E 100%);
   width: 100%;
   height: auto;
   padding-bottom: 13vh;
 `;
-
 export const ThirdGradient = styled.div`
   background: #16192E;
   width: 100%;
   height: auto;
   padding-bottom: 15vh;
 `;
-
 export const  NavBar = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  align-self: auto;
   gap: 9.4%;
   padding-top: 4rem;
-`
-
-export const  Group3 = styled.div`
-  height: 80px;
-  width: 217px;
-`
-export const  Text1 = styled.p`
-  text-align: left;
-  vertical-align: top;
-  font-size: 39.253204345703125px;
-  @font-face {
-    font-family: 'SF';
-    src: url("${SF}") format("opentype");
+  @media (max-width: 1450px) {
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
   }
-  font-family: 'SF';
-  letter-spacing: 45.5%;
-  line-height: auto;
-  color: #d9d9d9;
+  @media (max-width: 1200px) {
+    zoom: 0.6;
+    -moz-transform: scale(0.6);
+  }
+  @media (max-width: 920px) {
+    zoom: 0.4;
+    -moz-transform: scale(0.4);
+  }
+  @media (max-width: 620px) {
+    zoom: 0.3;
+    -moz-transform: scale(0.3);
+  }
+  @media (max-width: 480px) {
+    zoom: 0.2;
+    -moz-transform: scale(0.2);
+  }
 `
 export const  Text3 = styled.div`
   text-align: left;
@@ -67,14 +67,8 @@ export const  Text3 = styled.div`
   }
   transition: 0.5s;
   cursor: pointer;
-  @media (max-width: 1450px) {
-    font-size: 20px;
-  }
 `
 export const MainLogo = styled.img`
-  @media (max-width: 1450px) {
-    display: none;
-  }
 `
 export const  Text4 = styled.div`
   text-align: left;
@@ -93,9 +87,6 @@ export const  Text4 = styled.div`
   }
   transition: 0.5s;
   cursor: pointer;
-  @media (max-width: 1450px) {
-    font-size: 20px;
-  }
 `
 export const  Text5 = styled.div`
   text-align: left;
@@ -114,9 +105,6 @@ export const  Text5 = styled.div`
   }
   transition: 0.5s;
   cursor: pointer;
-  @media (max-width: 1450px) {
-    font-size: 20px;
-  }
 `
 export const  Text6 = styled.div`
   text-align: center;
@@ -130,20 +118,41 @@ export const  Text6 = styled.div`
   letter-spacing: 0.33em;
   line-height: auto;
   color: #c7c7c7;
-  @media (max-width: 1450px) {
-    font-size: 20px;
-  }
 `
-export const  HeroText = styled.div`
-  height: 750px;
-  width: 597px;
-  margin-left: auto;
-  margin-right: auto;
+export const HeroText = styled.div`
   display: flex;
   flex-direction: column;
-  justify-content: left;
+  justify-content: flex-start;
+  align-items: left;
+  height: 750px;
+  width: 597px;
+  margin-left: 155px;
   gap: 50px;
-  padding-right: 63em;
+  @media (max-width: 1450px) {
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 1200px) {
+    zoom: 0.6;
+    -moz-transform: scale(0.6);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 920px) {
+    zoom: 0.4;
+    -moz-transform: scale(0.4);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 620px) {
+    zoom: 0.3;
+    -moz-transform: scale(0.3);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 480px) {
+    zoom: 0.2;
+    -moz-transform: scale(0.2);
+    -moz-transform-origin: top left;
+  }
 `
 export const  Group4 = styled.div`
   height: 82px;
@@ -169,10 +178,6 @@ export const Rectangle30 = styled.div`
     text-shadow: 0 0 1px #c7c7c7, 0 0 1px #c7c7c7, 0 0 2px #c7c7c7, 0 0 2px #c7c7c7, 0 0 5px #c7c7c7, 0 0 5px #c7c7c7, 0 0 70px #c7c7c7;
   }
   transition: 0.5s;
-  @media (max-width: 1450px) {
-    height: 82px;
-    width: 217px;
-  }
 `
 export const  Text7 = styled.div`
   text-align: left;
@@ -248,6 +253,31 @@ export const  Frame9 = styled.div`
   margin-left: auto;
   margin-right: auto;
   padding-left: 4.2em;
+  @media (max-width: 1450px) {
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 1200px) {
+    zoom: 0.6;
+    -moz-transform: scale(0.6);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 920px) {
+    zoom: 0.4;
+    -moz-transform: scale(0.4);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 620px) {
+    zoom: 0.3;
+    -moz-transform: scale(0.3);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 480px) {
+    zoom: 0.2;
+    -moz-transform: scale(0.2);
+    -moz-transform-origin: top left;
+  }
 `
 export const  Group6 = styled.div`
   height: 157px;
@@ -352,6 +382,31 @@ export const  Rectangle32 = styled.div`
   margin-left: auto;
   margin-right: auto;
   margin-top: 13em;
+  @media (max-width: 1450px) {
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 1200px) {
+    zoom: 0.6;
+    -moz-transform: scale(0.6);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 920px) {
+    zoom: 0.4;
+    -moz-transform: scale(0.4);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 620px) {
+    zoom: 0.3;
+    -moz-transform: scale(0.3);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 480px) {
+    zoom: 0.2;
+    -moz-transform: scale(0.2);
+    -moz-transform-origin: top left;
+  }
 `
 export const  NaskoiSasho = styled.div`
   height: 421px;
@@ -538,6 +593,31 @@ export const  Group14 = styled.div`
   grid-row-gap: 0px; 
   margin-left: auto;
   margin-right: auto;
+  @media (max-width: 1750px) {
+    zoom: 0.8;
+    -moz-transform: scale(0.8);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 1500px) {
+    zoom: 0.6;
+    -moz-transform: scale(0.6);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 1220px) {
+    zoom: 0.4;
+    -moz-transform: scale(0.4);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 920px) {
+    zoom: 0.3;
+    -moz-transform: scale(0.3);
+    -moz-transform-origin: top left;
+  }
+  @media (max-width: 780px) {
+    zoom: 0.2;
+    -moz-transform: scale(0.2);
+    -moz-transform-origin: top left;
+  }
 `
 export const  Rectangle34 = styled.div`
   border-radius: 20px;

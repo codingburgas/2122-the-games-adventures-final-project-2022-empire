@@ -137,34 +137,6 @@ function Index() {
           <SC.Rectangle36 />
         </SC.Group14>
       </SC.ThirdGradient>
-      {/*
-        <SC.Footer>
-          <SC.Rectangle3 />
-          <SC.Group2>
-            <SC.Text27>HOME</SC.Text27>
-            <SC.Text28>STATS</SC.Text28>
-            <SC.Text29>CONTACT</SC.Text29>
-          </SC.Group2>
-          <SC.Rectangle4 />
-          <SC.Text30>Type here....</SC.Text30>
-          <SC.Rectangle5 />
-          <SC.Text31>SUBMIT</SC.Text31>
-          <SC.Text32>TEXT US HERE</SC.Text32>
-          <SC.Line1 />
-          <SC.Text33>2022 © Empire | All rights reserved</SC.Text33>
-          <SC.Mainlogo>
-            <SC.Group3>
-              <SC.Text34>EMP</SC.Text34>
-              <SC.Text35>IRE</SC.Text35>
-              <SC.Rectangle28 />
-              <SC.Rectangle29 />
-            </SC.Group3>
-          </SC.Mainlogo>
-        </SC.Footer>
-        <SC.Switch>
-          <SC.Rectangle4 />
-          <SC.Rectangle2 />
-        </SC.Switch> */}
     </>
   );
 }
