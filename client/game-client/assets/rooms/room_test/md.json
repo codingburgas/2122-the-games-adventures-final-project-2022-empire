@@ -4,5 +4,6 @@
         "x": 20,
         "y": 20
     },
-    "tileSize": 32
+    "tileSize": 32,
+    "scaleFactor": 2
 }
