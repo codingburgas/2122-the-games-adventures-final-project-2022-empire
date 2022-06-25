@@ -5,7 +5,7 @@
     "main": "",
     "scripts": {
       "build": "npx tsc",
-      "start": "npm config set registry http://registry.npmjs.org/ --global && npm cache clear --force && npm i && node app.js",
+      "start": "npm i && node app.js",
       "dev": "concurrently \"npx tsc --watch --synchronousWatchDirectory\" \"nodemon -L outDir/app.js\""
     },
     "author": "",

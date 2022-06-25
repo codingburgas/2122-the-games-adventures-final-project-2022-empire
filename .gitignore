@@ -358,6 +358,7 @@ node_modules/
 # Typescript transpiler files
 server/outDir/*
 !server/outDir/package.json
+!server/outDir/package-lock.json
 
 server/.env
 
