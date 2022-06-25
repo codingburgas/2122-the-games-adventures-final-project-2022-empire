@@ -14,6 +14,7 @@ import {
   FormPopup,
 } from "../components/RegisterAndLogin";
 import { FormField } from "../components/FormField";
+import formArt from "../../assets/formArt.svg?url";
 
 function Login() {
   const userContext = useContext(UserContext);
@@ -60,7 +61,7 @@ function Login() {
       <FormPopup>
         <Form onSubmit={handleSubmit}>
           <img
-            src="../../assets/images/register/registration-image.jpg"
+            src={formArt}
             alt="Mountains"
           />
 
@@ -70,7 +71,9 @@ function Login() {
               <br />
               <Hr />
               <br />
-
+              <br />
+              <br />
+              <br />
               <FormField
                 label="Username"
                 name="username"
@@ -81,7 +84,7 @@ function Login() {
                 iconAltText="Username"
               />
               <br />
-
+              <br />
               <FormField
                 label="Password"
                 name="pass"
@@ -92,7 +95,7 @@ function Login() {
                 iconAltText="Password"
               />
               <br />
-
+              <br />
               <Button type="submit">
                 <Emoji
                   src="../../assets/images/register/button-image.png"

@@ -1,11 +1,10 @@
 import styled from "styled-components";
 
 export const Hr = styled.hr`
-  border: 3.7354px solid;
-  color: #282e48;
-  width: 67.24px;
-  height: 1px;
-  float: left;
+transform: rotate(0deg);
+height: 0px;
+width: 102px;
+border: 5.69px solid #282e48;
 `;
 
 export const InputContainer = styled.div`

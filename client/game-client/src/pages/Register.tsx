@@ -13,6 +13,7 @@ import {
 } from "../components/RegisterAndLogin";
 import { FormField } from "../components/FormField";
 import { writeStorage } from "../localstorage";
+import formArt from "../../assets/formArt.svg?url";
 
 const USERNAME_REGEX =
   /^(?=.{8,20}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$/;
@@ -113,7 +114,7 @@ function Register() {
       <FormPopup>
         <Form onSubmit={handleSubmit}>
           <img
-            src="../../assets/images/register/registration-image.jpg"
+            src={formArt}
             alt="Mountains"
             style={{ borderEndStartRadius: 15, borderStartStartRadius: 15 }}
           />
@@ -123,6 +124,9 @@ function Register() {
               <h1> Register </h1>
               <br />
               <Hr />
+              <br />
+              <br />
+              <br />
               <br />
               <FormField
                 label="Username"
@@ -144,6 +148,7 @@ function Register() {
                 }}
               />
               <br />
+              <br />
               <FormField
                 label="Password"
                 iconUrl="../../assets/images/register/password.png"
@@ -163,6 +168,7 @@ function Register() {
                   );
                 }}
               />
+              <br />
               <br />
               <FormField
                 label="Confirm Password"
