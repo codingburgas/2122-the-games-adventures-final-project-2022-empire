@@ -103,16 +103,6 @@ export default class PlayerScript extends Script {
                 );
             });
         }
-
-        // this.engine.DrawText(
-            this.roomRef.current!.getPositionFunction({
-                ...this.pos,
-                width: this.tex!.Texture.width,
-                height: this.tex!.Texture.height
-            }).toString()/*, 10, */
-            // this.engine.GetScreenHeight() - 30,
-            // 20, { r: 0, g: 0, b: 0, a: 255 }
-        // );
     }
 
     public OnDestroy(): void {
