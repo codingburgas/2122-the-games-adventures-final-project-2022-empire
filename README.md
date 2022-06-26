@@ -51,13 +51,9 @@ lorem ipsum
 
 ## Related documents 📄 <a name = "docs"></a>
    + [Documentation]()
-   + [Doxygen documentation]()
-   + [Postman documentation]()
+   + [Wiki]()
    + [Presentation]()
 
-## Usage 🖱️ <a name = "usage"></a>
-lorem ipsum
-  
 ## Installation ⚙ <a name = "installation"></a>
 
 You can start with downloading our project form [GitHub](https://github.com/codingburgas/2122-the-games-adventures-final-proejct-2022-empire/archive/refs/heads/master.zip) by pressing the **green clone button**
