@@ -1,6 +1,7 @@
 import styled, {keyframes} from 'styled-components';
 import SpaceMission from '../../assets/fonts/PressStart2P.ttf';
 import ScreenImage from '../../assets/menuArt.png';
+import monitorImg from "../../assets/monitor.png";
 
 const blinkingEffect = keyframes`
     50% {
@@ -14,6 +15,17 @@ export const MenuArt = styled.div`
   background-size: 100% 100%;
   height: 100vh;
 `;
+
+export const Monitor = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-image: url(${monitorImg});
+  background-repeat: no-repeat;
+  height: 100vh;
+  width: 100vw;
+  background-attachment: fixed;
+`
 
 export const PlayButton = styled.p`
   color: white;
@@ -34,3 +46,11 @@ export const PlayButton = styled.p`
     display: none;
   }
 `;
+
+export const Inventory = styled.img`
+  position: absolute;
+  margin-left: auto;
+  margin-right: auto;
+  padding-top: 52.6em;
+  width: 40em;
+`
