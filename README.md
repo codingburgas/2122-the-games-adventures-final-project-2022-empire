@@ -48,9 +48,10 @@ lorem ipsum
 
 
 ## Related documents 📄 <a name = "docs"></a>
-   + [Documentation]()
-   + [Wiki]()
+   + [Documentation](https://codingburgas-my.sharepoint.com/:w:/g/personal/sysolakov20_codingburgas_bg/ET6L9M9yb7NNhHa7xlCsi6gB--A1qllTLt5fPS_8MpWaDQ?e=ylo6QK)
+   + [Figma File](https://codingburgas-my.sharepoint.com/:u:/g/personal/sysolakov20_codingburgas_bg/EX9lsOmlZphHigFSMWp4pGcBNK4WkPXiYTndwYZBdO4nkg?e=IbcepR)
    + [Presentation]()
+   + [Wiki](https://github.com/codingburgas/2122-the-games-adventures-final-project-2022-empire/wiki)
 
 ## Installation ⚙ <a name = "installation"></a>
 
