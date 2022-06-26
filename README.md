@@ -43,6 +43,7 @@ Team Empire offers an innovative and intuitive game based on puzzles solved by t
    + [Figma File](https://codingburgas-my.sharepoint.com/:u:/g/personal/sysolakov20_codingburgas_bg/EX9lsOmlZphHigFSMWp4pGcBNK4WkPXiYTndwYZBdO4nkg?e=IbcepR)
    + [Presentation](https://codingburgas-my.sharepoint.com/:p:/g/personal/sysolakov20_codingburgas_bg/EXR8PEziqCdIi5TvBV-SKQUB1ruZoyIs-AT1QUpP-_nNyw?e=b4wod2)
    + [Wiki](https://github.com/codingburgas/2122-the-games-adventures-final-project-2022-empire/wiki)
+   + [Postman Documentation](https://documenter.getpostman.com/view/14581342/UzBsHQFp)
 
 ## Installation ⚙ <a name = "installation"></a>
 
