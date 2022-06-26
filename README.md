@@ -10,15 +10,6 @@
   <img src = "https://img.shields.io/github/languages/top/codingburgas/2122-the-games-adventures-final-proejct-2022-empire?style=for-the-badge">
 </div>
 
----
-
-<p align = "center" style = "font-size:4em">
-  <strong>
-An adventure game project created using our own game engine. The project is 2.5D top-down , adventure, multiplayer co-op, online game and can be played on our website.
-  </strong>
-</p>
-
-
 
 ## 🚀 Languages 
   <p align="left"> 
@@ -43,21 +34,16 @@ An adventure game project created using our own game engine. The project is 2.5D
 
 
 ## About 💻 <a name = "about"></a>
-lorem ipsum
+Team Empire offers an innovative and intuitive game based on puzzles solved by two players working in a team. The user can create an account to monitor their results and achievements. The whole idea of the product is to make the player think and develop his logical thinking.
 
-## Demo of our project 🎥 <a name = "demo"></a>
-<img src = "" alt = "demo img 1">
-<img src = "" alt = "demo img 2">
+
 
 ## Related documents 📄 <a name = "docs"></a>
-   + [Documentation]()
-   + [Doxygen documentation]()
-   + [Postman documentation]()
-   + [Presentation]()
+   + [Documentation](https://codingburgas-my.sharepoint.com/:w:/g/personal/sysolakov20_codingburgas_bg/ET6L9M9yb7NNhHa7xlCsi6gB--A1qllTLt5fPS_8MpWaDQ?e=ylo6QK)
+   + [Figma File](https://codingburgas-my.sharepoint.com/:u:/g/personal/sysolakov20_codingburgas_bg/EX9lsOmlZphHigFSMWp4pGcBNK4WkPXiYTndwYZBdO4nkg?e=IbcepR)
+   + [Presentation](https://codingburgas-my.sharepoint.com/:p:/g/personal/sysolakov20_codingburgas_bg/EXR8PEziqCdIi5TvBV-SKQUB1ruZoyIs-AT1QUpP-_nNyw?e=b4wod2)
+   + [Wiki](https://github.com/codingburgas/2122-the-games-adventures-final-project-2022-empire/wiki)
 
-## Usage 🖱️ <a name = "usage"></a>
-lorem ipsum
-  
 ## Installation ⚙ <a name = "installation"></a>
 
 You can start with downloading our project form [GitHub](https://github.com/codingburgas/2122-the-games-adventures-final-proejct-2022-empire/archive/refs/heads/master.zip) by pressing the **green clone button**
@@ -73,7 +59,7 @@ git clone --recursive https://github.com/codingburgas/2122-the-games-adventures-
 ## Deployment 💻
 If you want to deploy, first you need to create a **Database**. This can be achieved by pasting the content of **database/db.sql** in <img src = "https://www.edureka.co/blog/wp-content/uploads/2019/10/logo.png" height = "19px" alt = "vs logo"> SQL Server Management Studio.
 
-Then, you need to make a **.env** in the in the **server** folder. You can see [**.env.example**](https://github.com/codingburgas/2122-otj-10-project-repo-SSIvanov19/blob/master/.env.example) on what environment variable you need to set up!
+Then, you need to make a **.env** in the in the **server** folder. You can see [**.env.example**](https://github.com/codingburgas/2122-the-games-adventures-final-project-2022-empire/blob/main/server/.env.example) on what environment variable you need to set up!
 
 Finally, you can start the HTTP Server by paste the following lines in **your favourite Terminal**, while you are in the **server** folder:
 ```
@@ -87,7 +73,10 @@ To start the HTTP Client, paste the following lines in **your favourite Terminal
   npm run dev
 ```
 
----
+ ## Demo of our project 🎥 <a name = "demo"></a>
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/900689339179216926/990695673512992838/Silver_24inch_iMac_Mockup.png" width = "550px" >
+</p>
 
 ```
 Thank you for scrolling this far! Please consider giving the repo a star ⭐.
