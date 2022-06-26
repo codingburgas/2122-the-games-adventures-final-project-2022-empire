@@ -59,7 +59,7 @@ git clone --recursive https://github.com/codingburgas/2122-the-games-adventures-
 ## Deployment 💻
 If you want to deploy, first you need to create a **Database**. This can be achieved by pasting the content of **database/db.sql** in <img src = "https://www.edureka.co/blog/wp-content/uploads/2019/10/logo.png" height = "19px" alt = "vs logo"> SQL Server Management Studio.
 
-Then, you need to make a **.env** in the in the **server** folder. You can see [**.env.example**](https://github.com/codingburgas/2122-otj-10-project-repo-SSIvanov19/blob/master/.env.example) on what environment variable you need to set up!
+Then, you need to make a **.env** in the in the **server** folder. You can see [**.env.example**](https://github.com/codingburgas/2122-the-games-adventures-final-project-2022-empire/blob/main/server/.env.example) on what environment variable you need to set up!
 
 Finally, you can start the HTTP Server by paste the following lines in **your favourite Terminal**, while you are in the **server** folder:
 ```
