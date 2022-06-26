@@ -68,8 +68,10 @@ Finally, you can start the HTTP Server by paste the following lines in **your fa
   npm run dev
 ```
 
-To start the HTTP Client, paste the following lines in **your favourite Terminal**, while you are in the **client/game-client** folder:
+To start the HTTP Client, paste the following lines in **your favourite Terminal**, while you are in the **client** folder:
 ```
+  py populate.py
+  cd game-client
   npm install
   npm run dev
 ```
