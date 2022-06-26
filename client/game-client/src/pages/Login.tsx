@@ -41,7 +41,7 @@ function Login() {
           return;
         },
         (err: string) => {
-          setErrMsg(err);
+          setErrMsg(err.toString());
         }
       );
     },
