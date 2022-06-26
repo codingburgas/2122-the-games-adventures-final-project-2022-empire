@@ -37,7 +37,7 @@ function Login() {
         () => {
           setErrMsg("");
           setsuccessMsg("Successfully logged in. Redirecting...");
-          //window.location.href = "/account";
+          window.location.reload();
           return;
         },
         (err: string) => {
@@ -72,8 +72,6 @@ function Login() {
               <Hr />
               <br />
               <br />
-              <br />
-              <br />
               <FormField
                 label="Username"
                 name="username"
@@ -84,7 +82,6 @@ function Login() {
                 iconAltText="Username"
               />
               <br />
-              <br />
               <FormField
                 label="Password"
                 name="pass"
@@ -94,16 +91,32 @@ function Login() {
                 iconUrl="../../assets/images/register/password.png"
                 iconAltText="Password"
               />
-              <br />
+
               <br />
               <Button type="submit">
                 <Emoji
                   src="../../assets/images/register/button-image.png"
                   alt="Login Button"
                 />
-                Button
+                LOGIN
               </Button>
-              <br />
+
+              <Button
+                type="button"
+                onClick={() => {
+                  document.getElementById("login")!.style.display = "none";
+                  document.getElementById("register")!.style.display = "block";
+                }}
+              >
+                <Emoji
+                  src="../../assets/images/register/button-image.png"
+                  alt="Mountains"
+                ></Emoji>
+                REGISTER
+              </Button>
+
+              <p>{successMsg}</p>
+              <p>{errMsg}</p>
             </Container>
           </InputContainer>
         </Form>

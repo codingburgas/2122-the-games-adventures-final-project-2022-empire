@@ -23,7 +23,7 @@ interface userContextInterface {
   authenticated?: boolean;
   isLoading?: boolean;
   token?: string | null;
-  userData?: Object | null;
+  userData?: any | null;
   loginUser?: Function;
   registerUser?: Function;
 }

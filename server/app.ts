@@ -28,7 +28,6 @@ const port = process.env.PORT || 4000;
 
 app.get("/", (req: Request, res: Response) => {
   res.contentType(".html").sendFile(process.cwd() + "/client/index.html");
-  res.send('Qsha!');
 });
 
 const httpServer = createServer(app);
@@ -38,8 +37,6 @@ const io = new Server(httpServer);
 io.use(auth);
 
 io.on('connection', (socket: Socket) => {
-  console.log('nice');
-
   socket.on('playerMovement', (data) => {
     onPlayerMovement(socket, JSON.parse(data));
   })

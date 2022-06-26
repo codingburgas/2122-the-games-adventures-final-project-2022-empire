@@ -80,8 +80,6 @@ function Register() {
         password: e.target.password.value,
       };
 
-      console.log(data);
-
       if (!userContext?.registerUser) return;
 
       userContext.registerUser(data).then(
@@ -89,8 +87,9 @@ function Register() {
           setErrMsg("");
           setsuccessMsg("Successfully register in. Redirecting...");
           writeStorage("hasUserRegistered", { isUserEntered: true });
-          
-          window.location.href = "/";
+
+          document.getElementById("register")!.style.display = "none";
+          document.getElementById("login")!.style.display = "block";
           return;
         },
         (err: string) => {
@@ -190,6 +189,21 @@ function Register() {
                 />
                 REGISTER
               </Button>
+
+              <Button
+                type="button"
+                onClick={() => {
+                  document.getElementById("register")!.style.display = "none";
+                  document.getElementById("login")!.style.display = "block";
+                }}
+              >
+                <Emoji
+                  src="../../assets/images/register/button-image.png"
+                  alt="Mountains"
+                ></Emoji>
+                LOGIN
+              </Button>
+
               <p>{successMsg}</p>
               <p>{errMsg}</p>
             </Container>

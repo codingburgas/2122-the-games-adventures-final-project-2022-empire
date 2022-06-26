@@ -1,20 +1,63 @@
 import { useContext } from "react";
 import { UserContext } from "../App";
+import {
+  ChangedTextHeader,
+  Col,
+  HR,
+  NotCentredHeader,
+  Row,
+  StatsChangedShape,
+  StatsShape,
+  TextHeader,
+  TextSection,
+  ChangedPStats,
+  Circle,
+  CentredChangedHeader,
+  CentredChangedP,
+} from "../components/AccountComponents";
+import { FirstGradient } from "./indexStyles";
 
 function Account() {
   const userContext = useContext(UserContext);
 
   return (
-    <>
-      <h1>Account info:</h1>
-      <h2>
-        {JSON.stringify(userContext?.userData)
-          .split(",")
-          .join(",\n ")
-          .replace(/:/g, ": ")
-          .replace(/["{}]/g, "")}
-      </h2>
-    </>
+    <FirstGradient>
+      <TextSection>
+        <Row>
+          <Col>
+            <StatsShape>
+              <TextHeader>My information</TextHeader>
+              <br />
+              <br />
+              <br />
+              <HR />
+            </StatsShape>
+            <Row>
+              <StatsShape>
+                <ChangedTextHeader>Other information</ChangedTextHeader>
+                <br />
+                <br />
+                <br />
+                <HR />
+              </StatsShape>
+            </Row>
+          </Col>
+          <StatsChangedShape>
+            <NotCentredHeader>My profile</NotCentredHeader>
+            <ChangedPStats>
+              Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+            </ChangedPStats>
+            <Circle/>
+            <CentredChangedHeader>
+              Welcome back {userContext?.userData?.username}
+            </CentredChangedHeader>
+            <CentredChangedP>
+              We are happy to see you back here
+            </CentredChangedP>
+          </StatsChangedShape>
+        </Row>
+      </TextSection>
+    </FirstGradient>
   );
 }
 

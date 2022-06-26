@@ -64,14 +64,15 @@ function Index() {
               </>
             ) : (
               <>
-                <br />
-                <br />
                 <Link to="/account">
-                  <button>Go to account</button>
+                  <SC.Rectangle30>
+                    <SC.Text6>MY ACCOUNT</SC.Text6>
+                  </SC.Rectangle30>
+                  <br />
                 </Link>
-                <br />
-                <br />
-                <button onClick={handleLogOut}>Log out</button>
+                <SC.Rectangle30 onClick={handleLogOut}>
+                  <SC.Text6>LOG OUT</SC.Text6>
+                </SC.Rectangle30>
               </>
             )}
           </SC.Group4>
