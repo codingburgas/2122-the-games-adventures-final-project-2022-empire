@@ -12,7 +12,8 @@ const parseFunctionMap = (csvText: string): number[][] => {
 export interface RoomMetadata {
     name: string;
     startingPos: Vector2;
-    tileSize: number
+    tileSize: number;
+    scaleFactor: number;
 }
 
 export interface RoomPickable {
@@ -64,6 +65,8 @@ export class CRoom {
         this.bgTex.delete();
         this.fgTex.delete();
     }
+
+    get 
 }
 
 export function Room({ collisionData, pickableData, metadata, children }: { collisionData: string; pickableData: RoomPickable[]; metadata: RoomMetadata; children: React.ReactNode }) {

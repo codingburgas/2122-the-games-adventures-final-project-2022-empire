@@ -23,7 +23,7 @@ const PlayerFrameSize = { width: 64, height: 64 };
 const PlayerScale = 1.5;
 
 export default class PlayerScript extends Script {
-    private pos: Vector2 = { x: 0, y: 0 };
+    private pos: Vector2 = { x: 400, y: 250 };
     private tex: CTexture | null | undefined;
     private roomRef: React.MutableRefObject<CRoom | undefined>;
 
