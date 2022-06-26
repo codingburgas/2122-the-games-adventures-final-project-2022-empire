@@ -621,7 +621,7 @@ export const  Group14 = styled.div`
 `
 export const  Rectangle34 = styled.div`
   border-radius: 20px;
-  height: 684px;
+  height: 754px;
   width: 875px;
   background-color: #d9d9d9;
   grid-area: 1 / 1 / 6 / 3;
@@ -782,7 +782,11 @@ export const  Rectangle2 = styled.div`
   width: 15px;
   background-color: #9aa2a9;
 `
-export const  Rectangle33 = styled.div`
+export const Rectangle33 = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   border-radius: 15px;
   height: 83px;
   width: 83px;

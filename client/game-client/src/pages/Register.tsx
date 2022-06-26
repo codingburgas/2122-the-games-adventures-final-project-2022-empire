@@ -126,8 +126,6 @@ function Register() {
               <Hr />
               <br />
               <br />
-              <br />
-              <br />
               <FormField
                 label="Username"
                 name="username"
@@ -148,7 +146,6 @@ function Register() {
                 }}
               />
               <br />
-              <br />
               <FormField
                 label="Password"
                 iconUrl="../../assets/images/register/password.png"
@@ -168,7 +165,6 @@ function Register() {
                   );
                 }}
               />
-              <br />
               <br />
               <FormField
                 label="Confirm Password"

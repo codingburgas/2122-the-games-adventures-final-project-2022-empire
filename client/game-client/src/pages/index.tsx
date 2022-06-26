@@ -3,6 +3,10 @@ import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { deleteStorage, writeStorage, readStorage } from "../localstorage";
 import mainLogo from "../../assets/Mainlogo.svg?url";
+import loginIcon from "../../assets/loginIcon.svg?url";
+import pfpIcon from "../../assets/pfpIcon.svg?url";
+import engineIcon from "../../assets/engineIcon.svg?url";
+import playerIcon from "../../assets/playerIcon.svg?url";
 import * as SC from "./indexStyles";
 
 import Register from "./Register";
@@ -17,7 +21,6 @@ function Index() {
 
   const userContext = useContext(UserContext);
   const navigate = useNavigate();
-  // Better to go in separate component
   const handleLogOut = () => {
     deleteStorage("auth");
     window.location.reload();
@@ -30,7 +33,7 @@ function Index() {
 
   return (
     <>
-      <Login/>
+      <Login />
       <Register />
       <SC.FirstGradient>
         <SC.NavBar>
@@ -77,8 +80,7 @@ function Index() {
           <SC.Group42></SC.Group42>
           <SC.Text8>Brewing the time</SC.Text8>
           <SC.Text9>
-            Website description will stay here. This is just referance text to
-            put
+            Website for our adventure game project. Sign in and start playing!
           </SC.Text9>
           <SC.Rectangle30 onClick={() => navigate("game", { replace: false })}>
             <SC.Text7>PLAY</SC.Text7>
@@ -87,43 +89,51 @@ function Index() {
       </SC.FirstGradient>
       <SC.SecondGradient>
         <SC.Frame9>
-          <SC.Text10>Make it yours with me</SC.Text10>
+          <SC.Text10>We've reached</SC.Text10>
           <SC.Group6>
-            <SC.Text11>4K</SC.Text11>
-            <SC.Text12>There is 4k most popular websites</SC.Text12>
+            <SC.Text11>150+</SC.Text11>
+            <SC.Text12>Commits on github.</SC.Text12>
           </SC.Group6>
           <SC.Group7>
-            <SC.Text14>21+</SC.Text14>
-            <SC.Text13>There is 4k most popular websites</SC.Text13>
+            <SC.Text14>8+</SC.Text14>
+            <SC.Text13>Tools and languages used.</SC.Text13>
           </SC.Group7>
           <SC.Group8>
-            <SC.Text16>200</SC.Text16>
-            <SC.Text15>There is 4k most popular websites</SC.Text15>
+            <SC.Text16>5K+</SC.Text16>
+            <SC.Text15>Written lines of code.</SC.Text15>
           </SC.Group8>
         </SC.Frame9>
         <SC.Rectangle32>
           <SC.NaskoiSasho>
-            <SC.Text17>Nasko i Sasho</SC.Text17>
+            <SC.Text17>Features of the Project</SC.Text17>
             <SC.Frame10>
               <SC.Group10>
-                <SC.Rectangle33 />
-                <SC.Text19>Online classes</SC.Text19>
-                <SC.Text18>Make it happen this is very cool</SC.Text18>
+                <SC.Rectangle33>
+                  <img src={playerIcon}></img>
+                </SC.Rectangle33>
+                <SC.Text19>Login & Register</SC.Text19>
+                <SC.Text18>Working login and register system</SC.Text18>
               </SC.Group10>
               <SC.Group13>
-                <SC.Rectangle33 />
-                <SC.Text21>Online classes</SC.Text21>
-                <SC.Text20>Make it happen this is very cool</SC.Text20>
+                <SC.Rectangle33>
+                  <img src={loginIcon}></img>
+                </SC.Rectangle33>
+                <SC.Text21>PFP Generation</SC.Text21>
+                <SC.Text20>Random pfp generator</SC.Text20>
               </SC.Group13>
               <SC.Group11>
-                <SC.Rectangle33 />
-                <SC.Text23>Online classes</SC.Text23>
-                <SC.Text22>Make it happen this is very cool</SC.Text22>
+                <SC.Rectangle33>
+                  <img src={engineIcon}></img>
+                </SC.Rectangle33>
+                <SC.Text23>Custom Engine</SC.Text23>
+                <SC.Text22>Our own custom engine</SC.Text22>
               </SC.Group11>
               <SC.Group12>
-                <SC.Rectangle33 />
-                <SC.Text25>Online classes</SC.Text25>
-                <SC.Text24>Make it happen this is very cool</SC.Text24>
+                <SC.Rectangle33>
+                  <img src={pfpIcon}></img>
+                </SC.Rectangle33>
+                <SC.Text25>Multiplayer Server</SC.Text25>
+                <SC.Text24>Multiplayer server for the game</SC.Text24>
               </SC.Group12>
             </SC.Frame10>
           </SC.NaskoiSasho>
