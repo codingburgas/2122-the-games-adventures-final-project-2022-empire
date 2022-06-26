@@ -10,15 +10,6 @@
   <img src = "https://img.shields.io/github/languages/top/codingburgas/2122-the-games-adventures-final-proejct-2022-empire?style=for-the-badge">
 </div>
 
----
-
-<p align = "center" style = "font-size:4em">
-  <strong>
-An adventure game project created using our own game engine. The project is 2.5D top-down , adventure, multiplayer co-op, online game and can be played on our website.
-  </strong>
-</p>
-
-
 
 ## 🚀 Languages 
   <p align="left"> 
@@ -43,7 +34,7 @@ An adventure game project created using our own game engine. The project is 2.5D
 
 
 ## About 💻 <a name = "about"></a>
-lorem ipsum
+Team Empire offers an innovative and intuitive game based on puzzles solved by two players working in a team. The user can create an account to monitor their results and achievements. The whole idea of the product is to make the player think and develop his logical thinking.
 
 
 
