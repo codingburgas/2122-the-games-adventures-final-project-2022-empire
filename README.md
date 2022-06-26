@@ -45,9 +45,7 @@ An adventure game project created using our own game engine. The project is 2.5D
 ## About 💻 <a name = "about"></a>
 lorem ipsum
 
-## Demo of our project 🎥 <a name = "demo"></a>
-<img src = "" alt = "demo img 1">
-<img src = "" alt = "demo img 2">
+
 
 ## Related documents 📄 <a name = "docs"></a>
    + [Documentation]()
@@ -83,7 +81,10 @@ To start the HTTP Client, paste the following lines in **your favourite Terminal
   npm run dev
 ```
 
----
+ ## Demo of our project 🎥 <a name = "demo"></a>
+<p align="center">
+<img src="https://cdn.discordapp.com/attachments/900689339179216926/990695673512992838/Silver_24inch_iMac_Mockup.png" width = "550px" >
+</p>
 
 ```
 Thank you for scrolling this far! Please consider giving the repo a star ⭐.
