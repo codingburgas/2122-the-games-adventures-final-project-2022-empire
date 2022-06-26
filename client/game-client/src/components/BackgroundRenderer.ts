@@ -1,5 +1,6 @@
 import React from "react";
 import { CCamera2D, EngineModule } from "../Engine";
+import Module from "../engine_wasm";
 import { CRoom } from "../Room";
 import { Script } from "../Script";
 
@@ -21,7 +22,6 @@ export class BackgroundRenderer extends Script {
         if (this.camera) {
             this.camera.DrawWithCamera(() => {
                 if (this.roomRef.current) {
-                    console.log('literally drawing background');
                     this.roomRef.current.renderBG();
                 }
             });

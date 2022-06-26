@@ -284,6 +284,10 @@ export interface FunctionBindings {
     EaseElasticOut(t: number, b: number, c: number, d: number): number;
     EaseElasticInOut(t: number, b: number, c: number, d: number): number;
 
+    DrawFPS(posX: number, posY: number): void;
+    DrawText(text: string, posX: number, posY: number, fontSize: number, color: Color): void;
+    MeasureText(text: string, fontSize: number): number;
+
     Init(): void;
     Deinit(): void;
     Tick(): void;

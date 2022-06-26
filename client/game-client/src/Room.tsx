@@ -49,7 +49,7 @@ export class CRoom {
 
     getPositionFunction(rect: Rectangle): number {
         return this.functionMap[Math.floor(rect.x / this.metadata.tileSize)][Math.floor(rect.y / this.metadata.tileSize)] ||
-            this.functionMap[Math.floor(rect.width / this.metadata.tileSize)][Math.floor(rect.height / this.metadata.tileSize)]; 
+            this.functionMap[Math.floor(rect.x + rect.width / this.metadata.tileSize)][Math.floor(rect.y + rect.height / this.metadata.tileSize)]; 
     }
     
     renderBG() {
