@@ -71,23 +71,20 @@ git clone --recursive https://github.com/codingburgas/2122-the-games-adventures-
 ```
 
 ## Deployment 💻
-You can deploy the project with just one line using docker. Just place this line in **your favourite Terminal**:
-```
-  docker smt
-```
+If you want to deploy, first you need to create a **Database**. This can be achieved by pasting the content of **database/db.sql** in <img src = "https://www.edureka.co/blog/wp-content/uploads/2019/10/logo.png" height = "19px" alt = "vs logo"> SQL Server Management Studio.
 
-OR
+Then, you need to make a **.env** in the in the **server** folder. You can see [**.env.example**](https://github.com/codingburgas/2122-otj-10-project-repo-SSIvanov19/blob/master/.env.example) on what environment variable you need to set up!
 
-If you want to deploy manually, first you need to create a **Database**. This can be achieved by pasting the content of **database/database-script.sql** in <img src = "https://www.edureka.co/blog/wp-content/uploads/2019/10/logo.png" height = "19px" alt = "vs logo"> SQL Server Management Studio.
-
-Then, you need to make a **.env** in the root of the project and in the **clinet** folder. You can see [**.env.example**](https://github.com/codingburgas/2122-otj-10-project-repo-SSIvanov19/blob/master/.env.example) for the file in the root folder and [**.env.example**](https://github.com/codingburgas/2122-otj-10-project-repo-SSIvanov19/blob/master/client/.env.example) for the file in the **client** folder.
-
-Finally, you can start the HTTP Server by opening <img src = "https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Visual_Studio_Icon_2019.svg/512px-Visual_Studio_Icon_2019.svg.png" height = "19px" alt = "vs logo"> **server.sln** file, located in the ***server*** folder. 
-
-To start the HTTP Client, paste the following lines in **your favourite Terminal**, while you are in the **client** folder:
+Finally, you can start the HTTP Server by paste the following lines in **your favourite Terminal**, while you are in the **server** folder:
 ```
   npm install
-  npm start
+  npm run dev
+```
+
+To start the HTTP Client, paste the following lines in **your favourite Terminal**, while you are in the **client/game-client** folder:
+```
+  npm install
+  npm run dev
 ```
 
 ---
