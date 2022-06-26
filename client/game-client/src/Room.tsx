@@ -65,8 +65,6 @@ export class CRoom {
         this.bgTex.delete();
         this.fgTex.delete();
     }
-
-    get 
 }
 
 export function Room({ collisionData, pickableData, metadata, children }: { collisionData: string; pickableData: RoomPickable[]; metadata: RoomMetadata; children: React.ReactNode }) {
