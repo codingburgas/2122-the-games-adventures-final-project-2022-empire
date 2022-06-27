@@ -47,7 +47,15 @@ export const PlayButton = styled.p`
   }
 `;
 
-export const Inventory = styled.img`
+export const InventorySlot = styled.img`
+  position: absolute;
+  z-index: 9;
+  width: 55px;
+  padding-top: 52.6em;
+  margin-left: -34.7em;
+`;
+
+export const InventoryBackground = styled.img`
   position: absolute;
   margin-left: auto;
   margin-right: auto;

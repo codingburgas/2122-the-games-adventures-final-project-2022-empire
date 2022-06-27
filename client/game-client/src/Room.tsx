@@ -3,6 +3,7 @@ import { BackgroundRenderer } from "./components/BackgroundRenderer";
 import { CameraContext, EngineContext, RoomRefContext } from "./components/Canvas";
 import { ForegroundRenderer } from "./components/ForegroundRenderer";
 import { CCamera2D, CRenderTexture, CTexture, Engine, EngineModule, Rectangle, Vector2 } from "./Engine";
+import { GameContext } from "./pages/Game";
 import { ScriptComponent } from "./Script";
 
 const parseFunctionMap = (csvText: string): number[][] => {
@@ -20,6 +21,9 @@ export interface RoomPickable {
     id: number;
     name: string;
     res: string;
+    pos: Vector2;
+    tex: CTexture;
+    show: boolean;
 };
 
 export class CRoom {
@@ -30,6 +34,7 @@ export class CRoom {
     private functionMap: number[][] = [];
     private metadata: RoomMetadata = {} as RoomMetadata;
     private pickables: RoomPickable[] = [];
+    private gameContext: any;
 
     public constructor(engine: EngineModule) {
         this.engine = engine;
@@ -37,7 +42,7 @@ export class CRoom {
         this.fgTex = new this.engine.CTexture();
     }
 
-    loadMap(collisionData: string, pickableData: RoomPickable[], metadata: RoomMetadata) {
+    loadMap(collisionData: string, pickableData: RoomPickable[], gameContext: React.Dispatch<React.SetStateAction<boolean>>, metadata: RoomMetadata) {
         console.log(collisionData, pickableData);
         this.fgTex.Unload();
         this.fgTex.Load(`res/rooms/${metadata.name}/fg.png`);
@@ -46,15 +51,51 @@ export class CRoom {
         this.functionMap = parseFunctionMap(collisionData);
         this.metadata = metadata;
         this.pickables = pickableData;
+
+        //Load the textures for picables
+        for (let pickable of this.pickables) {
+            pickable.tex = new this.engine.CTexture();
+            pickable.tex.Unload();
+            pickable.tex.Load(pickable.res);
+        }
+
+        this.gameContext = gameContext; 
     }
 
     getPositionFunction(rect: Rectangle): number {
         return this.functionMap[Math.floor(rect.x / this.metadata.tileSize)][Math.floor(rect.y / this.metadata.tileSize)] ||
             this.functionMap[Math.floor(rect.x + rect.width / this.metadata.tileSize)][Math.floor(rect.y + rect.height / this.metadata.tileSize)]; 
     }
-    
+
+    //Measure distance between two vector2
+    Distance(a: Vector2, b: Vector2): number {
+        return Math.sqrt(Math.pow(a.x - b.x, 2) + Math.pow(a.y - b.y, 2));
+    }
+
+    GetEntityAt(pos: Vector2): RoomPickable | undefined {
+        // Search in a search radius of 1 tile
+        for (let pickable of this.pickables) {
+            if (this.Distance(pos, pickable.pos) < this.metadata.tileSize * 3 && pickable.show) {
+                this.gameContext(true);
+                return pickable;
+            }
+        }
+    }
+
     renderBG() {
         this.engine.DrawTexture(this.bgTex.Texture, 0, 0, { r: 255, g: 255, b: 255, a: 255 });
+        for (let pickable of this.pickables) {
+            if (pickable.show) {
+                this.engine.DrawTexturePro(
+                    pickable.tex.Texture,
+                    {x: 0, y: 0 , width: pickable.tex.Texture.width, height: pickable.tex.Texture.height},
+                    {x: pickable.pos.x, y: pickable.pos.y, width: pickable.tex.Texture.width / 2, height: pickable.tex.Texture.height / 2},
+                    { x: 64 * 1.5 / 2, y: 64 * 1.5 / 2 },
+                    0, { r: 255, g: 255, b: 255, a: 255 }
+                    );
+            }
+
+        }
     }
 
     renderFG() {
@@ -71,10 +112,11 @@ export function Room({ collisionData, pickableData, metadata, children }: { coll
     const engineContext = useContext(EngineContext);
     const roomRefContext = useContext(RoomRefContext);
     const cameraContext = useContext(CameraContext);
-
+    const gameContext = useContext(GameContext);
+    
     useEffect(() => {
         roomRefContext.current = new CRoom(engineContext);
-        roomRefContext.current.loadMap(collisionData, pickableData, metadata);
+        roomRefContext.current.loadMap(collisionData, pickableData, gameContext, metadata);
 
         return () => {
             if (!roomRefContext.current) return

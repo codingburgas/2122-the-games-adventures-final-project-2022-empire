@@ -74,6 +74,20 @@ export default class PlayerScript extends Script {
             this.playerState = PlayerState.Walking;
         }
 
+        // Wants to pickup an object
+        if (this.engine.IsKeyDown(69)) {
+            let room = this.roomRef.current;
+            if (room) {
+                let entity = room.GetEntityAt(this.pos);
+                if (entity) {
+                    entity.show = false;
+                    
+                    entity.tex.Unload();
+                    entity.tex.delete();
+                }
+            }
+        }
+            
         if (this.playerState === PlayerState.Idle)
             this.currentFrame = 0;
         else {
