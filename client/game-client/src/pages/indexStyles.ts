@@ -411,7 +411,7 @@ export const  Rectangle32 = styled.div`
     -moz-transform-origin: top left;
   }
 `
-export const  NaskoiSasho = styled.div`
+export const  DebugSymbol1 = styled.div`
   height: 421px;
   width: 1297px;
 `
