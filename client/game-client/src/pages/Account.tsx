@@ -15,6 +15,7 @@ import {
   CentredChangedHeader,
   CentredChangedP,
 } from "../components/AccountComponents";
+import { NavBar } from "../components/NavBar";
 import { FirstGradient } from "./indexStyles";
 
 function Account() {
@@ -22,6 +23,7 @@ function Account() {
 
   return (
     <FirstGradient>
+      <NavBar hasUserRegistered={true}/>
       <TextSection>
         <Row>
           <Col>

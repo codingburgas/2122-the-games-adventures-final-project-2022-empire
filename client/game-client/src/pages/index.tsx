@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { UserContext } from "../App";
 import { deleteStorage, writeStorage, readStorage } from "../localstorage";
-import mainLogo from "../../assets/Mainlogo.svg?url";
 import loginIcon from "../../assets/loginIcon.svg?url";
 import pfpIcon from "../../assets/pfpIcon.svg?url";
 import engineIcon from "../../assets/engineIcon.svg?url";
@@ -11,87 +10,43 @@ import * as SC from "./indexStyles";
 
 import Register from "./Register";
 import Login from "./Login";
+import { NavBar } from "../components/NavBar";
 
 function Index() {
+  const userContext = useContext(UserContext);
   const [hasUserRegistered, setHasUserRegistered] = useState<boolean>(false);
 
   useEffect(() => {
     setHasUserRegistered(Boolean(readStorage("hasUserRegistered")));
   }, []);
 
-  const userContext = useContext(UserContext);
   const navigate = useNavigate();
-  const handleLogOut = () => {
-    deleteStorage("auth");
-    window.location.reload();
-  };
-
-  const showForm = (id: string) => {
-    document.getElementById(id)!.style.display = "block";
-    document.body.classList.add("stop-scrolling");
-  };
 
   return (
     <>
-      <Login />
-      <Register />
       <SC.FirstGradient>
-        <SC.NavBar>
-          <SC.MainLogo src={mainLogo} />
-          <SC.Text3>Home</SC.Text3>
-          <SC.Text4>Stats</SC.Text4>
-          <SC.Text5
-            onClick={(e) => {
-              e.preventDefault();
-              window.location.href =
-                "https://github.com/codingburgas/2122-the-games-adventures-final-project-2022-empire";
-            }}
-          >
-            Source
-          </SC.Text5>
-          <SC.Group4>
-            {!userContext?.authenticated ? (
-              <>
-                {hasUserRegistered ? (
-                  <SC.Rectangle30 onClick={() => showForm("login")}>
-                    <SC.Text6>Login</SC.Text6>
-                  </SC.Rectangle30>
-                ) : (
-                  <SC.Rectangle30 onClick={() => showForm("register")}>
-                    <SC.Text6>Register</SC.Text6>
-                  </SC.Rectangle30>
-                )}
-              </>
-            ) : (
-              <>
-              <Link to="/game">
-                  <SC.Rectangle30>
-                    <SC.Text6>GAME</SC.Text6>
-                  </SC.Rectangle30>
-                  <br />
-                </Link>
-                <Link to="/account">
-                  <SC.Rectangle30>
-                    <SC.Text6>MY ACCOUNT</SC.Text6>
-                  </SC.Rectangle30>
-                  <br />
-                </Link>
-                <SC.Rectangle30 onClick={handleLogOut}>
-                  <SC.Text6>LOG OUT</SC.Text6>
-                </SC.Rectangle30>
-              </>
-            )}
-          </SC.Group4>
-        </SC.NavBar>
+        {!userContext?.authenticated ? (
+          <>
+            <Login />
+            <Register />
+          </>
+        ) : null}
+        <NavBar hasUserRegistered={hasUserRegistered} />
         <SC.HeroText>
           <SC.Group42></SC.Group42>
           <SC.Text8>Brewing the time</SC.Text8>
           <SC.Text9>
             Website for our adventure game project. Sign in and start playing!
           </SC.Text9>
-          <SC.Rectangle30 onClick={() => navigate("game", { replace: false })}>
-            <SC.Text7>PLAY</SC.Text7>
-          </SC.Rectangle30>
+          {userContext?.authenticated ? (
+            <>
+              <SC.Rectangle30
+                onClick={() => navigate("game", { replace: false })}
+              >
+                <SC.Text7>PLAY</SC.Text7>
+              </SC.Rectangle30>
+            </>
+          ) : null}
         </SC.HeroText>
       </SC.FirstGradient>
       <SC.SecondGradient>
