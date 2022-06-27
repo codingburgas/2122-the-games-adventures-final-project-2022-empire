@@ -1,9 +1,18 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../App";
 import * as SC from "../components/AccountComponents";
 import { NavBar } from "../components/NavBar";
 import { FirstGradient } from "./indexStyles";
 import mainLogo from "../../assets/mainLogo.svg?url";
+import OneHour from "../../assets/achievements/1Hour.svg?url";
+import TenHour from "../../assets/achievements/10Hours.svg?url";
+import FHour from "../../assets/achievements/50Hours.svg?url";
+import THour from "../../assets/achievements/100Hours.svg?url";
+import TWHour from "../../assets/achievements/200Hours.svg?url";
+import BoxAchiev from "../../assets/achievements/BoxAchiev.svg?url";
+import KeyAchiev from "../../assets/achievements/KeyAchiev.svg?url";
+import LockAchiev from "../../assets/achievements/LockAchiev.svg?url";
+import MapAchiev from "../../assets/achievements/MapAchiev.svg?url";
 
 function Account() {
   const userContext = useContext(UserContext);
@@ -27,16 +36,28 @@ function Account() {
       <SC.Grid>
         <SC.Group16>
           <SC.Text7>My information</SC.Text7>
-          <hr/>
+          <SC.Line2/>
         </SC.Group16>
         <SC.Group19>
-          <SC.Text8>Other informaton</SC.Text8>
-          <hr/>
+          <SC.Text8>Achievements</SC.Text8>
+          <SC.Line2 />
+          <SC.Achievements>
+            <SC.Achievement src={OneHour} alt="One hour" />
+            <SC.Achievement src={TenHour} alt="Ten hours" />
+            <SC.Achievement src={FHour} alt="Fifty hours" />
+            <SC.Achievement src={THour} height="grayscale(100%)" alt="One hundred hours" />
+            <SC.Achievement src={TWHour} height="grayscale(100%)" alt="Two hundred hours" />
+            <SC.Achievement src={BoxAchiev}  alt="Box achievement" />
+            <SC.Achievement src={KeyAchiev} alt="Key achievement" />
+            <SC.Achievement src={LockAchiev} alt="Lock achievement" />
+            <SC.Achievement src={MapAchiev} height="grayscale(100%)" alt="Map achievement" />
+            
+          </SC.Achievements>
         </SC.Group19>
         <SC.Group18>
           <SC.Text9>My Profile</SC.Text9>
           <SC.Text10>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit.{" "}
+            Personal information that cannot be viewed by others.{" "}
           </SC.Text10>
           <SC.Ellipse4 />
           <SC.Text12>Welcome Back {userContext?.userData?.username}</SC.Text12>

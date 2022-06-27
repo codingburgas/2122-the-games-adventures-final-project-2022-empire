@@ -119,6 +119,7 @@ export const  Rectangle30 = styled.div`
 export const  Text7 = styled.div`
   text-align: center;
   vertical-align: top;
+  margin-top: 1rem;
   font-size: 25.6px;
     @font-face {
     font-family: 'TG';
@@ -130,14 +131,16 @@ export const  Text7 = styled.div`
   font-weight: bold;
   color: #ffffff;
 `
-export const  Line2 = styled.div`
-  transform: rotate(-1deg);
+export const Line2 = styled.div`
+  margin-left: auto;
+  margin-right: auto;
   height: 0px;
-  width: 377px;
+  width: 603px;
   border: 1px solid rgba(196, 196, 221, 0.20000000298023224);
 `
 export const  Text8 = styled.div`
   text-align: center;
+  margin-top: 1rem;
   vertical-align: top;
   font-size: 25.6px;
     @font-face {
@@ -153,6 +156,8 @@ export const  Text8 = styled.div`
 export const  Text9 = styled.div`
   text-align: left;
   vertical-align: top;
+  letter-spacing: 0.05em;
+  margin-top: -1em;
   font-size: 44.8px;
     @font-face {
     font-family: 'TG';
@@ -179,17 +184,19 @@ export const  Text10 = styled.div`
 export const  Text11 = styled.div`
   text-align: center;
   vertical-align: top;
+  width: 300px;
   font-size: 20.8px;
   font-family: @font-face {
     font-family: 'SF';
     src: url("${SF}") format("opentype");
   }
   font-family: 'SF';;
-  letter-spacing: 22%;
+  letter-spacing: 0.22em;
   line-height: auto;
   color: #ffffff;
 `
-export const  Ellipse4 = styled.div`
+export const Ellipse4 = styled.div`
+  margin-top: 9em;
   height: 91px;
   width: 91px;
   background-color: #ffffff;
@@ -199,6 +206,7 @@ export const  Ellipse4 = styled.div`
 `
 export const  Text12 = styled.div`
   text-align: left;
+  letter-spacing: 0.05em;
   vertical-align: top;
   font-size: 38.4px;
     @font-face {
@@ -251,4 +259,17 @@ export const Group18 = styled.div`
   margin-left: -220px;
   background-color: #3d425d;
   grid-area: 1 / 4 / 6 / 6;
+`
+export const Achievements = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-top: 30px;
+  gap: 20px;
+`
+
+export const Achievement = styled.img`
+  filter: ${(props) => props.height};
 `
