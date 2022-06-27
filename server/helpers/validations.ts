@@ -51,6 +51,11 @@ const registerValidations = {
   isPasswordValid: "Invalid password"
 };
 
+const updateValidations = {
+  username: { isUsernameValid: 1 },
+  isUsernameValid: "Invalid username",
+}
+
 export const isRegisterDataValid = (data: UserData): boolean => {
   return formValidation(data, registerValidations);
 };
@@ -58,3 +63,7 @@ export const isRegisterDataValid = (data: UserData): boolean => {
 export const isLoginDataValid = (data: UserData): boolean => {
   return formValidation(data, registerValidations);
 };
+
+export const isUpdateDataValid = (data: UserData): boolean => {
+  return formValidation(data, updateValidations);
+}

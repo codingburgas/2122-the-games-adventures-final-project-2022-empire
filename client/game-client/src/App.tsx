@@ -13,11 +13,9 @@ import withReactContent from "sweetalert2-react-content";
 
 const Index = lazy(() => import("./pages/index"));
 const Game = lazy(() => import("./pages/Game"));
-const Login = lazy(() => import("./pages/Login"));
-const Register = lazy(() => import("./pages/Register"));
 const Account = lazy(() => import("./pages/Account"));
 
-import './App.css';
+import "./App.css";
 
 interface userContextInterface {
   authenticated?: boolean;
@@ -160,7 +158,14 @@ function App() {
       >
         <Suspense fallback={<Failback />}>
           <Routes>
-            <Route path="/game" element={<Game />} />
+            <Route
+              path="/game"
+              element={
+                <AuthenticatedRoute>
+                  <Game />
+                </AuthenticatedRoute>
+              }
+            />
             <Route
               path="/account"
               element={
