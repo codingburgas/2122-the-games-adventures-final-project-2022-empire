@@ -82,6 +82,11 @@ export default class PlayerScript extends Script {
             this.currentFrame++;
         }
         
+        const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
+
+        this.pos.x = clamp(this.pos.x, 50, 720 - PlayerFrameSize.width);
+        this.pos.y = clamp(this.pos.y, 80, 555 - PlayerFrameSize.height);
+        
         if (this.camera) {
             let cam = this.camera.Camera;
             this.camera.Camera = {

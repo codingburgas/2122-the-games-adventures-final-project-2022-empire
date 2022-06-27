@@ -2,6 +2,9 @@ import styled, {keyframes} from 'styled-components';
 import SF from '../../assets/fonts/sf.ttf';
 import TGRegular from '../../assets/fonts/texgyreadventor-regular.otf';
 import TGBold from '../../assets/fonts/texgyreadventor-bold.otf';
+import FirstPic from '../../assets/pic1.png';
+import SecondPic from '../../assets/pic2.png';
+import ThirdPic from '../../assets/pic3.png';
 
 export const FirstGradient = styled.div`
   background: linear-gradient(180deg, #282E48 0%, #16192E 81.14%);
@@ -408,7 +411,7 @@ export const  Rectangle32 = styled.div`
     -moz-transform-origin: top left;
   }
 `
-export const  NaskoiSasho = styled.div`
+export const  DebugSymbol1 = styled.div`
   height: 421px;
   width: 1297px;
 `
@@ -621,23 +624,26 @@ export const  Group14 = styled.div`
 `
 export const  Rectangle34 = styled.div`
   border-radius: 20px;
-  height: 754px;
+  height: 700px;
   width: 875px;
-  background-color: #d9d9d9;
+  background-image: url("${FirstPic}");
+  background-size: cover;
   grid-area: 1 / 1 / 6 / 3;
 `
 export const  Rectangle35 = styled.div`
   border-radius: 20px;
   height: 293px;
   width: 511px;
-  background-color: #d9d9d9;
+  background-image: url("${SecondPic}");
+  background-size: cover;
   grid-area: 1 / 4 / 3 / 6;
 `
 export const  Rectangle36 = styled.div`
   border-radius: 20px;
   height: 293px;
   width: 511px;
-  background-color: #d9d9d9;
+  background-image: url("${ThirdPic}");
+  background-size: cover;
   grid-area: 4 / 4 / 6 / 6;
 `
 export const  Footer = styled.div`

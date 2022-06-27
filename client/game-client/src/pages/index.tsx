@@ -66,7 +66,7 @@ function Index() {
           </SC.Group8>
         </SC.Frame9>
         <SC.Rectangle32>
-          <SC.NaskoiSasho>
+          <SC.DebugSymbol1>
             <SC.Text17>Features of the Project</SC.Text17>
             <SC.Frame10>
               <SC.Group10>
@@ -98,7 +98,7 @@ function Index() {
                 <SC.Text24>Multiplayer server for the game</SC.Text24>
               </SC.Group12>
             </SC.Frame10>
-          </SC.NaskoiSasho>
+          </SC.DebugSymbol1>
         </SC.Rectangle32>
       </SC.SecondGradient>
       <SC.ThirdGradient>
