@@ -194,6 +194,8 @@ export const  Ellipse4 = styled.div`
   width: 91px;
   background-color: #ffffff;
   border-radius: 50%;
+  background-image: url(https://avatars.dicebear.com/api/adventurer-neutral/${Date.now()}.svg);
+  background-size: cover;
 `
 export const  Text12 = styled.div`
   text-align: left;
