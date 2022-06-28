@@ -26,12 +26,18 @@ let playerYClamp = 555;
 
 export default class PlayerScript extends Script {
     private pos: Vector2 = { x: 400, y: 250 };
+    private posSecond: Vector2 = { x: 0, y: 0 };
     private tex: CTexture | null | undefined;
+    private secondTex: CTexture | null | undefined;
     private roomRef: React.MutableRefObject<CRoom | undefined>;
 
     private playerState: PlayerState = PlayerState.Idle;
     private playerFacing: PlayerFacing = PlayerFacing.Down;
     private currentFrame: number = 0;
+
+    private playerStateSecond: PlayerState = PlayerState.Idle;
+    private playerFacingSecond: PlayerFacing = PlayerFacing.Down;
+    private currentFrameSecond: number = 0;
 
     public constructor(engine: EngineModule, camera: CCamera2D, roomRef: React.MutableRefObject<CRoom | undefined>) {
         super(engine, camera);
@@ -46,11 +52,16 @@ export default class PlayerScript extends Script {
         let texture = new this.engine.CTexture();
         texture.Load('res/player_spritesheet.png');
         this.tex = texture;
+
+        let secondTexture = new this.engine.CTexture();
+        secondTexture.Load('res/player_spritesheet_white.png');
+        this.secondTex = secondTexture;
     }
     
     public OnUpdate(): void {
         // up down left right handle with keycodes
         this.playerState = PlayerState.Idle;
+        this.playerStateSecond = PlayerState.Idle;
 
         if (this.engine.IsKeyDown(87)) {
             this.pos.y -= 200 * this.engine.GetFrameTime();
@@ -74,6 +85,33 @@ export default class PlayerScript extends Script {
             this.pos.x += 200 * this.engine.GetFrameTime();
             this.playerFacing = PlayerFacing.Right;
             this.playerState = PlayerState.Walking;
+        }
+
+        // arrow keys keycode dictionary
+        // right = 262; left = 263; down = 264; up = 265
+
+        if (this.engine.IsKeyDown(262)) {
+            this.posSecond.x += 200 * this.engine.GetFrameTime();
+            this.playerFacingSecond = PlayerFacing.Right;
+            this.playerStateSecond = PlayerState.Walking;
+        }
+
+        if (this.engine.IsKeyDown(263)) {
+            this.posSecond.x -= 200 * this.engine.GetFrameTime();
+            this.playerFacingSecond = PlayerFacing.Left;
+            this.playerStateSecond = PlayerState.Walking;
+        }
+
+        if(this.engine.IsKeyDown(264)) {
+            this.posSecond.y += 200 * this.engine.GetFrameTime();
+            this.playerFacingSecond = PlayerFacing.Down;
+            this.playerStateSecond = PlayerState.Walking;
+        }
+
+        if (this.engine.IsKeyDown(265)) {
+            this.posSecond.y -= 200 * this.engine.GetFrameTime();
+            this.playerFacingSecond = PlayerFacing.Up;
+            this.playerStateSecond = PlayerState.Walking;
         }
 
         // Wants to pickup an object
@@ -119,11 +157,21 @@ export default class PlayerScript extends Script {
             if (this.currentFrame > PlayerFrameCount * PlayerFrameRate - 2) this.currentFrame = 0;
             this.currentFrame++;
         }
+
+        if (this.playerStateSecond === PlayerState.Idle)
+            this.currentFrameSecond = 0;
+        else {
+            if (this.currentFrameSecond > PlayerFrameCount * PlayerFrameRate - 2) this.currentFrameSecond = 0;
+            this.currentFrameSecond++;
+        }
         
         const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
 
         this.pos.x = clamp(this.pos.x, 50, 720 - PlayerFrameSize.width);
         this.pos.y = clamp(this.pos.y, 80, playerYClamp - PlayerFrameSize.height);
+
+        this.posSecond.x = clamp(this.posSecond.x, 50, 720 - PlayerFrameSize.width);
+        this.posSecond.y = clamp(this.posSecond.y, 80, playerYClamp - PlayerFrameSize.height);
         
         if (this.camera) {
             let cam = this.camera.Camera;
@@ -141,6 +189,14 @@ export default class PlayerScript extends Script {
                     this.tex!.Texture,
                     { x: PlayerFrameSize.width * (Math.floor(this.currentFrame / PlayerFrameRate) + this.playerState), y: PlayerFrameSize.height * this.playerFacing, ...PlayerFrameSize },
                     { x: this.pos.x, y: this.pos.y, width: PlayerFrameSize.width * PlayerScale, height: PlayerFrameSize.height * PlayerScale },
+                    { x: PlayerFrameSize.width * PlayerScale / 2, y: PlayerFrameSize.height * PlayerScale / 2 },
+                    0, { r: 255, g: 255, b: 255, a: 255 }
+                );
+
+                this.engine.DrawTexturePro(
+                    this.secondTex!.Texture,
+                    { x: PlayerFrameSize.width * (Math.floor(this.currentFrameSecond / PlayerFrameRate) + this.playerStateSecond), y: PlayerFrameSize.height * this.playerFacingSecond, ...PlayerFrameSize },
+                    { x: this.posSecond.x, y: this.posSecond.y, width: PlayerFrameSize.width * PlayerScale, height: PlayerFrameSize.height * PlayerScale },
                     { x: PlayerFrameSize.width * PlayerScale / 2, y: PlayerFrameSize.height * PlayerScale / 2 },
                     0, { r: 255, g: 255, b: 255, a: 255 }
                 );
