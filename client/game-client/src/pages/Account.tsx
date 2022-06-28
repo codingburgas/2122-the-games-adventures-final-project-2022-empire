@@ -3,6 +3,7 @@ import { UserContext } from "../App";
 import * as SC from "../components/AccountComponents";
 import { NavBar } from "../components/NavBar";
 import { FirstGradient } from "./indexStyles";
+import { Link, useNavigate } from "react-router-dom";
 import mainLogo from "../../assets/mainLogo.svg?url";
 import OneHour from "../../assets/achievements/1Hour.svg?url";
 import TenHour from "../../assets/achievements/10Hours.svg?url";
@@ -16,12 +17,13 @@ import MapAchiev from "../../assets/achievements/MapAchiev.svg?url";
 
 function Account() {
   const userContext = useContext(UserContext);
+  const navigate = useNavigate();
 
   return (
     <SC.FirstGradient>
       <SC.NavBar>
         <SC.MainLogo src={mainLogo} />
-        <SC.Text3>Home</SC.Text3>
+        <SC.Text3  onClick={() => navigate("/", { replace: false })}>Home</SC.Text3>
         <SC.Text4>Stats</SC.Text4>
         <SC.Text5
           onClick={(e) => {
@@ -36,7 +38,9 @@ function Account() {
       <SC.Grid>
         <SC.Group16>
           <SC.Text7>My information</SC.Text7>
-          <SC.Line2/>
+          <SC.Line2 />
+          <SC.Text20>Username: {userContext?.userData?.username}</SC.Text20>
+          <SC.Text20>ID: {userContext?.userData?.id}</SC.Text20>
         </SC.Group16>
         <SC.Group19>
           <SC.Text8>Achievements</SC.Text8>
@@ -51,7 +55,6 @@ function Account() {
             <SC.Achievement src={KeyAchiev} alt="Key achievement" />
             <SC.Achievement src={LockAchiev} alt="Lock achievement" />
             <SC.Achievement src={MapAchiev} height="grayscale(100%)" alt="Map achievement" />
-            
           </SC.Achievements>
         </SC.Group19>
         <SC.Group18>

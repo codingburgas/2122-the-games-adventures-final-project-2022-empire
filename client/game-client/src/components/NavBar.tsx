@@ -52,12 +52,6 @@ export function NavBar(props: any) {
           </>
         ) : (
           <>
-            <Link to="/game">
-              <SC.Rectangle30>
-                <SC.Text6>GAME</SC.Text6>
-              </SC.Rectangle30>
-              <br />
-            </Link>
             <Link to="/account">
               <SC.Rectangle30>
                 <SC.Text6>MY ACCOUNT</SC.Text6>
