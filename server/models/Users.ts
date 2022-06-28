@@ -4,15 +4,27 @@ import sql, {IResult} from 'mssql/msnodesqlv8';
 import * as bcrypt from "bcrypt";
 import { LoggerManager } from "../helpers/loggerManager";
 
+/**
+ * Model that works with all users.
+ * @class
+ */
 class Users extends BaseModel {
   private _transitionalVar!: Promise<IResult<any>>;
   private loggerManager = new LoggerManager();
 
-  constructor() {
+    /**
+     * @constructor
+     */
+    constructor() {
     super();
   }
 
-  registerUser = async (data: UserData): Promise<UserReturnData | null> => {
+    /**
+     * Function to register user into the database
+     * @param data
+     * @returns Promise<UserReturnData | null>
+     */
+    registerUser = async (data: UserData): Promise<UserReturnData | null> => {
     const salt: string = await bcrypt.genSalt(10);
 
     return this.connection
@@ -35,7 +47,13 @@ class Users extends BaseModel {
       });
   };
 
-  loginUser = async (data: UserData): Promise<UserReturnData | null> => {
+    /**
+     * Logs in a user from the database
+     * @param data
+     * @returns Promise<UserReturnData | null>
+     * @async
+     */
+    loginUser = async (data: UserData): Promise<UserReturnData | null> => {
     const salt = await this.connection
       .request()
       .input("LoginUsername", sql.VarChar, data.username)
@@ -78,7 +96,11 @@ class Users extends BaseModel {
       });
   };
 
-  getUsers = (): this => {
+    /**
+     * Gets all the users from the database
+     * @returns Users
+     */
+    getUsers = (): this => {
     this._transitionalVar = this.connection
       .request()
       .query("SELECT Id as id, Username as username FROM Users");
@@ -86,7 +108,12 @@ class Users extends BaseModel {
     return this;
   };
 
-  by = async (data: FilterData): Promise<UserReturnData[]> => {
+    /**
+     * Returns all users that fit in a certain criteria
+     * @param data
+     * @async
+     */
+    by = async (data: FilterData): Promise<UserReturnData[]> => {
       const keys: Array<keyof FilterData> = ["id", "username"];
 
       let filterData: UserReturnData[] = [];
@@ -112,7 +139,12 @@ class Users extends BaseModel {
           });
     ;}
 
-      deleteUserById = (id: number): void => {
+    /**
+     * Deletes a user by given id
+     * @param id
+     * @returns void
+     */
+    deleteUserById = (id: number): void => {
           this.connection.request()
               .input('DeleteId', sql.Int, id)
               .query('DELETE FROM Users WHERE Id = @DeleteId')
@@ -121,7 +153,12 @@ class Users extends BaseModel {
               });
       };
 
-      updateUserById = (data: {id: number, newUsername: string}): Promise<boolean> => {
+    /**
+     *  Updates a user by given id and new username
+     * @param data
+     * @return Promise<boolean>
+     */
+    updateUserById = (data: {id: number, newUsername: string}): Promise<boolean> => {
           return this.connection.request()
               .input('Id', sql.Int, data.id)
               .input('NewUsername', sql.VarChar, data.newUsername)

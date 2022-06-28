@@ -17,6 +17,9 @@ const loggerManager = new LoggerManager();
 loginRouter.use(express.json());
 loginRouter.use(express.urlencoded());
 
+/**
+ * Attempts to log in a user with given username and password
+ */
 loginRouter.post("/", (req: Request, res: Response) => {
   if (!(req.body.username && req.body.password)) {
     loggerManager.logWarn(
@@ -53,7 +56,7 @@ loginRouter.post("/", (req: Request, res: Response) => {
         loggerManager.logWarn(`Login failed. Reason: Database refused.`);
         return res.send(successOrFailureResponse(value));
     }
-    
+
     const accessToken = jwt.sign({
         expiresIn: "1d",
         subject: value.id
