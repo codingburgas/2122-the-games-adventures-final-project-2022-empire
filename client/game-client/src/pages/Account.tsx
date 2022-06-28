@@ -4,7 +4,7 @@ import * as SC from "../components/AccountComponents";
 import { NavBar } from "../components/NavBar";
 import { FirstGradient } from "./indexStyles";
 import { Link, useNavigate } from "react-router-dom";
-import mainLogo from "../../assets/mainLogo.svg?url";
+import mainLogo from "../../assets/mainlogo.svg?url";
 import OneHour from "../../assets/achievements/1Hour.svg?url";
 import TenHour from "../../assets/achievements/10Hours.svg?url";
 import FHour from "../../assets/achievements/50Hours.svg?url";
