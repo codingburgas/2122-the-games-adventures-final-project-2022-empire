@@ -41,6 +41,9 @@ function Account() {
           <SC.Line2 />
           <SC.Text20>Username: {userContext?.userData?.username}</SC.Text20>
           <SC.Text20>ID: {userContext?.userData?.id}</SC.Text20>
+          <SC.Delete>
+            <SC.DeleteText>Delete</SC.DeleteText>
+          </SC.Delete>
         </SC.Group16>
         <SC.Group19>
           <SC.Text8>Achievements</SC.Text8>

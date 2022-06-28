@@ -176,7 +176,7 @@ export const  Text10 = styled.div`
     font-family: 'SF';
     src: url("${SF}") format("opentype");
   }
-  font-family: 'SF';;
+  font-family: 'SF';
   letter-spacing: 5%;
   line-height: auto;
   color: #ffffff;
@@ -287,5 +287,28 @@ export const Text20 = styled.div`
   line-height: auto;
   font-weight: bold;
   color: #ffffff;
-  margin-top: 1em;
+  margin-top: .6em;
+`
+export const Delete = styled.div`
+  border-radius: 20px;
+  height: 45px;
+  width: 189px;
+  background-color: #e22525;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+  cursor: pointer;
+`
+export const DeleteText = styled.div`
+  font-family: @font-face {
+    font-family: 'SF';
+    src: url("${SF}") format("opentype");
+  }
+  font-family: 'SF';
+  text-align: center;
+  vertical-align: center;
+  font-size: 28px;
+  letter-spacing: 33%;
+  line-height: auto;
+  color: white;
 `

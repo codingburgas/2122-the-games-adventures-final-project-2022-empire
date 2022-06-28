@@ -2,6 +2,7 @@ import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import { readStorage, writeStorage } from "./localstorage";
 export const SERVER_ENDPOINT = "//localhost:4000";
+// export const SERVER_ENDPOINT = "//20.86.31.10:80";
 export const API_ENDPOINT = SERVER_ENDPOINT + "/api";
 
 const MySwal = withReactContent(Swal);
