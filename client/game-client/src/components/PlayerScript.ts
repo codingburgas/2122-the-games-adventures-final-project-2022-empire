@@ -21,6 +21,8 @@ const PlayerFrameCount = 8;
 const PlayerFrameRate = 5;
 const PlayerFrameSize = { width: 64, height: 64 };
 const PlayerScale = 1.5;
+let playerYClamp = 555;
+
 
 export default class PlayerScript extends Script {
     private pos: Vector2 = { x: 400, y: 250 };
@@ -30,7 +32,7 @@ export default class PlayerScript extends Script {
     private playerState: PlayerState = PlayerState.Idle;
     private playerFacing: PlayerFacing = PlayerFacing.Down;
     private currentFrame: number = 0;
-    
+
     public constructor(engine: EngineModule, camera: CCamera2D, roomRef: React.MutableRefObject<CRoom | undefined>) {
         super(engine, camera);
 
@@ -39,7 +41,7 @@ export default class PlayerScript extends Script {
         this.OnCreate();
         this.attachedComponent.BindFunction("OnUpdate", () => this.OnUpdate());
     }
-    
+
     public OnCreate(): void {
         let texture = new this.engine.CTexture();
         texture.Load('res/player_spritesheet.png');
@@ -80,10 +82,32 @@ export default class PlayerScript extends Script {
             if (room) {
                 let entity = room.GetEntityAt(this.pos);
                 if (entity) {
-                    entity.show = false;
+                    if (entity.id === 2)
+                    {
+                        let badge = room.GetEntityWithId(1);
+
+                        if (badge)
+                        {
+                            if (badge.show == false )
+                            {
+                                entity.show = false;
+                                
+                                document.getElementById("slot")!.style.display = "none";
+                                playerYClamp = 835
                     
-                    entity.tex.Unload();
-                    entity.tex.delete();
+                                entity.tex.Unload();
+                                entity.tex.delete();
+
+                                room.updateBGTexture("bg2.png");
+                            }
+                        }
+                    } else{
+                        entity.show = false;
+                        entity.tex.Unload();
+                        entity.tex.delete();
+                    }
+
+                    
                 }
             }
         }
@@ -99,7 +123,7 @@ export default class PlayerScript extends Script {
         const clamp = (val: number, min: number, max: number) => Math.min(Math.max(val, min), max);
 
         this.pos.x = clamp(this.pos.x, 50, 720 - PlayerFrameSize.width);
-        this.pos.y = clamp(this.pos.y, 80, 555 - PlayerFrameSize.height);
+        this.pos.y = clamp(this.pos.y, 80, playerYClamp - PlayerFrameSize.height);
         
         if (this.camera) {
             let cam = this.camera.Camera;

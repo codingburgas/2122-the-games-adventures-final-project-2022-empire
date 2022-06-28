@@ -42,6 +42,11 @@ export class CRoom {
         this.fgTex = new this.engine.CTexture();
     }
 
+    public updateBGTexture(res: string) {
+        this.bgTex.Unload();
+        this.bgTex.Load(`res/rooms/room_test/${res}`);
+    }
+
     loadMap(collisionData: string, pickableData: RoomPickable[], gameContext: React.Dispatch<React.SetStateAction<boolean>>, metadata: RoomMetadata) {
         console.log(collisionData, pickableData);
         this.fgTex.Unload();
@@ -76,7 +81,18 @@ export class CRoom {
         // Search in a search radius of 1 tile
         for (let pickable of this.pickables) {
             if (this.Distance(pos, pickable.pos) < this.metadata.tileSize * 3 && pickable.show) {
-                this.gameContext(true);
+                if (pickable.id == 1) {
+                    this.gameContext(true);
+                }
+
+                return pickable;
+            }
+        }
+    }
+
+    GetEntityWithId(id: number): RoomPickable | undefined {
+        for (let pickable of this.pickables) {
+            if (pickable.id === id) {
                 return pickable;
             }
         }

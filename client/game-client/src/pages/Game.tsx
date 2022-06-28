@@ -39,7 +39,7 @@ function Game() {
           </GameContext.Provider>
           
           <InventoryBackground src={inventory} />
-          {isPickedUp ? <InventorySlot src={badge} /> : null}
+          {isPickedUp ? <InventorySlot src={badge} id="slot" /> : null}
           
         </Monitor>
       ) : (
