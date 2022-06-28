@@ -273,3 +273,19 @@ export const Achievements = styled.div`
 export const Achievement = styled.img`
   filter: ${(props) => props.height};
 `
+export const Text20 = styled.div`
+  text-align: center;
+  letter-spacing: 0.05em;
+  vertical-align: top;
+  font-size: 28.4px;
+    @font-face {
+    font-family: 'TG';
+    src: url("${TGBold}") format("opentype");
+  }
+  font-family: 'TG';
+  letter-spacing: 5%;
+  line-height: auto;
+  font-weight: bold;
+  color: #ffffff;
+  margin-top: 1em;
+`
