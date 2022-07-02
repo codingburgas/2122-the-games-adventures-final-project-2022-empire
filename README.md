@@ -34,7 +34,7 @@
 
 
 ## About 💻 <a name = "about"></a>
-Team Empire offers an innovative, intuitive, story-based, animation-based, collision-based, colorful, multiplayer, socket-based communication, original, mechanically inclined, smooth camera based, 2.5D client and server side rendered, competitive ranking, fastidious, open source, landing page based, 8 ball engine based, story-reinterpreted, phython compiled WASM, vectorly-mathematical, non hypercasual, data transmitting, ubiquitous adventure RPG game based on puzzles solved by two players working in a team. The user can create an account to monitor their results and achievements. The whole idea of the product is to make the player think and develop his logical thinking.
+Team Empire offers an innovative, intuitive, story-based, animation-based, collision-based, colorful, multiplayer, socket-based communication, original, mechanically inclined, smooth camera based, top-down/bird's-eye view client and server side rendered, competitive ranking, fastidious, open source, landing page based, 8 ball engine based, story-reinterpreted, phython compiled WASM, vectorly-mathematical, non hypercasual, data transmitting, ubiquitous adventure RPG game based on puzzles solved by two players working in a team. The user can create an account to monitor their results and achievements. The whole idea of the product is to make the player think and develop his logical thinking.
 
 
 
