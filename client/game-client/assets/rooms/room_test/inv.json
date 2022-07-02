@@ -1,0 +1,22 @@
+[
+    {
+        "id": 1,
+        "name": "Basic Badge",
+        "res": "res/badges/badge.png",
+        "pos": {
+            "x": 595,
+            "y": 370
+        },
+        "show": true
+    },
+    {
+        "id": 2,
+        "name": "Door Handle",
+        "res": "res/badges/.png",
+        "pos": {
+            "x": 200,
+            "y": 550
+        },
+        "show": true
+    }
+]

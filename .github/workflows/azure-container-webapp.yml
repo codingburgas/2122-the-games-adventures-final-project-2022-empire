@@ -1,0 +1,29 @@
+name: Build and deploy a container to an Azure Web App
+
+on:
+  push:
+    branches:
+      - "main"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  deploy:
+    permissions:
+      contents: none
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+    - name: Update Azure config
+      uses: azure/webapps-deploy@v2.2.3
+      with:
+        app-name: 'brewingtime'
+        configuration-file: 'docker-compose.yml'
+     

@@ -1,0 +1,104 @@
+header{
+    height: 90px;
+  }
+  body {
+    background: #D7D7D7;
+    font-family: "Montserrat", sans-serif;
+  }
+  /* Registration */
+  h1{
+    color: #000000;
+  }
+  /* Add containers style */
+  .container {
+    padding-right: 50px;
+    padding-left: 140px;
+    display:inline-block;
+    text-align: left;
+    font-size: 22px;
+  }
+
+  /* Input fields */
+  input[type=text], input[type=password] {
+    padding: 15px;
+    margin: 5px 0 22px 0;
+    width: 379px;
+    display: inline-block;
+    border-style: solid;
+    border-color:#555555;
+    border-radius: 9.74293px;
+    background: #D7D7D7;
+  }
+
+  input[type=text]:focus, input[type=password]:focus {
+    background-color: #d8c3c8;
+    outline: none;
+  }
+
+  /* Overwrite the style of hr */
+  hr {
+    border: 3.7354 px;
+    color: #A74B61;
+    border-style: solid;
+    width: 67.24px;
+    float: left;
+  }
+
+  /* Set a style for the register button */
+  .registerbtn {
+    background-color: #A74B61;
+    color: #fff;
+    padding: 16px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    border-radius: 15px;
+    font-size: 16pt;
+  }
+
+  .registerbtn:hover {
+    opacity:1;
+  }
+
+  .registration-col {
+    flex-basis: 48%;
+    padding: 30px 2px;
+  }
+
+  .registration-col img {
+    margin-left: 5px;
+    margin-top: 2px;
+  }
+  .text-registration
+  {
+    color:#000000;
+  }
+
+  .registration-images
+  {
+    width: 18px;
+    height: 18px;
+  }
+    .button-image
+    {
+    width: 16px;
+    height: 16px;
+    margin-right: 5px;
+    margin-top: 2px;
+    }
+
+#image-registration
+{
+    display: inline-block;
+}
+.form-class
+{
+    display:flex;
+}
+#login
+{
+  font-size: 16px;
+  color:#A74B61;
+  margin-left: 85px;
+}

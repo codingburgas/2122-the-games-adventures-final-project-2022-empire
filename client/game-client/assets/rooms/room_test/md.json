@@ -1,0 +1,9 @@
+{
+    "name": "room_test",
+    "startingPos": {
+        "x": 20,
+        "y": 20
+    },
+    "tileSize": 32,
+    "scaleFactor": 2
+}

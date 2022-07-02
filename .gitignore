@@ -153,9 +153,6 @@ AutoTest.Net/
 # Web workbench (sass)
 .sass-cache/
 
-# Installshield output folder
-[Ee]xpress/
-
 # DocProject is a documentation generator add-in
 DocProject/buildhelp/
 DocProject/Help/*.HxT
@@ -348,3 +345,21 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+
+# Jetbrains ides
+.idea/
+
+# Vscode
+.vscode/
+
+# Node modules :D
+node_modules/
+
+# Typescript transpiler files
+server/outDir/*
+!server/outDir/package.json
+!server/outDir/scripts
+
+server/.env
+
+.env
